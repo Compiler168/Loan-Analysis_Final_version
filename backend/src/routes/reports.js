@@ -1,14 +1,14 @@
 /**
- * SmartLoan AI+ — Report Routes
+ * SmartLoan AI+ — Report Routes (MongoDB)
  */
 const express = require('express');
 const router = express.Router();
+const mongoose = require('mongoose');
 const { authMiddleware } = require('../middleware/auth');
 
-router.post('/generate', authMiddleware, (req, res) => {
+router.post('/generate', authMiddleware, async (req, res) => {
   const { type = 'financial_summary' } = req.body;
   const report = {
-    id: Date.now().toString(),
     type,
     generated_at: new Date().toISOString(),
     title: type === 'loan_analysis' ? 'Loan Analysis Report' :
@@ -32,15 +32,54 @@ router.post('/generate', authMiddleware, (req, res) => {
       { title: 'Conclusion', content: 'Your financial health is satisfactory with room for improvement. Focus on reducing DTI ratio and building emergency savings.' }
     ]
   };
+
+  // Save report to MongoDB
+  if (mongoose.connection.readyState === 1) {
+    try {
+      const Report = require('../models/Report');
+      const saved = await Report.create({
+        userId: req.user.id,
+        type: report.type,
+        title: report.title,
+        sections: report.sections,
+        metadata: { health_score: 72, loan_probability: 78.5, risk_level: 'moderate', credit_score: 720 }
+      });
+      report.id = saved._id;
+    } catch (err) {
+      report.id = Date.now().toString();
+    }
+  } else {
+    report.id = Date.now().toString();
+  }
+
   res.json({ success: true, data: report });
 });
 
-router.get('/history', authMiddleware, (req, res) => {
-  res.json({ success: true, data: [
-    { id: '1', type: 'financial_summary', title: 'May 2026 Summary', date: '2026-05-01' },
-    { id: '2', type: 'loan_analysis', title: 'Loan Analysis', date: '2026-04-28' },
-    { id: '3', type: 'risk_report', title: 'Q1 Risk Report', date: '2026-04-15' }
-  ]});
+router.get('/history', authMiddleware, async (req, res) => {
+  try {
+    if (mongoose.connection.readyState === 1) {
+      const Report = require('../models/Report');
+      const reports = await Report.find({ userId: req.user.id })
+        .sort({ createdAt: -1 }).limit(20)
+        .select('type title createdAt');
+
+      const history = reports.map(r => ({
+        id: r._id,
+        type: r.type,
+        title: r.title,
+        date: r.createdAt.toISOString().split('T')[0],
+      }));
+      res.json({ success: true, data: history });
+    } else {
+      res.json({ success: true, data: [
+        { id: '1', type: 'financial_summary', title: 'May 2026 Summary', date: '2026-05-01' },
+        { id: '2', type: 'loan_analysis', title: 'Loan Analysis', date: '2026-04-28' },
+        { id: '3', type: 'risk_report', title: 'Q1 Risk Report', date: '2026-04-15' }
+      ]});
+    }
+  } catch (err) {
+    res.status(500).json({ success: false, error: err.message });
+  }
 });
 
 module.exports = router;
