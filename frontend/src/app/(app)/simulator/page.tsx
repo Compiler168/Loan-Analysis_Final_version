@@ -80,9 +80,9 @@ export default function SimulatorPage() {
               {/* Summary Cards */}
               <div className="grid grid-cols-3 gap-4">
                 {[
-                  { label: "Savings Diff", val: result.comparison.savings_difference, fmt: (v: number) => `${v >= 0 ? '+' : ''}$${Math.abs(v).toLocaleString()}`, icon: v => v >= 0 ? <TrendingUp className="h-5 w-5 text-emerald-500" /> : <TrendingDown className="h-5 w-5 text-red-500" /> },
-                  { label: "Monthly Net Δ", val: result.comparison.monthly_difference, fmt: (v: number) => `${v >= 0 ? '+' : '-'}$${Math.abs(v).toLocaleString()}`, icon: v => v >= 0 ? <TrendingUp className="h-5 w-5 text-emerald-500" /> : <TrendingDown className="h-5 w-5 text-red-500" /> },
-                  { label: "EMI Δ", val: result.comparison.emi_difference, fmt: (v: number) => `${v >= 0 ? '+' : '-'}$${Math.abs(v).toLocaleString()}`, icon: v => v === 0 ? <Minus className="h-5 w-5" /> : v > 0 ? <TrendingUp className="h-5 w-5 text-red-500" /> : <TrendingDown className="h-5 w-5 text-emerald-500" /> },
+                  { label: "Savings Diff", val: result.comparison.savings_difference, fmt: (v: number) => `${v >= 0 ? '+' : ''}$${Math.abs(v).toLocaleString()}`, icon: (v: number) => v >= 0 ? <TrendingUp className="h-5 w-5 text-emerald-500" /> : <TrendingDown className="h-5 w-5 text-red-500" /> },
+                  { label: "Monthly Net Δ", val: result.comparison.monthly_difference, fmt: (v: number) => `${v >= 0 ? '+' : '-'}$${Math.abs(v).toLocaleString()}`, icon: (v: number) => v >= 0 ? <TrendingUp className="h-5 w-5 text-emerald-500" /> : <TrendingDown className="h-5 w-5 text-red-500" /> },
+                  { label: "EMI Δ", val: result.comparison.emi_difference, fmt: (v: number) => `${v >= 0 ? '+' : '-'}$${Math.abs(v).toLocaleString()}`, icon: (v: number) => v === 0 ? <Minus className="h-5 w-5" /> : v > 0 ? <TrendingUp className="h-5 w-5 text-red-500" /> : <TrendingDown className="h-5 w-5 text-emerald-500" /> },
                 ].map((s, i) => (
                   <Card key={i} className="glass-card">
                     <CardContent className="p-4 text-center">
