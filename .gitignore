@@ -11,20 +11,44 @@ ml-service/data/*.csv
 # Environment
 .env
 .env.local
+*.pem
+*.key
+serviceAccountKey.json
 
 # Build
 .next/
 out/
 dist/
 
+# Android build artifacts
+android/build/
+android/app/build/
+android/.gradle/
+android/.idea/
+*.apk
+*.dex
+*.class
+local.properties
+
 # IDE
 .vscode/
 .idea/
+*.swp
+*.swo
+*~
+*.iml
 
 # OS
 .DS_Store
 Thumbs.db
 
+# Logs
+logs/
+*.log
+
 # Cache
 .pytest_cache/
 *.egg-info/
+.cache/
+*.tmp
+

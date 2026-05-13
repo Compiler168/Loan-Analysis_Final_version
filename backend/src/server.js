@@ -13,7 +13,17 @@ const PORT = process.env.PORT || 5000;
 
 // Security
 app.use(helmet());
-app.use(cors({ origin: ['http://localhost:3000', 'http://localhost:3001'], credentials: true }));
+// Mobile app CORS (configured for local WiFi network + localhost)
+app.use(cors({ 
+  origin: process.env.MOBILE_ORIGINS?.split(',') || [
+    'http://localhost:5000',
+    'http://localhost:8000',
+    'http://127.0.0.1:5000',
+    'http://192.168.2.108:5000',  // Laptop IP
+    'http://192.168.2.110:5000'   // Mobile IP
+  ],
+  credentials: true 
+}));
 app.use(express.json({ limit: '10mb' }));
 app.use(express.urlencoded({ extended: true }));
 
@@ -21,13 +31,12 @@ app.use(express.urlencoded({ extended: true }));
 app.use('/api/', rateLimit({ windowMs: 15 * 60 * 1000, max: 200, message: { error: 'Too many requests' } }));
 const aiLimiter = rateLimit({ windowMs: 15 * 60 * 1000, max: 50, message: { error: 'AI rate limit reached' } });
 
-// Routes
+// Routes - Mobile App APIs
 app.use('/api/auth', require('./routes/auth'));
 app.use('/api/loans', aiLimiter, require('./routes/loans'));
 app.use('/api/financial', aiLimiter, require('./routes/financial'));
 app.use('/api/chat', aiLimiter, require('./routes/chat'));
 app.use('/api/reports', require('./routes/reports'));
-app.use('/api/admin', require('./routes/admin'));
 
 // Health
 app.get('/api/health', (req, res) => {

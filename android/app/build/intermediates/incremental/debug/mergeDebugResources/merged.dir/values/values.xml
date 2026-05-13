@@ -638,18 +638,21 @@
     <color name="abc_search_url_text_normal">#7fa87f</color>
     <color name="abc_search_url_text_pressed">@android:color/black</color>
     <color name="abc_search_url_text_selected">@android:color/black</color>
+    <color name="accent_500">#8B5CF6</color>
+    <color name="accent_600">#7C3AED</color>
     <color name="accent_material_dark">@color/material_deep_teal_200</color>
     <color name="accent_material_light">@color/material_deep_teal_500</color>
     <color name="androidx_core_ripple_material_light">#1f000000</color>
     <color name="androidx_core_secondary_text_default_material_light">#8a000000</color>
-    <color name="apple_black">#000000</color>
-    <color name="auth_card_bg">#FFFFFF</color>
-    <color name="background">#F8FAFC</color>
+    <color name="background">@color/bg_app</color>
     <color name="background_floating_material_dark">@color/material_grey_800</color>
     <color name="background_floating_material_light">@android:color/white</color>
     <color name="background_material_dark">@color/material_grey_850</color>
     <color name="background_material_light">@color/material_grey_50</color>
+    <color name="bg_app">#F8FAFC</color>
     <color name="black">#000000</color>
+    <color name="border_focus">#3B82F6</color>
+    <color name="border_subtle">#E2E8F0</color>
     <color name="bright_foreground_disabled_material_dark">#80ffffff</color>
     <color name="bright_foreground_disabled_material_light">#80000000</color>
     <color name="bright_foreground_inverse_material_dark">@color/bright_foreground_material_light</color>
@@ -660,13 +663,12 @@
     <color name="button_material_light">#ffd6d7d7</color>
     <color name="call_notification_answer_color">#1d873b</color>
     <color name="call_notification_decline_color">#d93025</color>
-    <color name="card_background">#FFFFFF</color>
-    <color name="card_stroke">#E2E8F0</color>
+    <color name="card_background">@color/surface_card</color>
+    <color name="card_stroke">@color/border_subtle</color>
     <color name="cardview_dark_background">#FF424242</color>
     <color name="cardview_light_background">#FFFFFFFF</color>
     <color name="cardview_shadow_end_color">#03000000</color>
     <color name="cardview_shadow_start_color">#37000000</color>
-    <color name="checkbox_tint">#2563EB</color>
     <color name="design_bottom_navigation_shadow_color">#14000000</color>
     <color name="design_dark_default_color_background">#121212</color>
     <color name="design_dark_default_color_error">#CF6679</color>
@@ -706,31 +708,24 @@
     <color name="dim_foreground_disabled_material_light">#80323232</color>
     <color name="dim_foreground_material_dark">#ffbebebe</color>
     <color name="dim_foreground_material_light">#ff323232</color>
-    <color name="divider_color">#E2E8F0</color>
-    <color name="dot_active">#2563EB</color>
-    <color name="dot_inactive">#4B5563</color>
-    <color name="error">#EF4444</color>
+    <color name="divider_color">@color/border_subtle</color>
+    <color name="dot_active">@color/primary_500</color>
+    <color name="dot_inactive">@color/text_disabled</color>
+    <color name="error">@color/error_main</color>
     <color name="error_color_material_dark">#ff7043</color>
     <color name="error_color_material_light">#ff5722</color>
-    <color name="facebook_blue">#1877F2</color>
+    <color name="error_light">#FEE2E2</color>
+    <color name="error_main">#EF4444</color>
     <color name="foreground_material_dark">@android:color/white</color>
     <color name="foreground_material_light">@android:color/black</color>
-    <color name="glass_bg">#1AFFFFFF</color>
-    <color name="glass_border">#26FFFFFF</color>
-    <color name="glass_stroke">#33FFFFFF</color>
-    <color name="glass_white">#CCFFFFFF</color>
-    <color name="google_blue">#4285F4</color>
-    <color name="google_green">#34A853</color>
-    <color name="google_red">#EA4335</color>
-    <color name="google_yellow">#FBBC05</color>
-    <color name="gradient_end">#10B981</color>
-    <color name="gradient_start">#2563EB</color>
+    <color name="glass_stroke">#26FFFFFF</color>
+    <color name="glass_white">#99FFFFFF</color>
+    <color name="gradient_end">@color/secondary_500</color>
+    <color name="gradient_start">@color/primary_600</color>
     <color name="highlighted_text_material_dark">#6680cbc4</color>
     <color name="highlighted_text_material_light">#66009688</color>
     <color name="input_bg">#F8FAFC</color>
     <color name="input_stroke">#E2E8F0</color>
-    <color name="input_stroke_error">#EF4444</color>
-    <color name="input_stroke_focused">#2563EB</color>
     <color name="m3_ref_palette_black">#ff000000</color>
     <color name="m3_ref_palette_error0">#ff000000</color>
     <color name="m3_ref_palette_error10">#ff410e0b</color>
@@ -968,62 +963,84 @@
     <color name="mtrl_textinput_filled_box_default_background_color">#0A000000</color>
     <color name="mtrl_textinput_focused_box_stroke_color">#00000000</color>
     <color name="mtrl_textinput_hovered_box_stroke_color">#DE000000</color>
-    <color name="muted">#F1F5F9</color>
-    <color name="muted_foreground">#64748B</color>
+    <color name="muted">@color/surface_variant</color>
+    <color name="muted_foreground">@color/text_low_emphasis</color>
     <color name="nav_border_subtle">#332563EB</color>
-    <color name="nav_icon_default">#64748B</color>
-    <color name="nav_icon_selected">#2563EB</color>
+    <color name="nav_icon_default">@color/text_low_emphasis</color>
+    <color name="nav_icon_selected">@color/primary</color>
     <color name="nav_selected">#1A2563EB</color>
     <color name="notification_action_color_filter">#ffffffff</color>
     <color name="notification_icon_bg_color">#ff9e9e9e</color>
-    <color name="on_background">#0F172A</color>
+    <color name="on_background">@color/text_high_emphasis</color>
     <color name="on_error">#FFFFFF</color>
     <color name="on_primary">#FFFFFF</color>
+    <color name="on_primary_container">@color/primary_900</color>
     <color name="on_secondary">#FFFFFF</color>
-    <color name="on_surface">#0F172A</color>
-    <color name="on_surface_variant">#64748B</color>
+    <color name="on_surface">@color/text_high_emphasis</color>
+    <color name="on_surface_variant">@color/text_medium_emphasis</color>
     <color name="on_tertiary">#FFFFFF</color>
-    <color name="onboarding_bg">#111827</color>
-    <color name="onboarding_btn_next">#2563EB</color>
-    <color name="onboarding_text_primary">#FFFFFF</color>
-    <color name="onboarding_text_secondary">#9CA3AF</color>
-    <color name="primary">#2563EB</color>
-    <color name="primary_dark">#1E40AF</color>
+    <color name="onboarding_bg">@color/bg_app</color>
+    <color name="onboarding_btn_next">@color/primary</color>
+    <color name="onboarding_text_secondary">@color/text_low_emphasis</color>
+    <color name="primary">@color/primary_600</color>
+    <color name="primary_100">#DBEAFE</color>
+    <color name="primary_200">#BFDBFE</color>
+    <color name="primary_300">#93C5FD</color>
+    <color name="primary_400">#60A5FA</color>
+    <color name="primary_50">#EFF6FF</color>
+    <color name="primary_500">#3B82F6</color>
+    <color name="primary_600">#2563EB</color>
+    <color name="primary_700">#1D4ED8</color>
+    <color name="primary_800">#1E40AF</color>
+    <color name="primary_900">#1E3A8A</color>
+    <color name="primary_container">@color/primary_100</color>
     <color name="primary_dark_material_dark">@android:color/black</color>
     <color name="primary_dark_material_light">@color/material_grey_600</color>
-    <color name="primary_light">#DBEAFE</color>
+    <color name="primary_light">@color/primary_100</color>
     <color name="primary_material_dark">@color/material_grey_900</color>
     <color name="primary_material_light">@color/material_grey_100</color>
     <color name="primary_text_default_material_dark">#ffffffff</color>
     <color name="primary_text_default_material_light">#de000000</color>
     <color name="primary_text_disabled_material_dark">#4Dffffff</color>
     <color name="primary_text_disabled_material_light">#39000000</color>
-    <color name="primary_variant">#1D4ED8</color>
     <color name="ripple_material_dark">#33ffffff</color>
     <color name="ripple_material_light">#1f000000</color>
-    <color name="scrim">#80000000</color>
-    <color name="secondary">#10B981</color>
-    <color name="secondary_dark">#047857</color>
-    <color name="secondary_light">#D1FAE5</color>
+    <color name="secondary">@color/secondary_600</color>
+    <color name="secondary_100">#D1FAE5</color>
+    <color name="secondary_50">#ECFDF5</color>
+    <color name="secondary_500">#10B981</color>
+    <color name="secondary_600">#059669</color>
+    <color name="secondary_700">#047857</color>
+    <color name="secondary_light">@color/secondary_100</color>
     <color name="secondary_text_default_material_dark">#b3ffffff</color>
     <color name="secondary_text_default_material_light">#8a000000</color>
     <color name="secondary_text_disabled_material_dark">#36ffffff</color>
     <color name="secondary_text_disabled_material_light">#24000000</color>
-    <color name="success">#10B981</color>
-    <color name="surface">#FFFFFF</color>
+    <color name="success">@color/success_main</color>
+    <color name="success_light">#D1FAE5</color>
+    <color name="success_main">#10B981</color>
+    <color name="surface">@color/surface_card</color>
+    <color name="surface_card">#FFFFFF</color>
+    <color name="surface_modal">#FFFFFF</color>
     <color name="surface_variant">#F1F5F9</color>
     <color name="switch_thumb_disabled_material_dark">#ff616161</color>
     <color name="switch_thumb_disabled_material_light">#ffbdbdbd</color>
     <color name="switch_thumb_normal_material_dark">#ffbdbdbd</color>
     <color name="switch_thumb_normal_material_light">#fff1f1f1</color>
-    <color name="tertiary">#8B5CF6</color>
-    <color name="text_muted">#94A3B8</color>
-    <color name="text_primary">#0F172A</color>
-    <color name="text_secondary">#475569</color>
+    <color name="tertiary">@color/accent_500</color>
+    <color name="text_disabled">#CBD5E1</color>
+    <color name="text_high_emphasis">#0F172A</color>
+    <color name="text_low_emphasis">#94A3B8</color>
+    <color name="text_medium_emphasis">#475569</color>
+    <color name="text_muted">@color/text_low_emphasis</color>
+    <color name="text_primary">@color/text_high_emphasis</color>
+    <color name="text_secondary">@color/text_medium_emphasis</color>
     <color name="tooltip_background_dark">#e6616161</color>
     <color name="tooltip_background_light">#e6FFFFFF</color>
     <color name="transparent">#00000000</color>
-    <color name="warning">#F59E0B</color>
+    <color name="warning">@color/warning_main</color>
+    <color name="warning_light">#FEF3C7</color>
+    <color name="warning_main">#F59E0B</color>
     <color name="white">#FFFFFF</color>
     <dimen name="abc_action_bar_content_inset_material">16dp</dimen>
     <dimen name="abc_action_bar_content_inset_with_nav">72dp</dimen>
@@ -1107,20 +1124,19 @@
     <dimen name="abc_text_size_title_material">20sp</dimen>
     <dimen name="abc_text_size_title_material_toolbar">20dp</dimen>
     <dimen name="appcompat_dialog_background_inset">16dp</dimen>
-    <dimen name="avatar_size">48dp</dimen>
-    <dimen name="avatar_size_sm">36dp</dimen>
     <dimen name="bottom_nav_height">64dp</dimen>
-    <dimen name="button_height">52dp</dimen>
-    <dimen name="button_radius">12dp</dimen>
-    <dimen name="card_elevation">2dp</dimen>
+    <dimen name="button_height">54dp</dimen>
+    <dimen name="button_height_sm">40dp</dimen>
+    <dimen name="button_radius">14dp</dimen>
+    <dimen name="card_elevation">@dimen/card_elevation_subtle</dimen>
+    <dimen name="card_elevation_high">8dp</dimen>
+    <dimen name="card_elevation_subtle">2dp</dimen>
     <dimen name="card_padding">20dp</dimen>
-    <dimen name="card_radius">24dp</dimen>
-    <dimen name="card_radius_lg">28dp</dimen>
+    <dimen name="card_radius">@dimen/radius_lg</dimen>
+    <dimen name="card_radius_lg">@dimen/radius_lg</dimen>
     <dimen name="cardview_compat_inset_shadow">1dp</dimen>
     <dimen name="cardview_default_elevation">2dp</dimen>
     <dimen name="cardview_default_radius">2dp</dimen>
-    <dimen name="chart_height">260dp</dimen>
-    <dimen name="chart_height_large">300dp</dimen>
     <dimen name="clock_face_margin_start">64dp</dimen>
     <dimen name="compat_button_inset_horizontal_material">4dp</dimen>
     <dimen name="compat_button_inset_vertical_material">6dp</dimen>
@@ -1180,6 +1196,7 @@
     <dimen name="design_textinput_caption_translate_y">5dp</dimen>
     <item format="float" name="disabled_alpha_material_dark" type="dimen">0.30</item>
     <item format="float" name="disabled_alpha_material_light" type="dimen">0.26</item>
+    <dimen name="element_spacing">12dp</dimen>
     <dimen name="fastscroll_default_thickness">8dp</dimen>
     <dimen name="fastscroll_margin">0dp</dimen>
     <dimen name="fastscroll_minimum_range">50dp</dimen>
@@ -1192,9 +1209,11 @@
     <item format="float" name="hint_pressed_alpha_material_light" type="dimen">0.54</item>
     <dimen name="icon_lg">32dp</dimen>
     <dimen name="icon_md">24dp</dimen>
-    <dimen name="icon_sm">16dp</dimen>
+    <dimen name="icon_sm">20dp</dimen>
     <dimen name="icon_xl">48dp</dimen>
-    <dimen name="input_radius">12dp</dimen>
+    <dimen name="icon_xs">16dp</dimen>
+    <dimen name="input_height">56dp</dimen>
+    <dimen name="input_radius">14dp</dimen>
     <dimen name="item_touch_helper_max_drag_scroll_per_frame">20dp</dimen>
     <dimen name="item_touch_helper_swipe_escape_max_velocity">800dp</dimen>
     <dimen name="item_touch_helper_swipe_escape_velocity">120dp</dimen>
@@ -1580,6 +1599,7 @@
     <dimen name="m3_timepicker_display_stroke_width">2dp</dimen>
     <dimen name="m3_timepicker_window_elevation">@dimen/m3_comp_time_picker_container_elevation</dimen>
     <dimen name="m3_toolbar_text_size_title">20dp</dimen>
+    <dimen name="margin_card">16dp</dimen>
     <dimen name="material_bottom_sheet_max_width">640dp</dimen>
     <dimen name="material_clock_display_height">80dp</dimen>
     <dimen name="material_clock_display_padding">24dp</dimen>
@@ -1829,21 +1849,37 @@
     <dimen name="notification_subtext_size">13sp</dimen>
     <dimen name="notification_top_pad">10dp</dimen>
     <dimen name="notification_top_pad_large_text">5dp</dimen>
-    <dimen name="score_circle_size">100dp</dimen>
-    <dimen name="score_circle_stroke">8dp</dimen>
+    <dimen name="padding_screen">20dp</dimen>
+    <dimen name="radius_full">999dp</dimen>
+    <dimen name="radius_lg">16dp</dimen>
+    <dimen name="radius_md">12dp</dimen>
+    <dimen name="radius_sm">8dp</dimen>
+    <dimen name="radius_xl">24dp</dimen>
     <dimen name="sliding_pane_detail_pane_width">300dp</dimen>
-    <dimen name="spacing_lg">24dp</dimen>
-    <dimen name="spacing_md">16dp</dimen>
-    <dimen name="spacing_sm">8dp</dimen>
-    <dimen name="spacing_xl">32dp</dimen>
-    <dimen name="spacing_xs">4dp</dimen>
-    <dimen name="spacing_xxl">48dp</dimen>
-    <dimen name="text_body">14sp</dimen>
-    <dimen name="text_caption">12sp</dimen>
-    <dimen name="text_h1">28sp</dimen>
+    <dimen name="spacing_12">12dp</dimen>
+    <dimen name="spacing_16">16dp</dimen>
+    <dimen name="spacing_24">24dp</dimen>
+    <dimen name="spacing_32">32dp</dimen>
+    <dimen name="spacing_4">4dp</dimen>
+    <dimen name="spacing_40">40dp</dimen>
+    <dimen name="spacing_48">48dp</dimen>
+    <dimen name="spacing_64">64dp</dimen>
+    <dimen name="spacing_8">8dp</dimen>
+    <dimen name="spacing_lg">@dimen/spacing_24</dimen>
+    <dimen name="spacing_md">@dimen/spacing_16</dimen>
+    <dimen name="spacing_sm">@dimen/spacing_8</dimen>
+    <dimen name="spacing_xl">@dimen/spacing_32</dimen>
+    <dimen name="spacing_xs">@dimen/spacing_4</dimen>
+    <dimen name="spacing_xxl">@dimen/spacing_48</dimen>
+    <dimen name="text_body_lg">16sp</dimen>
+    <dimen name="text_body_md">14sp</dimen>
+    <dimen name="text_body_sm">12sp</dimen>
+    <dimen name="text_caption">11sp</dimen>
+    <dimen name="text_display">32sp</dimen>
+    <dimen name="text_h1">24sp</dimen>
     <dimen name="text_h2">20sp</dimen>
-    <dimen name="text_h3">16sp</dimen>
-    <dimen name="text_small">11sp</dimen>
+    <dimen name="text_h3">18sp</dimen>
+    <dimen name="text_overline">10sp</dimen>
     <dimen name="tooltip_corner_radius">2dp</dimen>
     <dimen name="tooltip_horizontal_padding">16dp</dimen>
     <dimen name="tooltip_margin">8dp</dimen>
@@ -2077,6 +2113,9 @@
     <string name="admin_title">Admin Panel</string>
     <string name="age">Age</string>
     <string name="ai_health_score_engine">AI HEALTH SCORE ENGINE</string>
+    <string name="ai_insight_neutral">We\'ve detected a slight increase in discretionary spending. Consider adjusting your entertainment budget to maintain your current trajectory.</string>
+    <string name="ai_insight_positive">Your savings ratio has increased by 12% this month. You are currently in the top 5% of savers in your demographic.</string>
+    <string name="ai_insight_warning">Your Debt-to-Income ratio is approaching 40%. We recommend prioritizing high-interest debt repayment to improve your credit standing.</string>
     <string name="ai_insights">AI Smart Insights</string>
     <string name="ai_label">AI</string>
     <string name="ai_recommendations">AI Recommendations</string>
@@ -2334,12 +2373,12 @@
     <string name="no_account">Don\'t have an account? Sign Up</string>
     <string name="notifications">Notifications</string>
     <string name="ok">OK</string>
-    <string name="onboarding_desc_1">Get instant and accurate loan approval predictions powered by advanced machine learning models.</string>
-    <string name="onboarding_desc_2">Interact with our intelligent chatbot to receive personalized financial advice and smart saving tips.</string>
-    <string name="onboarding_desc_3">Your data is protected with enterprise-grade security. Join thousands of users trusting SmartLoan AI+.</string>
-    <string name="onboarding_title_1">AI LOAN PREDICTIONS</string>
-    <string name="onboarding_title_2">SMART ADVISOR</string>
-    <string name="onboarding_title_3">SECURE ANALYSIS</string>
+    <string name="onboarding_desc_1">Experience instant loan eligibility predictions powered by our proprietary ensemble machine learning models with 95% accuracy.</string>
+    <string name="onboarding_desc_2">Interact with a state-of-the-art NLP engine designed to optimize your debt-to-income ratio and accelerate your path to financial freedom.</string>
+    <string name="onboarding_desc_3">Your financial data is encrypted with enterprise-standard AES-256 protocols, ensuring your private information stays private.</string>
+    <string name="onboarding_title_1">Precision AI Underwriting</string>
+    <string name="onboarding_title_2">Cognitive Financial Advisor</string>
+    <string name="onboarding_title_3">Institutional-Grade Security</string>
     <string name="onboarding_welcome">WELCOME TO SMARTLOAN</string>
     <string name="or_continue_with">OR CONTINUE WITH</string>
     <string name="password">Password</string>
@@ -2356,7 +2395,9 @@
     <string name="phone_number">Phone Number</string>
     <string name="phone_required">Phone number is required</string>
     <string name="predict">Predict</string>
+    <string name="prediction_low_prob_msg">Improvement Required: Our AI suggests increasing your savings balance by $2,000 to move into a higher approval bracket.</string>
     <string name="prediction_subtitle">ML-powered approval probability</string>
+    <string name="prediction_success_msg">Analysis Complete: Based on 21 financial variables, your loan application shows a high probability of approval.</string>
     <string name="prediction_title">AI Loan Prediction</string>
     <string name="predictions_today">Predictions Today</string>
     <string name="profile">Profile</string>
@@ -2382,7 +2423,7 @@
     <string name="risk_report">Risk Report</string>
     <string name="run_ai_simulation">RUN AI SIMULATION</string>
     <string name="run_health">Health Score</string>
-    <string name="run_prediction">Fill in the form and tap Predict</string>
+    <string name="run_prediction">RUN PREDICTION</string>
     <string name="run_risk">Risk Analysis</string>
     <string name="run_simulation">Run Simulation</string>
     <string name="save_changes">Save Changes</string>
@@ -6148,7 +6189,8 @@
         <item name="android:paddingLeft">@dimen/abc_action_bar_overflow_padding_start_material</item>
         <item name="android:paddingRight">@dimen/abc_action_bar_overflow_padding_end_material</item>
     </style>
-    <style name="ShapeAppearance.Circle" parent="">
+    <style name="ShapeAppearance.Circle" parent="ShapeAppearance.Material3.SmallComponent">
+        <item name="cornerFamily">rounded</item>
         <item name="cornerSize">50%</item>
     </style>
     <style name="ShapeAppearance.M3.Comp.Badge.Large.Shape" parent="ShapeAppearance.M3.Sys.Shape.Corner.Full"/>
@@ -6231,15 +6273,15 @@
     <style name="ShapeAppearance.MaterialComponents.MediumComponent">
     <item name="cornerSize">@dimen/mtrl_shape_corner_size_medium_component</item>
   </style>
-    <style name="ShapeAppearance.MaterialComponents.SmallComponent" parent="ShapeAppearance.Material3.SmallComponent">
-        <item name="cornerSize">12dp</item>
-    </style>
+    <style name="ShapeAppearance.MaterialComponents.SmallComponent">
+    <item name="cornerSize">@dimen/mtrl_shape_corner_size_small_component</item>
+  </style>
     <style name="ShapeAppearance.MaterialComponents.Tooltip" parent="">
     <item name="cornerFamily">rounded</item>
     <item name="cornerSize">4dp</item>
   </style>
-    <style name="ShapeAppearance.SmartLoan.SmallComponent" parent="ShapeAppearance.Material3.SmallComponent">
-        <item name="cornerSize">16dp</item>
+    <style name="ShapeAppearance.SmartLoan.Button" parent="ShapeAppearance.Material3.MediumComponent">
+        <item name="cornerSize">@dimen/button_radius</item>
     </style>
     <style name="ShapeAppearanceOverlay.Material3.Button" parent="">
     <item name="cornerSize">50%</item>
@@ -6638,47 +6680,56 @@
     <style name="TextAppearance.MaterialComponents.Tooltip" parent="TextAppearance.MaterialComponents.Body2">
     <item name="android:textColor">?attr/colorOnPrimary</item>
   </style>
+    <style name="TextAppearance.SmartLoan.BodyLarge" parent="TextAppearance.Material3.BodyLarge">
+        <item name="android:textSize">@dimen/text_body_lg</item>
+        <item name="android:fontFamily">sans-serif</item>
+        <item name="android:textColor">@color/text_medium_emphasis</item>
+    </style>
+    <style name="TextAppearance.SmartLoan.BodyMedium" parent="TextAppearance.Material3.BodyMedium">
+        <item name="android:textSize">@dimen/text_body_md</item>
+        <item name="android:fontFamily">sans-serif</item>
+        <item name="android:textColor">@color/text_medium_emphasis</item>
+    </style>
+    <style name="TextAppearance.SmartLoan.HeadlineLarge" parent="TextAppearance.Material3.HeadlineLarge">
+        <item name="android:textSize">@dimen/text_display</item>
+        <item name="android:fontFamily">sans-serif-black</item>
+        <item name="android:textColor">@color/text_high_emphasis</item>
+        <item name="android:letterSpacing">-0.02</item>
+    </style>
+    <style name="TextAppearance.SmartLoan.HeadlineMedium" parent="TextAppearance.Material3.HeadlineMedium">
+        <item name="android:textSize">@dimen/text_h1</item>
+        <item name="android:fontFamily">sans-serif-medium</item>
+        <item name="android:textColor">@color/text_high_emphasis</item>
+    </style>
+    <style name="TextAppearance.SmartLoan.LabelLarge" parent="TextAppearance.Material3.LabelLarge">
+        <item name="android:textSize">@dimen/text_body_md</item>
+        <item name="android:fontFamily">sans-serif-medium</item>
+        <item name="android:letterSpacing">0.02</item>
+    </style>
+    <style name="TextAppearance.SmartLoan.TitleLarge" parent="TextAppearance.Material3.TitleLarge">
+        <item name="android:textSize">@dimen/text_h2</item>
+        <item name="android:fontFamily">sans-serif-medium</item>
+        <item name="android:textColor">@color/text_high_emphasis</item>
+    </style>
     <style name="TextAppearance.Widget.AppCompat.ExpandedMenu.Item" parent="Base.TextAppearance.Widget.AppCompat.ExpandedMenu.Item">
     </style>
     <style name="TextAppearance.Widget.AppCompat.Toolbar.Subtitle" parent="Base.TextAppearance.Widget.AppCompat.Toolbar.Subtitle">
     </style>
     <style name="TextAppearance.Widget.AppCompat.Toolbar.Title" parent="Base.TextAppearance.Widget.AppCompat.Toolbar.Title">
     </style>
-    <style name="TextStyle"/>
-    <style name="TextStyle.Body">
-        <item name="android:textSize">14sp</item>
-        <item name="android:textColor">@color/on_surface</item>
+    <style name="TextStyle.Body" parent="TextAppearance.SmartLoan.BodyLarge"/>
+    <style name="TextStyle.Caption" parent="TextAppearance.SmartLoan.BodyMedium">
+        <item name="android:textSize">@dimen/text_body_sm</item>
+        <item name="android:textColor">@color/text_low_emphasis</item>
     </style>
-    <style name="TextStyle.Caption">
-        <item name="android:textSize">12sp</item>
-        <item name="android:textColor">@color/muted_foreground</item>
+    <style name="TextStyle.Heading1" parent="TextAppearance.SmartLoan.HeadlineMedium"/>
+    <style name="TextStyle.Heading2" parent="TextAppearance.SmartLoan.TitleLarge"/>
+    <style name="TextStyle.Heading3" parent="TextAppearance.SmartLoan.TitleLarge">
+        <item name="android:textSize">@dimen/text_h3</item>
     </style>
-    <style name="TextStyle.Heading1">
-        <item name="android:textSize">28sp</item>
-        <item name="android:textStyle">bold</item>
-        <item name="android:textColor">@color/on_surface</item>
-        <item name="android:fontFamily">sans-serif-medium</item>
-    </style>
-    <style name="TextStyle.Heading2">
-        <item name="android:textSize">20sp</item>
-        <item name="android:textStyle">bold</item>
-        <item name="android:textColor">@color/on_surface</item>
-    </style>
-    <style name="TextStyle.Heading3">
-        <item name="android:textSize">16sp</item>
-        <item name="android:textStyle">bold</item>
-        <item name="android:textColor">@color/on_surface</item>
-    </style>
-    <style name="TextStyle.Label">
-        <item name="android:textSize">12sp</item>
-        <item name="android:textStyle">bold</item>
-        <item name="android:textColor">@color/muted_foreground</item>
+    <style name="TextStyle.Label" parent="TextAppearance.SmartLoan.LabelLarge">
+        <item name="android:textSize">@dimen/text_overline</item>
         <item name="android:textAllCaps">true</item>
-    </style>
-    <style name="TextStyle.StatValue">
-        <item name="android:textSize">24sp</item>
-        <item name="android:textStyle">bold</item>
-        <item name="android:textColor">@color/on_surface</item>
     </style>
     <style name="Theme.AppCompat" parent="Base.Theme.AppCompat"/>
     <style name="Theme.AppCompat.CompactMenu" parent="Base.Theme.AppCompat.CompactMenu"/>
@@ -6869,34 +6920,41 @@
     <item name="windowNoTitle">true</item>
   </style>
     <style name="Theme.SmartLoanAI" parent="Theme.Material3.Light.NoActionBar">
+        
         <item name="colorPrimary">@color/primary</item>
-        <item name="colorPrimaryDark">@color/primary_dark</item>
-        <item name="colorPrimaryVariant">@color/primary_variant</item>
         <item name="colorOnPrimary">@color/on_primary</item>
+        <item name="colorPrimaryContainer">@color/primary_container</item>
+        <item name="colorOnPrimaryContainer">@color/on_primary_container</item>
+
         <item name="colorSecondary">@color/secondary</item>
         <item name="colorOnSecondary">@color/on_secondary</item>
-        <item name="colorTertiary">@color/tertiary</item>
-        <item name="colorOnTertiary">@color/on_tertiary</item>
-        <item name="colorError">@color/error</item>
-        <item name="colorOnError">@color/on_error</item>
-        <item name="android:colorBackground">@color/background</item>
+
+        <item name="colorError">@color/error_main</item>
+        <item name="colorOnError">@color/white</item>
+
+        <item name="android:windowBackground">@color/background</item>
         <item name="colorSurface">@color/surface</item>
         <item name="colorOnSurface">@color/on_surface</item>
         <item name="colorSurfaceVariant">@color/surface_variant</item>
         <item name="colorOnSurfaceVariant">@color/on_surface_variant</item>
+
+        
         <item name="android:statusBarColor">@color/surface</item>
         <item name="android:navigationBarColor">@color/surface</item>
         <item name="android:windowLightStatusBar" ns1:targetApi="23">true</item>
 
         
+        <item name="textAppearanceHeadlineLarge">@style/TextAppearance.SmartLoan.HeadlineLarge</item>
+        <item name="textAppearanceHeadlineMedium">@style/TextAppearance.SmartLoan.HeadlineMedium</item>
+        <item name="textAppearanceTitleLarge">@style/TextAppearance.SmartLoan.TitleLarge</item>
+        <item name="textAppearanceBodyLarge">@style/TextAppearance.SmartLoan.BodyLarge</item>
+        <item name="textAppearanceBodyMedium">@style/TextAppearance.SmartLoan.BodyMedium</item>
+        <item name="textAppearanceLabelLarge">@style/TextAppearance.SmartLoan.LabelLarge</item>
+
+        
         <item name="materialButtonStyle">@style/Widget.SmartLoan.Button</item>
         <item name="textInputStyle">@style/Widget.SmartLoan.TextInput</item>
         <item name="materialCardViewStyle">@style/Widget.SmartLoan.Card</item>
-    </style>
-    <style name="Theme.SmartLoanAI.Auth" parent="Theme.SmartLoanAI">
-        <item name="android:statusBarColor">#1E293B</item>
-        <item name="android:windowBackground">@color/background</item>
-        <item name="android:windowLightStatusBar" ns1:targetApi="23">false</item>
     </style>
     <style name="ThemeOverlay.AppCompat" parent="Base.ThemeOverlay.AppCompat"/>
     <style name="ThemeOverlay.AppCompat.ActionBar" parent="Base.ThemeOverlay.AppCompat.ActionBar"/>
@@ -9532,72 +9590,40 @@
     <item name="android:textAppearance">@style/TextAppearance.MaterialComponents.Tooltip</item>
     <item name="shapeAppearance">@style/ShapeAppearance.MaterialComponents.Tooltip</item>
   </style>
-    <style name="Widget.SmartLoan.BottomNav" parent="Widget.Material3.BottomNavigationView">
-        <item name="itemIconTint">@color/bottom_nav_color</item>
-        <item name="itemTextColor">@color/bottom_nav_color</item>
-        <item name="itemActiveIndicatorStyle">@style/Widget.SmartLoan.BottomNav.ActiveIndicator</item>
-    </style>
-    <style name="Widget.SmartLoan.BottomNav.ActiveIndicator" parent="Widget.Material3.BottomNavigationView.ActiveIndicator">
-        <item name="android:color">@color/nav_selected</item>
-    </style>
     <style name="Widget.SmartLoan.Button" parent="Widget.Material3.Button">
-        <item name="cornerRadius">12dp</item>
-        <item name="android:paddingTop">14dp</item>
-        <item name="android:paddingBottom">14dp</item>
-        <item name="android:textAllCaps">false</item>
-        <item name="android:fontFamily">sans-serif-medium</item>
-    </style>
-    <style name="Widget.SmartLoan.Button.Outline" parent="Widget.Material3.Button.OutlinedButton">
-        <item name="cornerRadius">12dp</item>
-        <item name="android:paddingTop">14dp</item>
-        <item name="android:paddingBottom">14dp</item>
-        <item name="android:textAllCaps">false</item>
-    </style>
-    <style name="Widget.SmartLoan.Button.Social" parent="Widget.Material3.Button.OutlinedButton">
-        <item name="cornerRadius">20dp</item>
         <item name="android:insetTop">0dp</item>
         <item name="android:insetBottom">0dp</item>
-        <item name="strokeColor">@color/card_stroke</item>
-        <item name="strokeWidth">1.5dp</item>
-        <item name="android:textColor">@color/text_primary</item>
-        <item name="android:fontFamily">sans-serif-medium</item>
-        <item name="android:textSize">14sp</item>
-        <item name="rippleColor">@color/primary_light</item>
+        <item name="android:minHeight">@dimen/button_height</item>
+        <item name="shapeAppearance">@style/ShapeAppearance.SmartLoan.Button</item>
+        <item name="android:textAppearance">@style/TextAppearance.SmartLoan.LabelLarge</item>
+    </style>
+    <style name="Widget.SmartLoan.Button.Outline" parent="Widget.Material3.Button.OutlinedButton"/>
+    <style name="Widget.SmartLoan.Button.Social" parent="Widget.Material3.Button.OutlinedButton">
+        <item name="cornerRadius">20dp</item>
+        <item name="strokeColor">@color/border_subtle</item>
+        <item name="android:textColor">@color/text_high_emphasis</item>
         <item name="android:backgroundTint">@color/white</item>
     </style>
     <style name="Widget.SmartLoan.Button.SocialIcon" parent="Widget.SmartLoan.Button.Social">
         <item name="android:padding">0dp</item>
-        <item name="iconPadding">0dp</item>
         <item name="iconGravity">textStart</item>
     </style>
     <style name="Widget.SmartLoan.Card" parent="Widget.Material3.CardView.Elevated">
-        <item name="cardCornerRadius">16dp</item>
-        <item name="cardElevation">2dp</item>
+        <item name="cardCornerRadius">@dimen/radius_lg</item>
+        <item name="cardElevation">@dimen/card_elevation_subtle</item>
+        <item name="cardBackgroundColor">@color/surface</item>
         <item name="strokeWidth">1dp</item>
-        <item name="strokeColor">@color/card_stroke</item>
-        <item name="cardBackgroundColor">@color/card_background</item>
-    </style>
-    <style name="Widget.SmartLoan.Chip" parent="Widget.Material3.Chip.Suggestion">
-        <item name="chipCornerRadius">20dp</item>
-        <item name="chipStrokeWidth">1dp</item>
-        <item name="chipStrokeColor">@color/card_stroke</item>
+        <item name="strokeColor">@color/border_subtle</item>
     </style>
     <style name="Widget.SmartLoan.TextInput" parent="Widget.Material3.TextInputLayout.OutlinedBox">
-        <item name="boxCornerRadiusTopStart">16dp</item>
-        <item name="boxCornerRadiusTopEnd">16dp</item>
-        <item name="boxCornerRadiusBottomStart">16dp</item>
-        <item name="boxCornerRadiusBottomEnd">16dp</item>
-        <item name="boxStrokeWidth">1dp</item>
-        <item name="boxStrokeWidthFocused">2dp</item>
+        <item name="boxCornerRadiusTopStart">@dimen/input_radius</item>
+        <item name="boxCornerRadiusTopEnd">@dimen/input_radius</item>
+        <item name="boxCornerRadiusBottomStart">@dimen/input_radius</item>
+        <item name="boxCornerRadiusBottomEnd">@dimen/input_radius</item>
         <item name="boxStrokeColor">@color/input_stroke</item>
         <item name="boxBackgroundColor">@color/input_bg</item>
-        <item name="startIconTint">@color/primary</item>
-        <item name="endIconTint">@color/text_secondary</item>
         <item name="hintTextColor">@color/primary</item>
-        <item name="android:textColorHint">@color/text_muted</item>
-        <item name="errorIconTint">@color/error</item>
-        <item name="errorTextColor">@color/error</item>
-        <item name="shapeAppearanceOverlay">@style/ShapeAppearance.SmartLoan.SmallComponent</item>
+        <item name="android:textColorHint">@color/text_low_emphasis</item>
     </style>
     <style name="Widget.Support.CoordinatorLayout" parent="android:Widget">
         <item name="statusBarBackground">#000000</item>

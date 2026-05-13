@@ -1,54 +1,66 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!-- Brand Identity (Dark Mode) -->
-    <color name="primary">#60A5FA</color>
-    <color name="primary_dark">#0F172A</color>
-    <color name="primary_light">#93C5FD</color>
-    <color name="primary_variant">#1E3A8A</color>
-    <color name="on_primary">#0F172A</color>
+    <!-- =================================================================================
+         CORE BRAND SYSTEM (Dark Mode Palette)
+         ================================================================================= -->
 
-    <color name="secondary">#34D399</color>
-    <color name="secondary_dark">#064E3B</color>
-    <color name="on_secondary">#0F172A</color>
+    <!-- Primary: Bright Tech Blue (shifted for dark mode contrast) -->
+    <color name="primary_500">#60A5FA</color>
+    <color name="primary_600">#3B82F6</color>
+    <color name="primary_200">#BFDBFE</color>
+    <color name="primary_900">#1E3A8A</color>
 
-    <!-- Surfaces -->
-    <color name="background">#020617</color>
-    <color name="surface">#0F172A</color>
-    <color name="surface_variant">#1E293B</color>
-    <color name="on_background">#F1F5F9</color>
-    <color name="on_surface">#F1F5F9</color>
-    <color name="on_surface_variant">#94A3B8</color>
+    <!-- Secondary: AI Mint -->
+    <color name="secondary_500">#34D399</color>
 
-    <!-- Typography -->
-    <color name="text_primary">#F1F5F9</color>
-    <color name="text_secondary">#94A3B8</color>
-    <color name="text_muted">#64748B</color>
-    <color name="muted_foreground">#94A3B8</color>
+    <!-- Semantic Colors -->
+    <color name="success_main">#34D399</color>
+    <color name="error_main">#F87171</color>
+    <color name="warning_main">#FBBF24</color>
 
-    <!-- Indicators -->
-    <color name="dot_inactive">#1E293B</color>
-    <color name="dot_active">#60A5FA</color>
+    <!-- Legacy Compatibility Aliases -->
+    <color name="error">@color/error_main</color>
+    <color name="on_error">#020617</color>
+    <color name="success">@color/success_main</color>
+    <color name="warning">@color/warning_main</color>
+    <color name="tertiary">@color/secondary_500</color>
+    <color name="on_tertiary">#020617</color>
 
-    <color name="nav_selected">#1A60A5FA</color>
-    <color name="nav_icon_selected">#60A5FA</color>
-    <color name="nav_icon_default">#94A3B8</color>
-    <color name="nav_border_subtle">#3360A5FA</color>
-    <color name="divider_color">#1E293B</color>
+    <!-- Hierarchy -->
+    <color name="text_high_emphasis">#F1F5F9</color> <!-- Slate 100 -->
+    <color name="text_medium_emphasis">#94A3B8</color> <!-- Slate 400 -->
+    <color name="text_low_emphasis">#64748B</color> <!-- Slate 500 -->
 
-    <!-- Gradient -->
-    <color name="gradient_start">#60A5FA</color>
-    <color name="gradient_end">#34D399</color>
+    <!-- Backgrounds -->
+    <color name="bg_app">#020617</color> <!-- Deepest Navy -->
+    <color name="surface_card">#0F172A</color> <!-- Slate 900 -->
+    <color name="surface_variant">#1E293B</color> <!-- Slate 800 -->
 
-    <!-- Glassmorphism -->
-    <color name="glass_white">#1AFFFFFF</color>
-    <color name="glass_stroke">#1AFFFFFF</color>
+    <!-- =================================================================================
+         THEME MAPPING
+         ================================================================================= -->
+    <color name="primary">@color/primary_500</color>
+    <color name="on_primary">#020617</color>
+    <color name="primary_container">@color/primary_900</color>
+    <color name="on_primary_container">@color/primary_200</color>
 
-    <!-- Components -->
-    <color name="card_background">#0F172A</color>
-    <color name="card_stroke">#1E293B</color>
-    <color name="muted">#1E293B</color>
-    <color name="divider">#1E293B</color>
+    <color name="secondary">@color/secondary_500</color>
+    <color name="on_secondary">#020617</color>
+
+    <color name="background">@color/bg_app</color>
+    <color name="on_background">@color/text_high_emphasis</color>
+
+    <color name="surface">@color/surface_card</color>
+    <color name="on_surface">@color/text_high_emphasis</color>
+    <color name="on_surface_variant">@color/text_medium_emphasis</color>
+
+    <!-- Input Fields -->
+    <color name="input_bg">#1E293B</color>
+    <color name="input_stroke">#334155</color>
+
+    <!-- Global / Legacy -->
     <color name="white">#FFFFFF</color>
     <color name="black">#000000</color>
     <color name="transparent">#00000000</color>
+    <color name="border_subtle">#1E293B</color>
 </resources>

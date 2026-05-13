@@ -84,13 +84,18 @@
     <string name="step_financial">Financial Details</string>
     <string name="step_loan">Loan Parameters</string>
     <string name="predict">Predict</string>
+    <string name="run_prediction">RUN PREDICTION</string>
     <string name="analyzing">Analyzing…</string>
     <string name="likely_approved">Likely Approved</string>
     <string name="likely_rejected">Likely Rejected</string>
     <string name="model_breakdown">Model Breakdown</string>
     <string name="risk_factors">Risk Factors</string>
     <string name="feature_importance">Top Feature Importance</string>
-    <string name="run_prediction">Fill in the form and tap Predict</string>
+    <string name="ai_insight_positive">Your savings ratio has increased by 12% this month. You are currently in the top 5% of savers in your demographic.</string>
+    <string name="ai_insight_neutral">We\'ve detected a slight increase in discretionary spending. Consider adjusting your entertainment budget to maintain your current trajectory.</string>
+    <string name="ai_insight_warning">Your Debt-to-Income ratio is approaching 40%. We recommend prioritizing high-interest debt repayment to improve your credit standing.</string>
+    <string name="prediction_success_msg">Analysis Complete: Based on 21 financial variables, your loan application shows a high probability of approval.</string>
+    <string name="prediction_low_prob_msg">Improvement Required: Our AI suggests increasing your savings balance by $2,000 to move into a higher approval bracket.</string>
 
     <!-- Form Fields -->
     <string name="age">Age</string>
@@ -188,12 +193,12 @@
     <string name="skip">Skip</string>
     <string name="welcome">WELCOME</string>
     <string name="onboarding_welcome">WELCOME TO SMARTLOAN</string>
-    <string name="onboarding_title_1">AI LOAN PREDICTIONS</string>
-    <string name="onboarding_desc_1">Get instant and accurate loan approval predictions powered by advanced machine learning models.</string>
-    <string name="onboarding_title_2">SMART ADVISOR</string>
-    <string name="onboarding_desc_2">Interact with our intelligent chatbot to receive personalized financial advice and smart saving tips.</string>
-    <string name="onboarding_title_3">SECURE ANALYSIS</string>
-    <string name="onboarding_desc_3">Your data is protected with enterprise-grade security. Join thousands of users trusting SmartLoan AI+.</string>
+    <string name="onboarding_title_1">Precision AI Underwriting</string>
+    <string name="onboarding_desc_1">Experience instant loan eligibility predictions powered by our proprietary ensemble machine learning models with 95% accuracy.</string>
+    <string name="onboarding_title_2">Cognitive Financial Advisor</string>
+    <string name="onboarding_desc_2">Interact with a state-of-the-art NLP engine designed to optimize your debt-to-income ratio and accelerate your path to financial freedom.</string>
+    <string name="onboarding_title_3">Institutional-Grade Security</string>
+    <string name="onboarding_desc_3">Your financial data is encrypted with enterprise-standard AES-256 protocols, ensuring your private information stays private.</string>
     <string name="get_started">Get Started</string>
     <string name="password_placeholder">••••••••</string>
     <string name="upload_hint">PDF, JPG or PNG (Max 5MB)</string>

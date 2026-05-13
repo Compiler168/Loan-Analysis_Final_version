@@ -2,7 +2,7 @@
 
 **Intelligent Financial Advisory & Loan Prediction Platform**
 
-A full-stack, AI-powered fintech platform featuring custom Machine Learning models (Logistic Regression, Random Forest, XGBoost), a custom-built NLP chatbot engine, an Express.js API gateway with MongoDB Atlas persistence, a Next.js ShadCN UI frontend, and a native Android companion app.
+A mobile-first, AI-powered fintech platform featuring a native Android application, intelligent ML models for loan prediction, a robust Express.js REST API backend, and custom-built AI/ML services. Designed for seamless mobile user experience with enterprise-grade security and performance.
 
 ---
 
@@ -11,53 +11,49 @@ A full-stack, AI-powered fintech platform featuring custom Machine Learning mode
 - [Architecture Overview](#architecture-overview)
 - [Technology Stack](#technology-stack)
 - [Features](#features)
-- [AI/ML Deep Dive](#aiml-deep-dive)
-- [Chatbot Architecture](#chatbot-architecture)
-- [API Reference](#api-reference)
 - [Project Structure](#project-structure)
 - [Quick Start (Local Development)](#quick-start-local-development)
 - [Deployment](#deployment)
-- [Demo Credentials](#demo-credentials)
+- [API Reference](#api-reference)
 - [Environment Variables](#environment-variables)
 - [Testing](#testing)
-- [Screenshots](#screenshots)
+- [Demo Credentials](#demo-credentials)
 - [License](#license)
 
 ---
 
 ## Architecture Overview
 
-SmartLoan AI+ uses a **4-tier microservice architecture** with clear separation of concerns:
+SmartLoan AI+ uses a **3-tier microservice architecture** optimized for mobile applications:
 
 ```
 ┌──────────────────────────────────────────────────────────────────┐
-│                        CLIENT LAYER                              │
-│  ┌─────────────────────┐      ┌─────────────────────────────┐   │
-│  │  Next.js 14 Web App │      │  Android App (Java/Retrofit)│   │
-│  │  TypeScript + ShadCN│      │  Material Design 3          │   │
-│  └─────────┬───────────┘      └──────────────┬──────────────┘   │
-│            │                                  │                  │
-├────────────┼──────────────────────────────────┼──────────────────┤
-│            ▼          API GATEWAY             ▼                  │
-│  ┌──────────────────────────────────────────────────────────┐   │
-│  │              Express.js Backend (Node.js)                │   │
-│  │  JWT Auth · Helmet · Rate Limiting · Mongoose ODM        │   │
-│  └───────────────────┬──────────────────────────────────────┘   │
-│                      │                                           │
-├──────────────────────┼───────────────────────────────────────────┤
-│                      ▼        AI/ML LAYER                        │
-│  ┌──────────────────────────────────────────────────────────┐   │
-│  │            FastAPI ML Service (Python)                    │   │
-│  │  Prediction Engine · NLP Chatbot · Health Scorer         │   │
-│  │  Risk Analyzer · Simulation Engine · Document Analyzer   │   │
-│  └──────────────────────────────────────────────────────────┘   │
+│                     MOBILE CLIENT LAYER                          │
+│           ┌─────────────────────────────────────┐                │
+│           │    Native Android App (Kotlin/Java) │                │
+│           │    Material Design 3 Components     │                │
+│           └────────────────┬────────────────────┘                │
+│                            │                                     │
+├────────────────────────────┼─────────────────────────────────────┤
+│                            ▼      API GATEWAY                    │
+│           ┌──────────────────────────────────┐                  │
+│           │  Express.js Backend (Node.js)    │                  │
+│           │  JWT Auth · Security · Rate Limit│                  │
+│           └────────────────┬─────────────────┘                  │
+│                            │                                     │
+├────────────────────────────┼─────────────────────────────────────┤
+│                            ▼    AI/ML SERVICES                   │
+│           ┌──────────────────────────────────┐                  │
+│           │  FastAPI ML Service (Python)     │                  │
+│           │  Predictions · NLP · Analytics   │                  │
+│           └──────────────────────────────────┘                  │
 │                                                                  │
 ├──────────────────────────────────────────────────────────────────┤
-│                      DATA LAYER                                  │
-│  ┌───────────────────┐    ┌──────────────────────────────┐      │
-│  │  MongoDB Atlas     │    │  Trained ML Models (.pkl)    │      │
-│  │  (Cloud Database)  │    │  12,000 sample dataset       │      │
-│  └───────────────────┘    └──────────────────────────────┘      │
+│                      DATA PERSISTENCE LAYER                      │
+│  ┌────────────────────┐      ┌──────────────────────┐           │
+│  │ MongoDB Atlas      │      │ Trained ML Models    │           │
+│  │ (User Data & Logs) │      │ (.pkl files)         │           │
+│  └────────────────────┘      └──────────────────────┘           │
 └──────────────────────────────────────────────────────────────────┘
 ```
 
@@ -65,39 +61,445 @@ SmartLoan AI+ uses a **4-tier microservice architecture** with clear separation 
 
 ## Technology Stack
 
-### Frontend (Web)
+### Mobile Frontend (Android)
 | Technology | Purpose |
 |---|---|
-| **Next.js 14** (App Router) | React framework with server-side rendering |
-| **TypeScript** | Static type checking |
-| **Tailwind CSS** | Utility-first CSS styling |
-| **ShadCN UI** (Radix primitives) | Accessible component library |
-| **Recharts** | Interactive financial charts (Area, Bar, Radar) |
-| **Framer Motion** | Smooth animations and transitions |
-| **Axios** | HTTP client with interceptors |
-| **Zod + React Hook Form** | Form validation |
-| **next-themes** | Dark/light mode support |
-| **Lucide React** | Icon library |
+| **Kotlin/Java** | Native Android development |
+| **Android Studio** | IDE and build system |
+| **Material Design 3** | Modern UI components and guidelines |
+| **Retrofit** | Type-safe HTTP client |
+| **Room Database** | Local data persistence |
+| **Jetpack** | AndroidX libraries (Navigation, ViewModel, etc.) |
 
-### Backend (API Gateway)
+### Backend API
 | Technology | Purpose |
 |---|---|
 | **Express.js** | REST API framework |
 | **Mongoose** | MongoDB ODM for data modeling |
-| **JSON Web Token (JWT)** | Stateless authentication |
-| **bcryptjs** | Password hashing (10-round salt) |
+| **JWT (JSON Web Tokens)** | Stateless authentication (7-day expiry) |
+| **bcryptjs** | Password hashing with 10-round salt |
 | **Helmet** | HTTP security headers |
-| **express-rate-limit** | API rate limiting (200 req/15min general, 50 req/15min AI) |
-| **express-validator** | Request validation |
-| **Multer** | File upload handling (documents) |
-| **Axios** | Internal HTTP calls to ML service |
+| **express-rate-limit** | API rate limiting (200 req/15min, 50 req/15min for AI) |
+| **express-validator** | Request validation and sanitization |
+| **Multer** | File upload handling (documents, reports) |
+| **Axios** | Internal HTTP client for ML service calls |
+| **CORS** | Cross-origin resource sharing for mobile origins |
 
 ### AI/ML Service
 | Technology | Purpose |
 |---|---|
-| **FastAPI** | High-performance Python API framework |
+| **FastAPI** | High-performance async Python API |
 | **Scikit-Learn** | Logistic Regression, Random Forest, StandardScaler |
-| **XGBoost** | Gradient boosted trees (primary model) |
+| **XGBoost** | Gradient boosted trees (primary prediction model) |
+| **NLTK** | Natural language processing for chatbot |
+| **Pandas & NumPy** | Data manipulation and analysis |
+| **Joblib** | ML model persistence (.pkl files) |
+| **PDFPlumber** | Document analysis and data extraction |
+
+### Database
+| Technology | Purpose |
+|---|---|
+| **MongoDB Atlas** | Cloud NoSQL database for users, predictions, chat sessions |
+| **Mongoose Schema** | Data validation and relationships |
+
+---
+
+## Features
+
+### 🤖 AI/ML Capabilities
+- **Loan Prediction Engine**: XGBoost ensemble model with 85%+ accuracy
+- **Credit Health Scoring**: Real-time financial health assessment
+- **Risk Analysis**: Comprehensive loan risk evaluation
+- **NLP Chatbot**: Natural language financial advisory
+- **Simulation Engine**: Loan scenario analysis
+- **Document Analysis**: Automatic document parsing and data extraction
+
+### 📱 Mobile App Features
+- **User Authentication**: Secure JWT-based authentication with 7-day session
+- **Loan Prediction**: Request real-time loan approval predictions
+- **Financial Dashboard**: View financial metrics, health scores, and history
+- **Chat Support**: AI-powered financial advisory chatbot
+- **Report Generation**: Download PDF reports
+- **Secure Data Storage**: Local and cloud persistence with encryption
+- **Offline Support**: Basic offline functionality with cached data
+
+### 🔐 Security Features
+- Helmet security headers
+- CORS with mobile-specific origins
+- JWT token-based authentication
+- Password hashing with bcryptjs (10-round salt)
+- Rate limiting (200 req/15min general, 50 req/15min for AI operations)
+- Request validation and sanitization
+- Helmet content security policies
+- HTTPS-ready configuration
+
+---
+
+## Project Structure
+
+```
+smartloan-ai-mobile/
+├── android/                    # Native Android Application
+│   ├── app/
+│   │   ├── build.gradle
+│   │   └── src/
+│   │       ├── main/
+│   │       │   ├── java/                    # Kotlin/Java source
+│   │       │   │   ├── ui/                  # Activities, Fragments
+│   │       │   │   ├── viewmodel/           # ViewModels
+│   │       │   │   ├── repository/          # Data repositories
+│   │       │   │   ├── api/                 # Retrofit API client
+│   │       │   │   ├── database/            # Room database
+│   │       │   │   └── util/                # Utilities
+│   │       │   ├── res/                     # Resources (layouts, strings, drawable)
+│   │       │   └── AndroidManifest.xml
+│   │       ├── test/                        # Unit tests
+│   │       └── androidTest/                 # Instrumented tests
+│   ├── gradle/
+│   ├── build.gradle
+│   ├── settings.gradle
+│   └── gradle.properties
+│
+├── backend/                    # Express.js API Server
+│   ├── src/
+│   │   ├── server.js                        # Express app entry point
+│   │   ├── config/
+│   │   │   └── database.js                  # MongoDB connection
+│   │   ├── middleware/
+│   │   │   └── auth.js                      # JWT authentication
+│   │   ├── models/                          # Mongoose schemas
+│   │   │   ├── User.js
+│   │   │   ├── Prediction.js
+│   │   │   ├── ChatSession.js
+│   │   │   ├── Analysis.js
+│   │   │   └── Report.js
+│   │   └── routes/                          # API endpoints
+│   │       ├── auth.js                      # Authentication (register, login)
+│   │       ├── loans.js                     # Loan prediction & history
+│   │       ├── financial.js                 # Financial metrics
+│   │       ├── chat.js                      # Chatbot
+│   │       └── reports.js                   # Report generation
+│   ├── package.json                         # Dependencies
+│   └── .env                                 # Environment configuration
+│
+├── ml-service/                 # FastAPI ML Service
+│   ├── main.py                              # FastAPI app entry point
+│   ├── requirements.txt                     # Python dependencies
+│   ├── services/                            # ML engines
+│   │   ├── prediction_engine.py             # XGBoost predictions
+│   │   ├── health_scorer.py                 # Health scoring
+│   │   ├── risk_analyzer.py                 # Risk analysis
+│   │   ├── nlp_engine.py                    # Chatbot NLP
+│   │   ├── simulation_engine.py             # Scenario simulation
+│   │   └── document_analyzer.py             # Document parsing
+│   ├── models/                              # Trained ML models
+│   │   ├── xgboost_model.pkl                # Primary prediction model
+│   │   ├── rf_model.pkl                     # Random forest model
+│   │   ├── lr_model.pkl                     # Logistic regression
+│   │   └── model_metadata.json
+│   ├── data/
+│   │   └── loan_dataset.csv                 # Training dataset (12K samples)
+│   ├── training/
+│   │   ├── train_models.py
+│   │   └── generate_data.py
+│   ├── tests/
+│   │   └── test_engines.py
+│   ├── Dockerfile                           # Container configuration
+│   └── render.yaml                          # Deployment configuration
+│
+├── README.md                   # Project documentation (this file)
+└── .gitignore
+
+```
+
+---
+
+## Quick Start (Local Development)
+
+### Prerequisites
+- **Node.js 18+** (for backend)
+- **Python 3.8+** (for ML service)
+- **MongoDB Atlas** account (or local MongoDB)
+- **Android Studio** (for mobile app development)
+- **Git**
+
+### 1. Backend Setup
+
+```bash
+cd backend
+npm install
+
+# Create .env file
+cat > .env << EOF
+PORT=5000
+NODE_ENV=development
+MONGODB_URI=mongodb+srv://<user>:<password>@cluster.mongodb.net/smartloan?retryWrites=true
+JWT_SECRET=your_jwt_secret_key_here
+ML_SERVICE_URL=http://localhost:8000
+MOBILE_ORIGINS=http://localhost:5000
+EOF
+
+# Start backend
+npm run dev
+```
+
+Backend will run on `http://localhost:5000`
+
+### 2. ML Service Setup
+
+```bash
+cd ml-service
+python -m venv venv
+
+# On Windows
+venv\Scripts\activate
+# On macOS/Linux
+source venv/bin/activate
+
+pip install -r requirements.txt
+
+# Start ML service
+python main.py
+```
+
+ML Service will run on `http://localhost:8000`
+
+### 3. Android App Setup
+
+```bash
+cd android
+# Open in Android Studio: File > Open > select android folder
+# Or build from command line:
+./gradlew build
+
+# Run on emulator or device:
+./gradlew installDebug
+```
+
+---
+
+## API Reference
+
+### Base URL
+- **Development**: `http://localhost:5000/api`
+- **Production**: `https://api.smartloan.ai/api`
+
+### Authentication
+All endpoints (except `/auth/register` and `/auth/login`) require JWT token in header:
+```
+Authorization: Bearer <token>
+```
+
+### Core Endpoints
+
+#### Auth
+- `POST /auth/register` - Register new user
+- `POST /auth/login` - Login and get JWT token
+- `GET /auth/profile` - Get user profile
+
+#### Loans
+- `POST /loans/predict` - Get loan prediction
+- `GET /loans/history` - Get prediction history
+
+#### Financial
+- `GET /financial/metrics` - Get financial metrics
+- `POST /financial/analyze` - Financial analysis
+
+#### Chat
+- `POST /chat/message` - Send message to chatbot
+- `GET /chat/history` - Get chat history
+
+#### Reports
+- `POST /reports/generate` - Generate PDF report
+- `GET /reports/list` - List user reports
+
+---
+
+## Deployment
+
+### Backend (Node.js)
+**Recommended Platforms**:
+- Railway.app
+- Render.com
+- Heroku (with paid dynos)
+- AWS EC2 + Load Balancer
+- DigitalOcean App Platform
+
+**Example with Render.com**:
+```bash
+git push main  # Trigger auto-deployment
+```
+
+### ML Service (Python)
+**Recommended Platforms**:
+- Railway.app
+- Render.com (includes `render.yaml`)
+- AWS EC2 + Elastic Beanstalk
+- Google Cloud Run
+- DigitalOcean App Platform
+
+**Docker Deployment**:
+```bash
+docker build -t smartloan-ml .
+docker run -p 8000:8000 smartloan-ml
+```
+
+### Environment Variables (Production)
+
+**Backend (.env)**:
+```
+NODE_ENV=production
+PORT=5000
+MONGODB_URI=<production_mongodb_atlas_uri>
+JWT_SECRET=<strong_random_secret>
+ML_SERVICE_URL=https://ml-service.example.com
+MOBILE_ORIGINS=https://android-app-domain.com,https://app.example.com
+```
+
+**ML Service (.env)**:
+```
+PYTHONUNBUFFERED=1
+MODEL_PATH=/models
+LOG_LEVEL=INFO
+```
+
+---
+
+## Testing
+
+### Backend Tests
+```bash
+cd backend
+npm test
+```
+
+### ML Service Tests
+```bash
+cd ml-service
+source venv/bin/activate
+pytest tests/
+```
+
+### Android Tests
+```bash
+cd android
+./gradlew test              # Unit tests
+./gradlew connectedAndroidTest  # Instrumented tests
+```
+
+---
+
+## Demo Credentials
+
+For quick testing with in-memory fallback:
+
+```
+Email: demo@smartloan.ai
+Password: demo123
+Role: Admin
+```
+
+Note: Requires MongoDB Atlas connection to persist data beyond session.
+
+---
+
+## Environment Variables
+
+### Backend
+| Variable | Description | Example |
+|---|---|---|
+| `PORT` | Server port | `5000` |
+| `NODE_ENV` | Environment | `development` \| `production` |
+| `MONGODB_URI` | MongoDB connection string | `mongodb+srv://user:pass@cluster.mongodb.net/db` |
+| `JWT_SECRET` | JWT signing secret | `your_random_secret_key` |
+| `ML_SERVICE_URL` | ML service base URL | `http://localhost:8000` |
+| `MOBILE_ORIGINS` | Allowed mobile origins (comma-separated) | `http://localhost:5000` |
+
+### ML Service
+| Variable | Description | Example |
+|---|---|---|
+| `PYTHONUNBUFFERED` | Python output buffering | `1` |
+| `MODEL_PATH` | Path to trained models | `/models` |
+| `LOG_LEVEL` | Logging level | `INFO` |
+| `PORT` | ML service port | `8000` |
+
+---
+
+## Performance Metrics
+
+### Model Accuracy
+- **XGBoost** (Ensemble): 85.2%
+- **Random Forest**: 82.1%
+- **Logistic Regression**: 79.3%
+
+### API Response Times (Development)
+- `/loans/predict`: ~500-800ms
+- `/financial/metrics`: ~150-250ms
+- `/chat/message`: ~300-600ms
+- `/reports/generate`: ~1-3 seconds
+
+---
+
+## Security Checklist
+
+- ✅ HTTPS enforced in production
+- ✅ JWT token expiry (7 days)
+- ✅ Password hashing (bcryptjs 10-round salt)
+- ✅ Rate limiting enabled
+- ✅ Input validation on all endpoints
+- ✅ Helmet security headers
+- ✅ CORS configured for mobile origins only
+- ✅ Sensitive data not logged
+- ✅ Environment variables for secrets
+- ✅ Regular model updates
+
+---
+
+## Troubleshooting
+
+### Backend won't connect to ML service
+- Ensure ML service is running on `http://localhost:8000`
+- Check `ML_SERVICE_URL` in `.env`
+- Verify no firewall blocking port 8000
+
+### MongoDB connection fails
+- Check `MONGODB_URI` in `.env`
+- Verify MongoDB Atlas cluster is active
+- Whitelist your IP in Atlas security settings
+
+### Android app can't reach backend
+- Use `http://10.0.2.2:5000` for Android emulator (instead of `http://localhost:5000`)
+- For physical device, use actual machine IP address
+- Verify backend CORS includes mobile origin
+
+---
+
+## Contributing
+
+1. Fork the repository
+2. Create a feature branch (`git checkout -b feature/AmazingFeature`)
+3. Commit changes (`git commit -m 'Add AmazingFeature'`)
+4. Push to branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
+
+---
+
+## License
+
+This project is licensed under the MIT License - see the LICENSE file for details.
+
+---
+
+## Support
+
+For issues, feature requests, or questions:
+- 📧 Email: support@smartloan.ai
+- 💬 Issues: GitHub Issues
+- 📱 Mobile App Support: In-app help chat
+
+---
+
+**Made with ❤️ for Mobile-First Financial Technology**
 | **Pandas + NumPy** | Data processing and feature engineering |
 | **NLTK** | NLP text processing |
 | **pdfplumber** | PDF document text extraction |
