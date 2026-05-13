@@ -75,6 +75,7 @@
     <string name="net_worth">Net Worth</string>
     <string name="risk_radar">Risk Radar Analysis</string>
     <string name="recent_activity">Recent Activity</string>
+    <string name="view_all">View All</string>
 
     <!-- Loan Prediction -->
     <string name="prediction_title">AI Loan Prediction</string>
@@ -185,6 +186,7 @@
     <string name="cancel">Cancel</string>
     <string name="ok">OK</string>
     <string name="skip">Skip</string>
+    <string name="welcome">WELCOME</string>
     <string name="onboarding_welcome">WELCOME TO SMARTLOAN</string>
     <string name="onboarding_title_1">AI LOAN PREDICTIONS</string>
     <string name="onboarding_desc_1">Get instant and accurate loan approval predictions powered by advanced machine learning models.</string>
@@ -193,4 +195,41 @@
     <string name="onboarding_title_3">SECURE ANALYSIS</string>
     <string name="onboarding_desc_3">Your data is protected with enterprise-grade security. Join thousands of users trusting SmartLoan AI+.</string>
     <string name="get_started">Get Started</string>
+    <string name="password_placeholder">••••••••</string>
+    <string name="upload_hint">PDF, JPG or PNG (Max 5MB)</string>
+    <string name="recent_documents">Recent Documents</string>
+    <string name="demo_doc_name">Identity_Proof.pdf</string>
+    <string name="demo_doc_date">Uploaded on Oct 24, 2025</string>
+    <string name="financial_statement">Financial Statement</string>
+    <string name="generate_audit_report">Generate your full AI audit report</string>
+    <string name="change_avatar">Change Avatar</string>
+    <string name="remove_avatar">Remove Avatar</string>
+    <string name="financial_parameters">Financial Parameters</string>
+    <string name="financial_context">Financial Context</string>
+    <string name="income_label">Income ($)</string>
+    <string name="expenses_label">Expenses ($)</string>
+    <string name="savings_label">Current Savings ($)</string>
+    <string name="future_scenario_simulation">Future Scenario Simulation</string>
+    <string name="income_adjustment">Income Adjustment</string>
+    <string name="expense_adjustment">Expense Adjustment</string>
+    <string name="new_loan_label">New Loan ($)</string>
+    <string name="horizon_label">Horizon (Mo)</string>
+    <string name="run_ai_simulation">RUN AI SIMULATION</string>
+    <string name="simulation_intelligence">Simulation Intelligence</string>
+    <string name="ai_health_score_engine">AI HEALTH SCORE ENGINE</string>
+    <string name="excellent">EXCELLENT</string>
+    <string name="stable">STABLE</string>
+    <string name="critical">CRITICAL</string>
+    <string name="analysis_breakdown">Analysis Breakdown</string>
+    <string name="financial_risk_analysis">FINANCIAL RISK ANALYSIS</string>
+    <string name="score_suffix"> / %1$s Score</string>
+    <string name="impact_suffix">%1$s IMPACT • %2$s</string>
+    <string name="projected_savings">Projected Savings</string>
+    <string name="monthly_cash_flow">Monthly Cash Flow</string>
+    <string name="emi_adjustment">EMI Adjustment</string>
+    <string name="dti_impact">DTI Impact</string>
+    <string name="asset_projection">Asset Projection Over Time</string>
+    <string name="strategic_recommendations">Strategic Recommendations</string>
+    <string name="current_path">Current Path</string>
+    <string name="simulated_path">Simulated Path</string>
 </resources>

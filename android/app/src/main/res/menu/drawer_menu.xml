@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <group android:checkableBehavior="single">
-        <item android:id="@+id/nav_dashboard" android:title="@string/nav_dashboard" android:icon="@android:drawable/ic_menu_compass" />
-        <item android:id="@+id/nav_prediction" android:title="@string/nav_prediction" android:icon="@android:drawable/ic_menu_myplaces" />
-        <item android:id="@+id/nav_chatbot" android:title="@string/nav_chatbot" android:icon="@android:drawable/ic_menu_send" />
-        <item android:id="@+id/nav_analysis" android:title="@string/nav_analysis" android:icon="@android:drawable/ic_menu_manage" />
-        <item android:id="@+id/nav_simulator" android:title="@string/nav_simulator" android:icon="@android:drawable/ic_menu_sort_by_size" />
+        <item android:id="@+id/nav_dashboard" android:title="@string/nav_dashboard" android:icon="@drawable/ic_nav_dashboard" />
+        <item android:id="@+id/nav_prediction" android:title="@string/nav_prediction" android:icon="@drawable/ic_nav_prediction" />
+        <item android:id="@+id/nav_chatbot" android:title="@string/nav_chatbot" android:icon="@drawable/ic_nav_chat" />
+        <item android:id="@+id/nav_analysis" android:title="@string/nav_analysis" android:icon="@drawable/ic_nav_analysis" />
+        <item android:id="@+id/nav_simulator" android:title="@string/nav_simulator" android:icon="@drawable/ic_nav_simulator" />
     </group>
     <group android:id="@+id/group_secondary">
-        <item android:id="@+id/nav_reports" android:title="@string/nav_reports" android:icon="@android:drawable/ic_menu_agenda" />
-        <item android:id="@+id/nav_admin" android:title="@string/nav_admin" android:icon="@android:drawable/ic_menu_preferences" />
-        <item android:id="@+id/nav_settings" android:title="@string/nav_settings" android:icon="@android:drawable/ic_menu_preferences" />
+        <item android:id="@+id/nav_reports" android:title="@string/nav_reports" android:icon="@drawable/ic_nav_reports" />
+        <item android:id="@+id/nav_admin" android:title="@string/nav_admin" android:icon="@drawable/ic_nav_analysis" />
+        <item android:id="@+id/nav_settings" android:title="@string/nav_settings" android:icon="@drawable/ic_nav_profile" />
     </group>
     <group android:id="@+id/group_logout">
-        <item android:id="@+id/nav_logout" android:title="@string/nav_logout" android:icon="@android:drawable/ic_lock_power_off" />
+        <item android:id="@+id/nav_logout" android:title="@string/nav_logout" android:icon="@drawable/ic_user_premium" />
     </group>
 </menu>

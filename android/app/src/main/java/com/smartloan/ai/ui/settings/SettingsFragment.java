@@ -114,12 +114,28 @@ public class SettingsFragment extends Fragment {
     }
 
     private void setupActions() {
+        binding.btnEditAvatar.setOnClickListener(v -> {
+            String[] options = {getString(R.string.change_avatar), getString(R.string.remove_avatar)};
+            new com.google.android.material.dialog.MaterialAlertDialogBuilder(requireContext())
+                    .setTitle(R.string.profile)
+                    .setItems(options, (dialog, which) -> {
+                        if (which == 0) {
+                            // Pick image
+                            documentPickerLauncher.launch("image/*");
+                        } else {
+                            // Remove image (Reset to default)
+                            binding.ivProfileLarge.setImageResource(R.drawable.ic_user_premium);
+                            ViewUtils.showSuccessSnackbar(binding.getRoot(), "Avatar removed");
+                        }
+                    })
+                    .show();
+        });
+
         binding.btnUploadDocs.setOnClickListener(v -> {
-            documentPickerLauncher.launch("application/pdf");
+            documentPickerLauncher.launch("*/*");
         });
 
         binding.btnDownloadReport.setOnClickListener(v -> {
-            // Navigate to Reports or trigger download
             Navigation.findNavController(v).navigate(R.id.nav_reports);
         });
 
@@ -134,7 +150,13 @@ public class SettingsFragment extends Fragment {
 
     private void handleDocumentSelected(Uri uri) {
         // In a real app, you would upload this to a server
-        ViewUtils.showSuccessSnackbar(binding.getRoot(), "Document selected: " + uri.getLastPathSegment());
+        String mimeType = requireContext().getContentResolver().getType(uri);
+        if (mimeType != null && mimeType.startsWith("image/")) {
+            binding.ivProfileLarge.setImageURI(uri);
+            ViewUtils.showSuccessSnackbar(binding.getRoot(), "Profile image updated");
+        } else {
+            ViewUtils.showSuccessSnackbar(binding.getRoot(), "Document attached: " + uri.getLastPathSegment());
+        }
     }
 
     @Override public void onDestroyView() { super.onDestroyView(); binding = null; }

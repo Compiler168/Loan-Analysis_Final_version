@@ -6,6 +6,7 @@
     android:background="@color/background">
 
     <ScrollView
+        android:id="@+id/scrollView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:clipToPadding="false"
@@ -210,75 +211,351 @@
         <!-- Results Section -->
         <LinearLayout android:id="@+id/resultsContainer" android:layout_width="match_parent"
             android:layout_height="wrap_content" android:orientation="vertical"
-            android:layout_marginTop="@dimen/spacing_md" android:visibility="gone">
+            android:layout_marginTop="@dimen/spacing_lg" android:visibility="gone">
 
-            <!-- Approval Card -->
-            <com.google.android.material.card.MaterialCardView android:id="@+id/cardApproval"
-                android:layout_width="match_parent" android:layout_height="wrap_content"
-                app:cardCornerRadius="@dimen/card_radius" app:cardElevation="@dimen/card_elevation"
-                app:strokeWidth="2dp">
-                <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
-                    android:orientation="horizontal" android:padding="@dimen/spacing_lg" android:gravity="center_vertical">
-                    <ProgressBar android:id="@+id/progressApproval" android:layout_width="@dimen/score_circle_size"
-                        android:layout_height="@dimen/score_circle_size" style="?android:attr/progressBarStyleHorizontal"
-                        android:progressDrawable="@android:drawable/progress_horizontal" android:max="100" />
-                    <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content"
-                        android:layout_weight="1" android:orientation="vertical" android:layout_marginStart="@dimen/spacing_md">
-                        <TextView android:id="@+id/tvApprovalPercent" android:layout_width="wrap_content"
-                            android:layout_height="wrap_content" android:textSize="28sp" android:textStyle="bold" />
-                        <TextView android:id="@+id/tvApprovalStatus" android:layout_width="wrap_content"
-                            android:layout_height="wrap_content" android:textSize="18sp" android:textStyle="bold" />
-                        <TextView android:id="@+id/tvConfidence" android:layout_width="wrap_content"
-                            android:layout_height="wrap_content" style="@style/TextStyle.Caption" android:layout_marginTop="4dp" />
+            <!-- Premium Result Header -->
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:cardCornerRadius="28dp"
+                app:cardElevation="8dp"
+                app:strokeWidth="0dp">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:background="@drawable/bg_prediction_result_header"
+                    android:padding="24dp">
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="AI Analysis Result"
+                            android:textColor="#CCFFFFFF"
+                            android:textSize="12sp"
+                            android:textAllCaps="true"
+                            android:letterSpacing="0.1"
+                            android:textStyle="bold" />
+
+                        <ImageView
+                            android:layout_width="24dp"
+                            android:layout_height="24dp"
+                            android:layout_alignParentRight="true"
+                            android:src="@drawable/ic_ai_sparkle"
+                            app:tint="#FFFFFF" />
+                    </RelativeLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_marginTop="20dp"
+                        android:gravity="center_vertical">
+
+                        <FrameLayout
+                            android:layout_width="100dp"
+                            android:layout_height="100dp">
+                            <ProgressBar
+                                android:id="@+id/progressApproval"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:indeterminate="false"
+                                android:max="100"
+                                android:progress="75"
+                                android:secondaryProgress="100"
+                                android:progressDrawable="@drawable/circular_progress_bar"
+                                style="?android:attr/progressBarStyleHorizontal" />
+
+                            <TextView
+                                android:id="@+id/tvApprovalPercent"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:text="75%"
+                                android:textColor="#FFFFFF"
+                                android:textSize="22sp"
+                                android:textStyle="bold" />
+                        </FrameLayout>
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:orientation="vertical"
+                            android:layout_marginStart="24dp">
+
+                            <TextView
+                                android:id="@+id/tvApprovalStatus"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Approved"
+                                android:textColor="#FFFFFF"
+                                android:textSize="24sp"
+                                android:textStyle="bold" />
+
+                            <LinearLayout
+                                android:id="@+id/riskBadge"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:background="@drawable/bg_status_chip"
+                                android:paddingHorizontal="12dp"
+                                android:paddingVertical="4dp"
+                                android:layout_marginTop="8dp"
+                                android:gravity="center_vertical">
+                                <View
+                                    android:id="@+id/riskDot"
+                                    android:layout_width="8dp"
+                                    android:layout_height="8dp"
+                                    android:background="@drawable/bg_circle_gradient"
+                                    android:backgroundTint="#10B981" />
+                                <TextView
+                                    android:id="@+id/tvRiskLevel"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="LOW RISK"
+                                    android:textColor="#FFFFFF"
+                                    android:textSize="10sp"
+                                    android:textStyle="bold"
+                                    android:layout_marginStart="6dp" />
+                            </LinearLayout>
+
+                            <TextView
+                                android:id="@+id/tvConfidence"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Confidence Score: 92%"
+                                android:textColor="#B3FFFFFF"
+                                android:textSize="12sp"
+                                android:layout_marginTop="12dp" />
+                        </LinearLayout>
                     </LinearLayout>
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
 
-            <!-- Model Breakdown -->
+            <!-- Financial Health Snapshot (Derived Metrics) -->
+            <LinearLayout
+                android:id="@+id/derivedMetricsContainer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="16dp"
+                android:weightSum="3"
+                android:visibility="gone">
+
+                <com.google.android.material.card.MaterialCardView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    app:cardCornerRadius="16dp"
+                    app:cardElevation="0dp"
+                    app:cardBackgroundColor="#050F172A"
+                    app:strokeWidth="1dp"
+                    app:strokeColor="#0D000000">
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:padding="12dp"
+                        android:gravity="center">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="DTI RATIO"
+                            android:textSize="9sp"
+                            android:textAllCaps="true"
+                            android:letterSpacing="0.05"
+                            android:textColor="@color/text_secondary" />
+                        <TextView
+                            android:id="@+id/tvDtiRatio"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="24%"
+                            android:textSize="16sp"
+                            android:textStyle="bold"
+                            android:textColor="@color/text_primary"
+                            android:layout_marginTop="2dp" />
+                    </LinearLayout>
+                </com.google.android.material.card.MaterialCardView>
+
+                <View android:layout_width="8dp" android:layout_height="1dp" />
+
+                <com.google.android.material.card.MaterialCardView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    app:cardCornerRadius="16dp"
+                    app:cardElevation="0dp"
+                    app:cardBackgroundColor="#050F172A"
+                    app:strokeWidth="1dp"
+                    app:strokeColor="#0D000000">
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:padding="12dp"
+                        android:gravity="center">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="EMI LOAD"
+                            android:textSize="9sp"
+                            android:textAllCaps="true"
+                            android:letterSpacing="0.05"
+                            android:textColor="@color/text_secondary" />
+                        <TextView
+                            android:id="@+id/tvRequestedEmi"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="$1,200"
+                            android:textSize="16sp"
+                            android:textStyle="bold"
+                            android:textColor="@color/text_primary"
+                            android:layout_marginTop="2dp" />
+                    </LinearLayout>
+                </com.google.android.material.card.MaterialCardView>
+
+                <View android:layout_width="8dp" android:layout_height="1dp" />
+
+                <com.google.android.material.card.MaterialCardView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    app:cardCornerRadius="16dp"
+                    app:cardElevation="0dp"
+                    app:cardBackgroundColor="#050F172A"
+                    app:strokeWidth="1dp"
+                    app:strokeColor="#0D000000">
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:padding="12dp"
+                        android:gravity="center">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="SAVINGS"
+                            android:textSize="9sp"
+                            android:textAllCaps="true"
+                            android:letterSpacing="0.05"
+                            android:textColor="@color/text_secondary" />
+                        <TextView
+                            android:id="@+id/tvSavingsRatio"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="15%"
+                            android:textSize="16sp"
+                            android:textStyle="bold"
+                            android:textColor="@color/text_primary"
+                            android:layout_marginTop="2dp" />
+                    </LinearLayout>
+                </com.google.android.material.card.MaterialCardView>
+            </LinearLayout>
+
+            <!-- Action Buttons -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="16dp">
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnSaveResult"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Save Result"
+                    app:icon="@drawable/ic_nav_reports"
+                    style="@style/Widget.SmartLoan.Button.Outline" />
+                <View android:layout_width="12dp" android:layout_height="1dp" />
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnDownloadReport"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Report"
+                    app:icon="@drawable/ic_chevron_right"
+                    style="@style/Widget.SmartLoan.Button" />
+            </LinearLayout>
+
+            <!-- Insight Section -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Detailed Insights"
+                style="@style/TextStyle.Heading3"
+                android:layout_marginTop="24dp"
+                android:layout_marginStart="4dp" />
+
+            <!-- Model Breakdown (Neural Network Variance) -->
             <com.google.android.material.card.MaterialCardView android:layout_width="match_parent"
-                android:layout_height="wrap_content" android:layout_marginTop="@dimen/spacing_md"
-                app:cardCornerRadius="@dimen/card_radius" app:cardElevation="@dimen/card_elevation"
+                android:layout_height="wrap_content" android:layout_marginTop="12dp"
+                app:cardCornerRadius="@dimen/card_radius" app:cardElevation="0dp"
                 app:cardBackgroundColor="@color/card_background" app:strokeWidth="1dp" app:strokeColor="@color/card_stroke">
                 <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
                     android:orientation="vertical" android:padding="@dimen/card_padding">
                     <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
-                        android:text="@string/model_breakdown" style="@style/TextStyle.Heading3" />
-                    <LinearLayout android:id="@+id/modelsContainer" android:layout_width="match_parent"
-                        android:layout_height="wrap_content" android:orientation="vertical"
-                        android:layout_marginTop="@dimen/spacing_sm" />
+                        android:text="Neural Network Variance" style="@style/TextStyle.Caption"
+                        android:textColor="@color/primary" android:textStyle="bold" />
+
+                    <HorizontalScrollView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        android:scrollbars="none">
+                        <LinearLayout android:id="@+id/modelsContainer" android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" android:orientation="horizontal"
+                            android:paddingBottom="8dp" />
+                    </HorizontalScrollView>
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- Key Decision Drivers -->
+            <com.google.android.material.card.MaterialCardView android:layout_width="match_parent"
+                android:layout_height="wrap_content" android:layout_marginTop="@dimen/spacing_md"
+                app:cardCornerRadius="@dimen/card_radius" app:cardElevation="0dp"
+                app:cardBackgroundColor="@color/card_background" app:strokeWidth="1dp" app:strokeColor="@color/card_stroke">
+                <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+                    android:orientation="vertical" android:padding="@dimen/card_padding">
+                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                        android:text="Key Decision Drivers" style="@style/TextStyle.Caption"
+                        android:textColor="@color/primary" android:textStyle="bold" />
+
+                    <LinearLayout
+                        android:id="@+id/insightCardsContainer"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        android:orientation="vertical" />
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
 
             <!-- Risk Factors -->
             <com.google.android.material.card.MaterialCardView android:layout_width="match_parent"
                 android:layout_height="wrap_content" android:layout_marginTop="@dimen/spacing_md"
-                app:cardCornerRadius="@dimen/card_radius" app:cardElevation="@dimen/card_elevation"
+                android:layout_marginBottom="24dp"
+                app:cardCornerRadius="@dimen/card_radius" app:cardElevation="0dp"
                 app:cardBackgroundColor="@color/card_background" app:strokeWidth="1dp" app:strokeColor="@color/card_stroke">
                 <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
                     android:orientation="vertical" android:padding="@dimen/card_padding">
                     <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
-                        android:text="@string/risk_factors" style="@style/TextStyle.Heading3" />
+                        android:text="Risk Identification" style="@style/TextStyle.Caption"
+                        android:textColor="@color/primary" android:textStyle="bold" />
                     <LinearLayout android:id="@+id/riskContainer" android:layout_width="match_parent"
                         android:layout_height="wrap_content" android:orientation="vertical"
                         android:layout_marginTop="@dimen/spacing_sm" />
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
 
-            <!-- Feature Importance -->
-            <com.google.android.material.card.MaterialCardView android:layout_width="match_parent"
-                android:layout_height="wrap_content" android:layout_marginTop="@dimen/spacing_md"
-                android:layout_marginBottom="@dimen/spacing_md"
-                app:cardCornerRadius="@dimen/card_radius" app:cardElevation="@dimen/card_elevation"
-                app:cardBackgroundColor="@color/card_background" app:strokeWidth="1dp" app:strokeColor="@color/card_stroke">
-                <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
-                    android:orientation="vertical" android:padding="@dimen/card_padding">
-                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
-                        android:text="@string/feature_importance" style="@style/TextStyle.Heading3" />
-                    <com.github.mikephil.charting.charts.HorizontalBarChart android:id="@+id/chartFeatures"
-                        android:layout_width="match_parent" android:layout_height="@dimen/chart_height"
-                        android:layout_marginTop="@dimen/spacing_sm" />
-                </LinearLayout>
-            </com.google.android.material.card.MaterialCardView>
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnRetry"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Recalculate Prediction"
+                style="@style/Widget.SmartLoan.Button.Outline"
+                android:layout_marginBottom="40dp" />
         </LinearLayout>
 
         <!-- Empty State -->

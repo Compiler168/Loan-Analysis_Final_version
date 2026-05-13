@@ -23,8 +23,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:paddingHorizontal="@dimen/spacing_md"
-                android:paddingTop="80dp"
+                android:paddingHorizontal="24dp"
+                android:paddingTop="105dp"
                 android:visibility="gone">
 
                 <!-- Stats Grid -->
@@ -197,33 +197,52 @@
                     </LinearLayout>
                 </com.google.android.material.card.MaterialCardView>
 
-                <!-- Recent Activity -->
-                <TextView
-                    android:layout_width="wrap_content"
+                <!-- Recent Activity Section -->
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/spacing_lg"
                     android:layout_marginBottom="@dimen/spacing_sm"
-                    android:text="@string/recent_activity"
-                    android:textStyle="bold"
-                    android:textSize="18sp"
-                    android:textColor="@color/text_primary" />
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
 
-                <com.google.android.material.card.MaterialCardView
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/recent_activity"
+                        android:textStyle="bold"
+                        android:textSize="18sp"
+                        android:textColor="@color/text_primary"
+                        android:fontFamily="sans-serif-black" />
+
+                    <View
+                        android:layout_width="0dp"
+                        android:layout_height="1dp"
+                        android:layout_weight="1"
+                        android:layout_marginStart="16dp"
+                        android:background="@color/divider_color"
+                        android:alpha="0.5" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/view_all"
+                        android:textColor="@color/primary"
+                        android:textSize="13sp"
+                        android:textStyle="bold"
+                        android:layout_marginStart="12dp"
+                        android:clickable="true"
+                        android:focusable="true" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/activityContainer"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="@dimen/spacing_md"
-                    app:cardCornerRadius="20dp"
-                    app:cardElevation="0dp"
-                    app:strokeWidth="1dp"
-                    app:strokeColor="@color/nav_border_subtle"
-                    app:cardBackgroundColor="@color/surface">
-                    <LinearLayout
-                        android:id="@+id/activityContainer"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical"
-                        android:padding="8dp" />
-                </com.google.android.material.card.MaterialCardView>
+                    android:orientation="vertical"
+                    android:layout_marginHorizontal="-16dp" />
+
 
             </LinearLayout>
         </ScrollView>
@@ -233,8 +252,8 @@
     <RelativeLayout
         android:id="@+id/headerContainer"
         android:layout_width="match_parent"
-        android:layout_height="80dp"
-        android:paddingHorizontal="@dimen/spacing_md"
+        android:layout_height="90dp"
+        android:paddingHorizontal="24dp"
         android:background="@color/surface"
         android:elevation="0dp"
         android:visibility="gone">
@@ -251,10 +270,10 @@
                 android:id="@+id/tvWelcomeTitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Welcome"
-                android:textColor="@color/text_secondary"
+                android:text="@string/welcome"
+                android:textColor="@color/text_muted"
                 android:textSize="11sp"
-                android:letterSpacing="0.04"
+                android:letterSpacing="0.15"
                 android:fontFamily="sans-serif-medium"
                 android:includeFontPadding="false" />
 
@@ -264,11 +283,11 @@
                 android:layout_height="wrap_content"
                 android:text="Demo User"
                 android:textColor="@color/text_primary"
-                android:textSize="20sp"
+                android:textSize="22sp"
                 android:textStyle="bold"
                 android:fontFamily="sans-serif-black"
                 android:includeFontPadding="false"
-                android:layout_marginTop="-4dp" />
+                android:layout_marginTop="2dp" />
         </LinearLayout>
 
         <!-- Profile & Notification Section -->
@@ -281,42 +300,50 @@
             android:gravity="center_vertical">
 
             <FrameLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="12dp">
+                android:id="@+id/notificationContainer"
+                android:layout_width="42dp"
+                android:layout_height="42dp"
+                android:layout_marginEnd="12dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:background="?attr/selectableItemBackgroundBorderless">
 
                 <ImageView
                     android:id="@+id/ivNotification"
-                    android:layout_width="38dp"
-                    android:layout_height="38dp"
-                    android:padding="8dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:padding="10dp"
                     android:src="@drawable/ic_notification_bell"
-                    android:background="@drawable/bg_muted_rounded"
+                    android:background="@drawable/bg_indicator_inactive"
+                    android:backgroundTint="@color/surface_variant"
                     app:tint="@color/on_surface" />
 
                 <!-- Notification Badge -->
                 <View
-                    android:layout_width="7dp"
-                    android:layout_height="7dp"
+                    android:layout_width="8dp"
+                    android:layout_height="8dp"
                     android:layout_gravity="top|end"
-                    android:layout_marginTop="6dp"
-                    android:layout_marginEnd="6dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="8dp"
                     android:background="@drawable/bg_dot_selector"
                     android:backgroundTint="@color/error" />
             </FrameLayout>
 
             <com.google.android.material.imageview.ShapeableImageView
                 android:id="@+id/ivHeaderProfile"
-                android:layout_width="42dp"
-                android:layout_height="42dp"
+                android:layout_width="46dp"
+                android:layout_height="46dp"
                 android:src="@drawable/ic_user_premium"
                 android:scaleType="centerInside"
                 android:padding="3dp"
                 app:strokeColor="@color/primary"
                 app:strokeWidth="2dp"
                 app:shapeAppearanceOverlay="@style/ShapeAppearance.Circle"
-                android:background="@color/surface_variant" />
+                android:background="@color/surface_variant"
+                android:clickable="true"
+                android:focusable="true" />
         </LinearLayout>
+
 
         <!-- Subtle Bottom Border - Animated on scroll -->
         <View

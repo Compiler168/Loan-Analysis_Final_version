@@ -427,64 +427,67 @@ public class DashboardFragment extends Fragment {
         binding.activityContainer.removeAllViews();
         if (data.recentActivity == null) return;
 
+        LayoutInflater inflater = LayoutInflater.from(requireContext());
+
         for (DashboardData.RecentActivity activity : data.recentActivity) {
-            LinearLayout row = new LinearLayout(requireContext());
-            row.setOrientation(LinearLayout.HORIZONTAL);
-            row.setBackground(ContextCompat.getDrawable(requireContext(), R.drawable.bg_muted_rounded));
-            row.setPadding(24, 20, 24, 20);
-            row.setGravity(android.view.Gravity.CENTER_VERTICAL);
-            LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(
-                    LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
-            lp.setMargins(0, 6, 0, 6);
-            row.setLayoutParams(lp);
+            View itemView = inflater.inflate(R.layout.item_recent_activity, binding.activityContainer, false);
 
-            // Dot indicator
-            View dot = new View(requireContext());
-            int dotSize = (int) (8 * getResources().getDisplayMetrics().density);
-            LinearLayout.LayoutParams dotLp = new LinearLayout.LayoutParams(dotSize, dotSize);
-            dotLp.setMargins(0, 0, 32, 0);
-            dot.setLayoutParams(dotLp);
-            
-            // Status-based coloring
-            int statusColor = ContextCompat.getColor(requireContext(), R.color.primary);
-            if (activity.result.toLowerCase().contains("approved") || activity.result.toLowerCase().contains("high")) {
+            TextView tvMessage = itemView.findViewById(R.id.tvActivityMessage);
+            TextView tvTime = itemView.findViewById(R.id.tvActivityTime);
+            TextView tvResult = itemView.findViewById(R.id.tvActivityResult);
+            ImageView ivIcon = itemView.findViewById(R.id.ivActivityIcon);
+            View iconContainer = itemView.findViewById(R.id.iconContainer);
+
+            tvMessage.setText(activity.message);
+            tvTime.setText(activity.time);
+            tvResult.setText(activity.result.toUpperCase());
+
+            // Status-based styling
+            int statusColor;
+            int bgColor;
+            int iconRes = R.drawable.ic_ai_sparkle;
+
+            String resultLower = activity.result.toLowerCase();
+            if (resultLower.contains("approved") || resultLower.contains("high") || resultLower.contains("success")) {
                 statusColor = ContextCompat.getColor(requireContext(), R.color.secondary);
-            } else if (activity.result.toLowerCase().contains("rejected") || activity.result.toLowerCase().contains("risk")) {
+                bgColor = ContextCompat.getColor(requireContext(), R.color.secondary_light);
+                iconRes = R.drawable.ic_nav_analysis;
+            } else if (resultLower.contains("rejected") || resultLower.contains("risk") || resultLower.contains("low")) {
                 statusColor = ContextCompat.getColor(requireContext(), R.color.error);
+                bgColor = Color.parseColor("#FEE2E2"); // Soft error red
+                iconRes = R.drawable.ic_nav_prediction;
+            } else {
+                statusColor = ContextCompat.getColor(requireContext(), R.color.primary);
+                bgColor = ContextCompat.getColor(requireContext(), R.color.primary_light);
+                iconRes = R.drawable.ic_ai_sparkle;
             }
+
+            // Apply styling
+            tvResult.setTextColor(statusColor);
+            android.graphics.drawable.GradientDrawable resultBg = new android.graphics.drawable.GradientDrawable();
+            resultBg.setCornerRadius(24);
+            resultBg.setColor(Color.argb(30, Color.red(statusColor), Color.green(statusColor), Color.blue(statusColor)));
+            tvResult.setBackground(resultBg);
+
+            ivIcon.setImageResource(iconRes);
+            ivIcon.setColorFilter(statusColor);
             
-            android.graphics.drawable.GradientDrawable shape = new android.graphics.drawable.GradientDrawable();
-            shape.setShape(android.graphics.drawable.GradientDrawable.OVAL);
-            shape.setColor(statusColor);
-            dot.setBackground(shape);
+            android.graphics.drawable.GradientDrawable iconBg = new android.graphics.drawable.GradientDrawable();
+            iconBg.setShape(android.graphics.drawable.GradientDrawable.OVAL);
+            iconBg.setColor(bgColor);
+            iconContainer.setBackground(iconBg);
 
-            // Message
-            TextView msg = new TextView(requireContext());
-            msg.setText(activity.message);
-            msg.setTextSize(13f);
-            msg.setTextColor(ContextCompat.getColor(requireContext(), R.color.on_surface));
-            LinearLayout.LayoutParams msgLp = new LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT, 1f);
-            msg.setLayoutParams(msgLp);
+            // Add animation
+            itemView.setAlpha(0f);
+            itemView.setTranslationY(20f);
+            itemView.animate()
+                    .alpha(1f)
+                    .translationY(0f)
+                    .setDuration(400)
+                    .setStartDelay(binding.activityContainer.getChildCount() * 100L)
+                    .start();
 
-            // Result
-            TextView result = new TextView(requireContext());
-            result.setText(activity.result);
-            result.setTextSize(12f);
-            result.setTypeface(null, android.graphics.Typeface.BOLD);
-            result.setTextColor(statusColor);
-            result.setPadding(16, 0, 16, 0);
-
-            // Time
-            TextView time = new TextView(requireContext());
-            time.setText(activity.time);
-            time.setTextSize(11f);
-            time.setTextColor(ContextCompat.getColor(requireContext(), R.color.muted_foreground));
-
-            row.addView(dot);
-            row.addView(msg);
-            row.addView(result);
-            row.addView(time);
-            binding.activityContainer.addView(row);
+            binding.activityContainer.addView(itemView);
         }
     }
 
