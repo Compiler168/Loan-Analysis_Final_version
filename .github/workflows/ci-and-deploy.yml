@@ -126,3 +126,40 @@ jobs:
           tags: |
             ghcr.io/${{ github.repository_owner }}/loan-ml-service:latest
             ghcr.io/${{ github.repository_owner }}/loan-ml-service:${{ github.sha }}
+
+  deploy-ml-service-fly:
+    name: Deploy ML service to Fly.io
+    needs: ml-service-ci
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install Flyctl
+        uses: superfly/flyctl-actions@v2
+        with:
+          version: latest
+      - name: Deploy ML service to Fly
+        run: flyctl deploy --remote-only --config ml-service/fly.toml --app "${{ secrets.FLY_ML_APP }}"
+        env:
+          FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
+
+  deploy-backend-fly:
+    name: Deploy backend to Fly.io
+    needs: [backend-ci, deploy-ml-service-fly]
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install Flyctl
+        uses: superfly/flyctl-actions@v2
+        with:
+          version: latest
+      - name: Deploy backend to Fly
+        run: flyctl deploy --remote-only --config backend/fly.toml --app "${{ secrets.FLY_BACKEND_APP }}"
+        env:
+          FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
+      - name: Configure backend ML service URL
+        run: |
+          flyctl secrets set ML_SERVICE_URL=https://${{ secrets.FLY_ML_APP }}.fly.dev --app "${{ secrets.FLY_BACKEND_APP }}"
+        env:
+          FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
