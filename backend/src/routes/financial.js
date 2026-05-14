@@ -7,7 +7,7 @@ const axios = require('axios');
 const mongoose = require('mongoose');
 const { authMiddleware } = require('../middleware/auth');
 
-const ML_URL = process.env.ML_SERVICE_URL || 'http://localhost:8000';
+const ML_URL = process.env.ML_SERVICE_URL || (process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}/api/ml` : 'http://localhost:8000');
 
 router.post('/health-score', authMiddleware, async (req, res) => {
   try {

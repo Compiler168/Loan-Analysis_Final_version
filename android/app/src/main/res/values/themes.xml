@@ -163,4 +163,8 @@
 
     <style name="Widget.SmartLoan.Button.Outline" parent="Widget.Material3.Button.OutlinedButton" />
 
+    <style name="Theme.SmartLoanAI.Auth" parent="Theme.SmartLoanAI">
+        <item name="android:statusBarColor">@color/surface</item>
+    </style>
+
 </resources>

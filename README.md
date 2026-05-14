@@ -322,50 +322,51 @@ Authorization: Bearer <token>
 
 ## Deployment
 
-### Backend (Node.js)
-**Recommended Platforms**:
-- Railway.app
-- Render.com
-- Heroku (with paid dynos)
-- AWS EC2 + Load Balancer
-- DigitalOcean App Platform
+### Render Deployment
+This repo includes `render.yaml` at the root to deploy both services in one Render project.
 
-**Example with Render.com**:
+#### 1. Connect the repo to Render
+- Go to https://dashboard.render.com
+- Create a new service and choose **Web Service**
+- Connect your GitHub/GitLab repository
+- Render will auto-detect `render.yaml`
+
+#### 2. Services defined by `render.yaml`
+- `smartloan-backend` — Node.js service using `backend`
+- `smartloan-ml-service` — Docker-based Python service using `ml-service`
+
+#### 3. Deploy workflow
+- Push code to the repo branch connected to Render
+- Render will read `render.yaml` and deploy both services automatically
+- Use the Render dashboard to view build logs and service URLs
+
+#### 4. Backend environment values
+The backend service is configured to use:
+- `ML_SERVICE_URL=https://smartloan-ml-service.onrender.com`
+- `MOBILE_ORIGINS=https://smartloan-backend.onrender.com,http://localhost:5000`
+
+#### 5. ML service defaults
+The ML service uses Docker and exposes port `8000` inside Render.
+
+#### 6. Verify deployment
+- Backend: `https://smartloan-backend.onrender.com/api/health`
+- ML service: `https://smartloan-ml-service.onrender.com/health`
+
+### Alternative local startup
+If you want to run locally instead of Render:
+
+**Backend**:
 ```bash
-git push main  # Trigger auto-deployment
+cd backend
+npm install
+npm start
 ```
 
-### ML Service (Python)
-**Recommended Platforms**:
-- Railway.app
-- Render.com (includes `render.yaml`)
-- AWS EC2 + Elastic Beanstalk
-- Google Cloud Run
-- DigitalOcean App Platform
-
-**Docker Deployment**:
+**ML Service**:
 ```bash
-docker build -t smartloan-ml .
-docker run -p 8000:8000 smartloan-ml
-```
-
-### Environment Variables (Production)
-
-**Backend (.env)**:
-```
-NODE_ENV=production
-PORT=5000
-MONGODB_URI=<production_mongodb_atlas_uri>
-JWT_SECRET=<strong_random_secret>
-ML_SERVICE_URL=https://ml-service.example.com
-MOBILE_ORIGINS=https://android-app-domain.com,https://app.example.com
-```
-
-**ML Service (.env)**:
-```
-PYTHONUNBUFFERED=1
-MODEL_PATH=/models
-LOG_LEVEL=INFO
+cd ml-service
+pip install -r requirements.txt
+uvicorn main:app --host 0.0.0.0 --port 8000
 ```
 
 ---

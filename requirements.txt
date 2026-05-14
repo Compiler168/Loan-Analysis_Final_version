@@ -1,0 +1,14 @@
+fastapi
+uvicorn
+scikit-learn
+xgboost
+pandas
+numpy
+nltk
+pydantic
+python-multipart
+pdfplumber
+joblib
+python-dotenv
+httpx
+pytest

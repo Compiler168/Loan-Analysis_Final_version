@@ -8,7 +8,7 @@ const multer = require('multer');
 const mongoose = require('mongoose');
 const { authMiddleware } = require('../middleware/auth');
 
-const ML_URL = process.env.ML_SERVICE_URL || 'http://localhost:8000';
+const ML_URL = process.env.ML_SERVICE_URL || (process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}/api/ml` : 'http://localhost:8000');
 const upload = multer({ storage: multer.memoryStorage(), limits: { fileSize: 10 * 1024 * 1024 } });
 
 router.post('/message', authMiddleware, async (req, res) => {

@@ -1,0 +1,26 @@
+# Ignore local Android build artifacts and development files
+android/
+*.apk
+*.dex
+**/build/
+**/.gradle/
+**/.idea/
+**/.vscode/
+**/__pycache__/
+**/*.pyc
+**/*.pyo
+**/*.pyd
+**/venv/
+**/node_modules/
+**/dist/
+**/coverage/
+**/.DS_Store
+**/.env*
+.git/
+.github/
+README.md
+DesignSystem.md
+DEPLOYMENT.md
+CONTRIBUTING.md
+ARCHITECTURE.md
+eda/

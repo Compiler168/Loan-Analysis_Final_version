@@ -1,0 +1,28 @@
+services:
+  - type: web
+    name: smartloan-backend
+    env: node
+    region: oregon
+    plan: free
+    root: backend
+    buildCommand: npm install
+    startCommand: npm start
+    envVars:
+      - key: PORT
+        value: "5000"
+      - key: NODE_ENV
+        value: "production"
+      - key: ML_SERVICE_URL
+        value: "https://smartloan-ml-service.onrender.com"
+      - key: MOBILE_ORIGINS
+        value: "https://smartloan-backend.onrender.com,http://localhost:5000"
+
+  - type: web
+    name: smartloan-ml-service
+    env: docker
+    region: oregon
+    plan: free
+    root: ml-service
+    envVars:
+      - key: PORT
+        value: "8000"
