@@ -35,12 +35,13 @@ public class TokenManager {
         return getToken() != null && !getToken().isEmpty();
     }
 
-    public void saveUserInfo(String id, String name, String email, String role) {
+    public void saveUserInfo(String id, String name, String email, String role, String firebaseToken) {
         prefs.edit()
                 .putString(Constants.KEY_USER_ID, id)
                 .putString(Constants.KEY_USER_NAME, name)
                 .putString(Constants.KEY_USER_EMAIL, email)
                 .putString(Constants.KEY_USER_ROLE, role)
+                .putString(Constants.KEY_FIREBASE_TOKEN, firebaseToken)
                 .apply();
     }
 
@@ -58,6 +59,10 @@ public class TokenManager {
 
     public String getUserId() {
         return prefs.getString(Constants.KEY_USER_ID, "");
+    }
+
+    public String getFirebaseToken() {
+        return prefs.getString(Constants.KEY_FIREBASE_TOKEN, null);
     }
 
     public void saveTheme(String theme) {

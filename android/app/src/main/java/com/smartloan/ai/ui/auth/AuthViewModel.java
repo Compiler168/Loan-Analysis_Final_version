@@ -29,13 +29,32 @@ public class AuthViewModel extends ViewModel {
                     public void onResponse(Call<ApiResponse<AuthData>> call, Response<ApiResponse<AuthData>> response) {
                         if (response.isSuccessful() && response.body() != null && response.body().isSuccess()) {
                             AuthData data = response.body().getData();
-                            authResult.postValue(AuthResult.success(
-                                    data.getToken(),
-                                    data.getUser().getId(),
-                                    data.getUser().getName(),
-                                    data.getUser().getEmail(),
-                                    data.getUser().getRole()
-                            ));
+                            if (data.getFirebaseCustomToken() != null && !data.getFirebaseCustomToken().isEmpty()) {
+                                com.google.firebase.auth.FirebaseAuth.getInstance().signInWithCustomToken(data.getFirebaseCustomToken())
+                                        .addOnCompleteListener(task -> {
+                                            if (task.isSuccessful()) {
+                                                authResult.postValue(AuthResult.success(
+                                                        data.getToken(),
+                                                        data.getUser().getId(),
+                                                        data.getUser().getName(),
+                                                        data.getUser().getEmail(),
+                                                        data.getUser().getRole(),
+                                                        data.getFirebaseCustomToken()
+                                                ));
+                                            } else {
+                                                authResult.postValue(AuthResult.error("Firebase Authentication failed"));
+                                            }
+                                        });
+                            } else {
+                                authResult.postValue(AuthResult.success(
+                                        data.getToken(),
+                                        data.getUser().getId(),
+                                        data.getUser().getName(),
+                                        data.getUser().getEmail(),
+                                        data.getUser().getRole(),
+                                        data.getFirebaseCustomToken()
+                                ));
+                            }
                         } else {
                             String error = "Invalid credentials";
                             if (response.body() != null && response.body().getError() != null) {
@@ -59,13 +78,32 @@ public class AuthViewModel extends ViewModel {
                     public void onResponse(Call<ApiResponse<AuthData>> call, Response<ApiResponse<AuthData>> response) {
                         if (response.isSuccessful() && response.body() != null && response.body().isSuccess()) {
                             AuthData data = response.body().getData();
-                            authResult.postValue(AuthResult.success(
-                                    data.getToken(),
-                                    data.getUser().getId(),
-                                    data.getUser().getName(),
-                                    data.getUser().getEmail(),
-                                    data.getUser().getRole()
-                            ));
+                            if (data.getFirebaseCustomToken() != null && !data.getFirebaseCustomToken().isEmpty()) {
+                                com.google.firebase.auth.FirebaseAuth.getInstance().signInWithCustomToken(data.getFirebaseCustomToken())
+                                        .addOnCompleteListener(task -> {
+                                            if (task.isSuccessful()) {
+                                                authResult.postValue(AuthResult.success(
+                                                        data.getToken(),
+                                                        data.getUser().getId(),
+                                                        data.getUser().getName(),
+                                                        data.getUser().getEmail(),
+                                                        data.getUser().getRole(),
+                                                        data.getFirebaseCustomToken()
+                                                ));
+                                            } else {
+                                                authResult.postValue(AuthResult.error("Firebase Authentication failed"));
+                                            }
+                                        });
+                            } else {
+                                authResult.postValue(AuthResult.success(
+                                        data.getToken(),
+                                        data.getUser().getId(),
+                                        data.getUser().getName(),
+                                        data.getUser().getEmail(),
+                                        data.getUser().getRole(),
+                                        data.getFirebaseCustomToken()
+                                ));
+                            }
                         } else {
                             String error = "Registration failed";
                             if (response.body() != null && response.body().getError() != null) {
@@ -92,25 +130,27 @@ public class AuthViewModel extends ViewModel {
         private final String userName;
         private final String userEmail;
         private final String userRole;
+        private final String firebaseToken;
         private final String error;
 
         private AuthResult(boolean success, String token, String userId, String userName,
-                           String userEmail, String userRole, String error) {
+                           String userEmail, String userRole, String firebaseToken, String error) {
             this.success = success;
             this.token = token;
             this.userId = userId;
             this.userName = userName;
             this.userEmail = userEmail;
             this.userRole = userRole;
+            this.firebaseToken = firebaseToken;
             this.error = error;
         }
 
-        public static AuthResult success(String token, String id, String name, String email, String role) {
-            return new AuthResult(true, token, id, name, email, role, null);
+        public static AuthResult success(String token, String id, String name, String email, String role, String firebaseToken) {
+            return new AuthResult(true, token, id, name, email, role, firebaseToken, null);
         }
 
         public static AuthResult error(String error) {
-            return new AuthResult(false, null, null, null, null, null, error);
+            return new AuthResult(false, null, null, null, null, null, null, error);
         }
 
         public boolean isSuccess() { return success; }
@@ -119,6 +159,7 @@ public class AuthViewModel extends ViewModel {
         public String getUserName() { return userName; }
         public String getUserEmail() { return userEmail; }
         public String getUserRole() { return userRole; }
+        public String getFirebaseToken() { return firebaseToken; }
         public String getError() { return error; }
     }
 }

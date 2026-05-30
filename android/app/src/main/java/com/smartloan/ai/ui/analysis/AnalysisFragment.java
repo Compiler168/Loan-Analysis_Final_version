@@ -242,7 +242,7 @@ public class AnalysisFragment extends Fragment {
         valRow.setPadding(0, dpToPx(16), 0, 0);
 
         TextView levelTv = new TextView(requireContext());
-        levelTv.setText(data.riskLevel.toUpperCase());
+        levelTv.setText(data.riskLevel != null ? data.riskLevel.toUpperCase() : "N/A");
         levelTv.setTextColor(Color.WHITE);
         levelTv.setTextSize(32);
         levelTv.setTypeface(null, android.graphics.Typeface.BOLD);
@@ -411,7 +411,8 @@ public class AnalysisFragment extends Fragment {
         textCol.addView(title);
 
         TextView sub = new TextView(requireContext());
-        sub.setText(getString(R.string.impact_suffix, d.severity.toUpperCase(), d.value));
+        String severity = d.severity != null ? d.severity.toUpperCase() : "UNKNOWN";
+        sub.setText(getString(R.string.impact_suffix, severity, d.value));
         sub.setTextSize(11);
         sub.setLetterSpacing(0.05f);
         sub.setTextColor(isHigh ? Color.parseColor("#EF4444") : Color.parseColor("#10B981"));

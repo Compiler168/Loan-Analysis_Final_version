@@ -68,7 +68,8 @@ public class LoginActivity extends AppCompatActivity {
                         result.getUserId(),
                         result.getUserName(),
                         result.getUserEmail(),
-                        result.getUserRole()
+                        result.getUserRole(),
+                        result.getFirebaseToken()
                 );
                 navigateToMain();
             } else {

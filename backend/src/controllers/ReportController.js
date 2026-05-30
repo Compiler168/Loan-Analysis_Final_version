@@ -1,5 +1,5 @@
 /**
- * SmartLoan AI+ — Report Controller
+ * SmartLoan AI+ — Report Controller (Firestore)
  */
 const Report = require('../models/Report');
 
@@ -36,8 +36,8 @@ exports.generateReport = async (req, res) => {
 
 exports.getHistory = async (req, res) => {
   try {
-    const reports = await Report.find({ userId: req.user.id }).sort({ createdAt: -1 }).select('type title createdAt');
-    const history = reports.map(r => ({ id: r._id, type: r.type, title: r.title, date: r.createdAt.toISOString().split('T')[0] }));
+    const reports = await Report.find({ userId: req.user.id });
+    const history = reports.map(r => ({ id: r.id, type: r.type, title: r.title, date: (r.createdAt.toDate ? r.createdAt.toDate() : new Date(r.createdAt)).toISOString().split('T')[0] }));
     res.json({ success: true, data: history });
   } catch (err) {
     res.status(500).json({ success: false, error: 'Failed to fetch history' });

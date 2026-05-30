@@ -13,6 +13,10 @@ public class AuthData {
     @SerializedName("user")
     private User user;
 
+    @SerializedName("firebaseCustomToken")
+    private String firebaseCustomToken;
+
     public String getToken() { return token; }
+    public String getFirebaseCustomToken() { return firebaseCustomToken; }
     public User getUser() { return user; }
 }

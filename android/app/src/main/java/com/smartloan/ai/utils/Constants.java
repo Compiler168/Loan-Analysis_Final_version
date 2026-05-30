@@ -21,6 +21,7 @@ public final class Constants {
     public static final String KEY_USER_EMAIL = "user_email";
     public static final String KEY_USER_ROLE = "user_role";
     public static final String KEY_USER_ID = "user_id";
+    public static final String KEY_FIREBASE_TOKEN = "firebase_token";
     public static final String KEY_THEME = "app_theme";
     public static final String KEY_ONBOARDING_COMPLETED = "onboarding_completed";
 

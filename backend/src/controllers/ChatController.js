@@ -1,5 +1,5 @@
 /**
- * SmartLoan AI+ — Chat Controller
+ * SmartLoan AI+ — Chat Controller (Firestore)
  */
 const axios = require('axios');
 const ChatSession = require('../models/ChatSession');
@@ -10,23 +10,28 @@ exports.sendMessage = async (req, res) => {
   try {
     const { message, sessionId } = req.body;
     const aiResponse = await axios.post(`${ML_URL}/chat`, { message });
-    const reply = aiResponse.data.reply;
+    const reply = aiResponse.data.data || aiResponse.data.reply;
 
     let session;
     if (sessionId) {
-      session = await ChatSession.findOne({ _id: sessionId, userId: req.user.id });
+      session = await ChatSession.findOne({ sessionId: sessionId, userId: req.user.id });
     }
 
     if (!session) {
-      session = new ChatSession({ userId: req.user.id, messages: [] });
+      session = new ChatSession({ 
+        userId: req.user.id, 
+        sessionId: sessionId || `session_${Date.now()}`,
+        messages: [] 
+      });
     }
 
-    session.messages.push({ role: 'user', content: message });
-    session.messages.push({ role: 'assistant', content: reply });
-    session.lastMessageAt = Date.now();
+    session.messages.push({ role: 'user', content: message, timestamp: new Date() });
+    session.messages.push({ role: 'assistant', content: reply, timestamp: new Date() });
+    session.lastActivity = new Date();
+    session.messageCount = session.messages.length;
     await session.save();
 
-    res.json({ success: true, data: { sessionId: session._id, reply } });
+    res.json({ success: true, data: { sessionId: session.id, ...reply } });
   } catch (err) {
     res.status(500).json({ success: false, error: 'AI Chat unavailable' });
   }
@@ -34,7 +39,7 @@ exports.sendMessage = async (req, res) => {
 
 exports.getSessions = async (req, res) => {
   try {
-    const sessions = await ChatSession.find({ userId: req.user.id }).sort({ lastMessageAt: -1 });
+    const sessions = await ChatSession.find({ userId: req.user.id });
     res.json({ success: true, data: sessions });
   } catch (err) {
     res.status(500).json({ success: false, error: 'Failed to fetch chats' });

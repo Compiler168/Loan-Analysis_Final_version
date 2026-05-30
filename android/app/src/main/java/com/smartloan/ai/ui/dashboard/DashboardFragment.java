@@ -52,8 +52,8 @@ public class DashboardFragment extends Fragment {
         String userName = TokenManager.getInstance(requireContext()).getUserName();
         binding.tvUserName.setText(userName);
 
+        binding.swipeRefresh.setEnabled(false); // Disabled as we have real-time sync
         binding.swipeRefresh.setColorSchemeResources(R.color.primary);
-        binding.swipeRefresh.setOnRefreshListener(() -> viewModel.loadDashboard());
 
         observeData();
         viewModel.loadDashboard();
@@ -112,12 +112,12 @@ public class DashboardFragment extends Fragment {
         binding.statsGrid.removeAllViews();
         
         Object[][] stats = {
-                {getString(R.string.loan_approval), data.loanProbability + "%", R.color.primary, R.drawable.ic_nav_prediction},
-                {getString(R.string.health_score), data.healthScore + "/100", R.color.secondary, R.drawable.ic_nav_analysis},
-                {getString(R.string.risk_level), capitalize(data.riskLevel), R.color.warning, R.drawable.ic_nav_simulator},
-                {getString(R.string.credit_score), String.valueOf(data.creditScore), R.color.tertiary, R.drawable.ic_user_premium},
-                {getString(R.string.monthly_savings), ViewUtils.formatCurrency(data.monthlySavings), R.color.primary, R.drawable.ic_nav_dashboard},
-                {getString(R.string.dti_ratio), ViewUtils.formatPercentage(data.dtiRatio * 100), R.color.error, R.drawable.ic_nav_analysis},
+                {getString(R.string.loan_approval), String.format("%.0f%%", data.loanProbability), R.color.primary_600, R.drawable.ic_nav_prediction},
+                {getString(R.string.health_score), data.healthScore + "/100", R.color.secondary_600, R.drawable.ic_nav_analysis},
+                {getString(R.string.risk_level), capitalize(data.riskLevel), R.color.warning_main, R.drawable.ic_nav_simulator},
+                {getString(R.string.credit_score), String.valueOf(data.creditScore), R.color.accent_600, R.drawable.ic_user_premium},
+                {getString(R.string.monthly_savings), ViewUtils.formatCurrency(data.monthlySavings), R.color.primary_600, R.drawable.ic_nav_dashboard},
+                {getString(R.string.dti_ratio), ViewUtils.formatPercentage(data.dtiRatio * 100), R.color.error_main, R.drawable.ic_nav_analysis},
         };
 
         for (Object[] stat : stats) {
@@ -194,7 +194,7 @@ public class DashboardFragment extends Fragment {
         }
 
         LineDataSet dataSet = new LineDataSet(entries, getString(R.string.net_worth));
-        int primaryColor = ContextCompat.getColor(requireContext(), R.color.primary);
+        int primaryColor = ContextCompat.getColor(requireContext(), R.color.primary_500);
         
         dataSet.setColor(primaryColor);
         dataSet.setLineWidth(4f);
@@ -350,11 +350,11 @@ public class DashboardFragment extends Fragment {
         }
 
         BarDataSet incomeSet = new BarDataSet(incomeEntries, getString(R.string.income));
-        incomeSet.setColor(ContextCompat.getColor(requireContext(), R.color.secondary));
+        incomeSet.setColor(ContextCompat.getColor(requireContext(), R.color.secondary_500));
         incomeSet.setDrawValues(false);
 
         BarDataSet expenseSet = new BarDataSet(expenseEntries, getString(R.string.expenses));
-        expenseSet.setColor(ContextCompat.getColor(requireContext(), R.color.error));
+        expenseSet.setColor(ContextCompat.getColor(requireContext(), R.color.error_main));
         expenseSet.setDrawValues(false);
 
         BarData barData = new BarData(incomeSet, expenseSet);
@@ -449,16 +449,16 @@ public class DashboardFragment extends Fragment {
 
             String resultLower = activity.result.toLowerCase();
             if (resultLower.contains("approved") || resultLower.contains("high") || resultLower.contains("success")) {
-                statusColor = ContextCompat.getColor(requireContext(), R.color.secondary);
-                bgColor = ContextCompat.getColor(requireContext(), R.color.secondary_light);
+                statusColor = ContextCompat.getColor(requireContext(), R.color.success_main);
+                bgColor = ContextCompat.getColor(requireContext(), R.color.success_light);
                 iconRes = R.drawable.ic_nav_analysis;
             } else if (resultLower.contains("rejected") || resultLower.contains("risk") || resultLower.contains("low")) {
-                statusColor = ContextCompat.getColor(requireContext(), R.color.error);
-                bgColor = Color.parseColor("#FEE2E2"); // Soft error red
+                statusColor = ContextCompat.getColor(requireContext(), R.color.error_main);
+                bgColor = ContextCompat.getColor(requireContext(), R.color.error_light);
                 iconRes = R.drawable.ic_nav_prediction;
             } else {
-                statusColor = ContextCompat.getColor(requireContext(), R.color.primary);
-                bgColor = ContextCompat.getColor(requireContext(), R.color.primary_light);
+                statusColor = ContextCompat.getColor(requireContext(), R.color.primary_500);
+                bgColor = ContextCompat.getColor(requireContext(), R.color.primary_100);
                 iconRes = R.drawable.ic_ai_sparkle;
             }
 

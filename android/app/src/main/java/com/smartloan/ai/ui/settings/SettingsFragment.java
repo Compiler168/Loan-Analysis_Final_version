@@ -18,6 +18,14 @@ import com.smartloan.ai.ui.reports.ReportsViewModel;
 import com.smartloan.ai.utils.Constants;
 import com.smartloan.ai.utils.TokenManager;
 import com.smartloan.ai.utils.ViewUtils;
+import com.smartloan.ai.data.api.ApiClient;
+import com.smartloan.ai.data.models.ApiResponse;
+import com.smartloan.ai.data.models.User;
+import java.util.HashMap;
+import java.util.Map;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class SettingsFragment extends Fragment {
     private FragmentSettingsBinding binding;
@@ -70,14 +78,35 @@ public class SettingsFragment extends Fragment {
                 binding.etName.setError(getString(R.string.name_required));
                 return;
             }
-            tokenManager.saveUserInfo(
-                    tokenManager.getUserId(),
-                    newName,
-                    tokenManager.getUserEmail(),
-                    tokenManager.getUserRole()
-            );
-            binding.tvProfileName.setText(newName);
-            ViewUtils.showSuccessSnackbar(binding.getRoot(), getString(R.string.saved));
+            binding.btnUpdateProfile.setEnabled(false);
+            Map<String, Object> body = new HashMap<>();
+            body.put("name", newName);
+
+            ApiClient.getService().updateProfile(body).enqueue(new Callback<ApiResponse<User>>() {
+                @Override
+                public void onResponse(Call<ApiResponse<User>> call, Response<ApiResponse<User>> response) {
+                    binding.btnUpdateProfile.setEnabled(true);
+                    if (response.isSuccessful() && response.body() != null && response.body().isSuccess()) {
+                        tokenManager.saveUserInfo(
+                                tokenManager.getUserId(),
+                                newName,
+                                tokenManager.getUserEmail(),
+                                tokenManager.getUserRole(),
+                                tokenManager.getFirebaseToken()
+                        );
+                        binding.tvProfileName.setText(newName);
+                        ViewUtils.showSuccessSnackbar(binding.getRoot(), getString(R.string.saved));
+                    } else {
+                        ViewUtils.showSuccessSnackbar(binding.getRoot(), "Failed to update profile");
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<ApiResponse<User>> call, Throwable t) {
+                    binding.btnUpdateProfile.setEnabled(true);
+                    ViewUtils.showSuccessSnackbar(binding.getRoot(), "Network error");
+                }
+            });
         });
     }
 

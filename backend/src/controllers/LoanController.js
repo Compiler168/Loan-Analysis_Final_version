@@ -1,8 +1,9 @@
 /**
- * SmartLoan AI+ — Loan Controller
+ * SmartLoan AI+ — Loan Controller (Firestore)
  */
 const axios = require('axios');
 const Prediction = require('../models/Prediction');
+const { updateDashboard } = require('../services/DashboardUpdater');
 
 const ML_URL = process.env.ML_SERVICE_URL || 'http://localhost:8000';
 
@@ -18,9 +19,11 @@ exports.predictLoan = async (req, res) => {
       status: resultData.ensemble.approved ? 'approved' : 'rejected',
     });
 
+    await updateDashboard(req.user.id);
+
     res.status(201).json({ 
       success: true, 
-      data: { id: prediction._id, ...resultData }
+      data: { id: prediction.id, ...resultData }
     });
   } catch (err) {
     const msg = err.response?.data?.detail || 'ML service unavailable';
@@ -30,13 +33,11 @@ exports.predictLoan = async (req, res) => {
 
 exports.getHistory = async (req, res) => {
   try {
-    const predictions = await Prediction.find({ userId: req.user.id })
-      .sort({ createdAt: -1 })
-      .limit(50);
+    const predictions = await Prediction.find({ userId: req.user.id });
 
     const history = predictions.map(p => ({
-      id: p._id,
-      date: p.createdAt.toISOString().split('T')[0],
+      id: p.id,
+      date: (p.createdAt.toDate ? p.createdAt.toDate() : new Date(p.createdAt)).toISOString().split('T')[0],
       amount: p.input.loan_amount,
       status: p.status,
       probability: p.result?.ensemble?.probability || 0,
@@ -52,7 +53,8 @@ exports.getStats = async (req, res) => {
   try {
     const total = await Prediction.countDocuments({ userId: req.user.id });
     const approved = await Prediction.countDocuments({ userId: req.user.id, status: 'approved' });
-    const latest = await Prediction.findOne({ userId: req.user.id }).sort({ createdAt: -1 });
+    const predictions = await Prediction.find({ userId: req.user.id });
+    const latest = predictions.length > 0 ? predictions[0] : null;
 
     res.json({ 
       success: true, 
@@ -73,6 +75,9 @@ exports.deletePrediction = async (req, res) => {
   try {
     const result = await Prediction.findOneAndDelete({ _id: req.params.id, userId: req.user.id });
     if (!result) return res.status(404).json({ success: false, error: 'Record not found' });
+    
+    await updateDashboard(req.user.id);
+    
     res.json({ success: true, message: 'Record deleted successfully' });
   } catch (err) {
     res.status(500).json({ success: false, error: 'Delete failed' });

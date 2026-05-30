@@ -6,7 +6,7 @@ const express = require('express');
 const cors = require('cors');
 const helmet = require('helmet');
 const rateLimit = require('express-rate-limit');
-const connectDB = require('./config/database');
+const { connectFirebase, initializeFirebase, admin } = require('./config/firebase');
 
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -32,14 +32,26 @@ app.use('/api/chat', aiLimiter, require('./routes/chat'));
 app.use('/api/reports', require('./routes/reports'));
 
 // Health
-app.get('/api/health', (req, res) => {
-  const mongoose = require('mongoose');
-  res.json({
-    status: 'healthy',
-    service: 'SmartLoan AI+',
-    database: mongoose.connection.readyState === 1 ? 'connected' : 'disconnected',
-    timestamp: new Date().toISOString()
-  });
+app.get('/api/health', async (req, res) => {
+  try {
+    const db = await initializeFirebase();
+    const isConnected = db !== null;
+    
+    res.json({
+      status: 'healthy',
+      service: 'SmartLoan AI+',
+      database: isConnected ? 'connected' : 'disconnected',
+      timestamp: new Date().toISOString()
+    });
+  } catch (err) {
+    res.json({
+      status: 'healthy',
+      service: 'SmartLoan AI+',
+      database: 'error',
+      error: err.message,
+      timestamp: new Date().toISOString()
+    });
+  }
 });
 
 // 404 handler
@@ -56,7 +68,7 @@ app.use((err, req, res, next) => {
 
 // Start server
 const startServer = async () => {
-  const dbConnected = await connectDB();
+  const dbConnected = await connectFirebase();
 
   if (dbConnected) {
     try {
@@ -76,16 +88,18 @@ const startServer = async () => {
           }
         });
         console.log('✅ Demo user seeded: demo@smartloan.ai / demo123');
+      } else {
+        console.log('✅ Demo user already exists');
       }
     } catch (err) {
-      if (err.code !== 11000) console.error('Seed error:', err.message);
+      console.error('Seed error:', err.message);
     }
   }
 
   app.listen(PORT, '0.0.0.0', () => {
     console.log(`\n🚀 SmartLoan AI+ Backend running on port ${PORT}`);
     console.log(`📡 ML Service: ${process.env.ML_SERVICE_URL || 'http://localhost:8000'}`);
-    console.log(`💾 Database: ${dbConnected ? 'MongoDB Atlas' : '⚠️ DISCONNECTED'}\n`);
+    console.log(`💾 Database: ${dbConnected ? 'Firebase Firestore' : '⚠️ DISCONNECTED'}\n`);
   });
 };
 
