@@ -103,6 +103,11 @@ const startServer = async () => {
   });
 };
 
-startServer();
+if (require.main === module) {
+  startServer();
+} else {
+  // If imported as a module (e.g., by Vercel), just connect DB without listening to a port
+  connectFirebase().catch(console.error);
+}
 
 module.exports = app;
