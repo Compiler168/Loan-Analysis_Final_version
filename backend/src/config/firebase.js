@@ -26,21 +26,33 @@ const initializeFirebase = async () => {
 
     // Try to load service account from multiple paths
     let serviceAccount = null;
-    const credentialsPaths = [
-      path.join(__dirname, '../../firebase-key.json'), // backend/firebase-key.json
-      process.env.GOOGLE_APPLICATION_CREDENTIALS || '',
-      './firebase-key.json'
-    ];
 
-    for (const credPath of credentialsPaths) {
-      if (credPath && fs.existsSync(credPath)) {
-        try {
-          const fileContent = fs.readFileSync(credPath, 'utf-8');
-          serviceAccount = JSON.parse(fileContent);
-          console.log(`✅ Service account loaded from: ${credPath}`);
-          break;
-        } catch (err) {
-          console.warn(`⚠️ Failed to load credentials from ${credPath}: ${err.message}`);
+    if (process.env.FIREBASE_SERVICE_ACCOUNT) {
+      try {
+        serviceAccount = JSON.parse(process.env.FIREBASE_SERVICE_ACCOUNT);
+        console.log(`✅ Service account loaded from Environment Variable`);
+      } catch (err) {
+        console.warn(`⚠️ Failed to parse FIREBASE_SERVICE_ACCOUNT env var: ${err.message}`);
+      }
+    }
+
+    if (!serviceAccount) {
+      const credentialsPaths = [
+        path.join(__dirname, '../../firebase-key.json'), // backend/firebase-key.json
+        process.env.GOOGLE_APPLICATION_CREDENTIALS || '',
+        './firebase-key.json'
+      ];
+
+      for (const credPath of credentialsPaths) {
+        if (credPath && fs.existsSync(credPath)) {
+          try {
+            const fileContent = fs.readFileSync(credPath, 'utf-8');
+            serviceAccount = JSON.parse(fileContent);
+            console.log(`✅ Service account loaded from: ${credPath}`);
+            break;
+          } catch (err) {
+            console.warn(`⚠️ Failed to load credentials from ${credPath}: ${err.message}`);
+          }
         }
       }
     }
