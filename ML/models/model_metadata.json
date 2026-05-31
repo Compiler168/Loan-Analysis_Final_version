@@ -1,0 +1,147 @@
+{
+  "trained_at": "2026-05-07T18:58:52.529185",
+  "n_samples": 12000,
+  "n_features": 21,
+  "feature_columns": [
+    "age",
+    "dependents",
+    "employment_encoded",
+    "employment_years",
+    "monthly_income",
+    "monthly_expenses",
+    "credit_score",
+    "existing_loans",
+    "existing_emi",
+    "loan_amount",
+    "loan_term_months",
+    "interest_rate",
+    "property_value",
+    "savings_balance",
+    "missed_payments_last_year",
+    "bankruptcies",
+    "dti_ratio",
+    "requested_emi",
+    "total_emi_burden",
+    "savings_ratio",
+    "loan_to_income_ratio"
+  ],
+  "models": {
+    "logistic_regression": {
+      "metrics": {
+        "accuracy": 0.85125,
+        "precision": 0.8596625766871165,
+        "recall": 0.8656370656370657,
+        "f1_score": 0.8626394767218161,
+        "roc_auc": 0.9251070074599486,
+        "cv_mean": 0.8560416666666667,
+        "cv_std": 0.007944031652057336
+      },
+      "feature_importance": {
+        "credit_score": 2.4117238011708646,
+        "bankruptcies": 1.0226630777707484,
+        "missed_payments_last_year": 0.7548487319864257,
+        "dti_ratio": 0.7427792405861164,
+        "savings_ratio": 0.7427791477114777,
+        "loan_to_income_ratio": 0.5387303755258785,
+        "employment_years": 0.4276576859509921,
+        "loan_term_months": 0.3515326459929895,
+        "total_emi_burden": 0.2687006829392754,
+        "existing_loans": 0.24650041678752804,
+        "interest_rate": 0.07767995931469474,
+        "loan_amount": 0.07052248380301915,
+        "monthly_expenses": 0.057457407302649116,
+        "age": 0.054415069580396554,
+        "monthly_income": 0.0353076101676011,
+        "existing_emi": 0.031527785434492646,
+        "savings_balance": 0.019449577753993464,
+        "employment_encoded": 0.016843838182127674,
+        "property_value": 0.010741885882702288,
+        "dependents": 0.010343864792463542,
+        "requested_emi": 0.008874012141456911
+      },
+      "requires_scaling": true
+    },
+    "random_forest": {
+      "metrics": {
+        "accuracy": 0.8795833333333334,
+        "precision": 0.8911353032659409,
+        "recall": 0.8849420849420849,
+        "f1_score": 0.8880278961642775,
+        "roc_auc": 0.9548098324568912,
+        "cv_mean": 0.8855208333333333,
+        "cv_std": 0.004856893011197835
+      },
+      "feature_importance": {
+        "credit_score": 0.35363594110161595,
+        "savings_ratio": 0.0924509265823986,
+        "dti_ratio": 0.08298536205181442,
+        "total_emi_burden": 0.07919853350769336,
+        "employment_years": 0.04208570941602728,
+        "bankruptcies": 0.04131423313098028,
+        "missed_payments_last_year": 0.037480374947040325,
+        "existing_emi": 0.034761151935819586,
+        "loan_to_income_ratio": 0.029661830318009088,
+        "requested_emi": 0.025971830175725855,
+        "monthly_expenses": 0.021437476063496316,
+        "existing_loans": 0.020401212412170855,
+        "savings_balance": 0.020004048191295688,
+        "monthly_income": 0.01957651763208573,
+        "interest_rate": 0.019359130220997955,
+        "loan_amount": 0.019296964804274012,
+        "age": 0.017213528280169976,
+        "property_value": 0.014178247469781833,
+        "loan_term_months": 0.012586992981696675,
+        "dependents": 0.00917771584062775,
+        "employment_encoded": 0.007222272936278542
+      },
+      "requires_scaling": false
+    },
+    "xgboost": {
+      "metrics": {
+        "accuracy": 0.8754166666666666,
+        "precision": 0.8915094339622641,
+        "recall": 0.8756756756756757,
+        "f1_score": 0.8835216205687573,
+        "roc_auc": 0.9575548140254022,
+        "cv_mean": 0.8911458333333334,
+        "cv_std": 0.00648850479266557
+      },
+      "feature_importance": {
+        "credit_score": 0.1746334433555603,
+        "bankruptcies": 0.15160878002643585,
+        "savings_ratio": 0.14110468327999115,
+        "missed_payments_last_year": 0.07633601874113083,
+        "total_emi_burden": 0.07178939133882523,
+        "dti_ratio": 0.051148608326911926,
+        "existing_loans": 0.0402415469288826,
+        "employment_years": 0.03075144626200199,
+        "loan_to_income_ratio": 0.0275254063308239,
+        "loan_term_months": 0.023069927468895912,
+        "requested_emi": 0.02170081064105034,
+        "monthly_expenses": 0.021286731585860252,
+        "existing_emi": 0.019908539950847626,
+        "property_value": 0.019189132377505302,
+        "monthly_income": 0.019072918221354485,
+        "dependents": 0.01893739402294159,
+        "employment_encoded": 0.018729785457253456,
+        "loan_amount": 0.018606262281537056,
+        "savings_balance": 0.01859774999320507,
+        "interest_rate": 0.018552981317043304,
+        "age": 0.017208484932780266
+      },
+      "requires_scaling": false
+    }
+  },
+  "ensemble_weights": {
+    "logistic_regression": 0.2,
+    "random_forest": 0.4,
+    "xgboost": 0.4
+  },
+  "employment_classes": [
+    "business_owner",
+    "freelancer",
+    "retired",
+    "salaried",
+    "self_employed"
+  ]
+}

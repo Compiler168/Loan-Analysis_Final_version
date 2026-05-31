@@ -280,8 +280,8 @@ public class AnalysisFragment extends Fragment {
         card.setRadius(dpToPx(16));
         card.setCardElevation(0f);
         card.setStrokeWidth(dpToPx(1));
-        card.setStrokeColor(Color.parseColor("#0D000000"));
-        card.setCardBackgroundColor(Color.parseColor("#050F172A"));
+        card.setStrokeColor(getResources().getColor(R.color.card_stroke, null));
+        card.setCardBackgroundColor(getResources().getColor(R.color.surface_variant, null));
 
         LinearLayout inner = new LinearLayout(requireContext());
         inner.setOrientation(LinearLayout.HORIZONTAL);
@@ -311,7 +311,7 @@ public class AnalysisFragment extends Fragment {
         lp.bottomMargin = dpToPx(12);
         card.setLayoutParams(lp);
         card.setRadius(dpToPx(16));
-        card.setCardBackgroundColor(Color.WHITE);
+        card.setCardBackgroundColor(getResources().getColor(R.color.surface_card, null));
         card.setStrokeWidth(dpToPx(1));
         card.setStrokeColor(getResources().getColor(R.color.card_stroke, null));
 
@@ -369,7 +369,7 @@ public class AnalysisFragment extends Fragment {
         lp.bottomMargin = dpToPx(12);
         card.setLayoutParams(lp);
         card.setRadius(dpToPx(16));
-        card.setCardBackgroundColor(Color.WHITE);
+        card.setCardBackgroundColor(getResources().getColor(R.color.surface_card, null));
         card.setStrokeWidth(dpToPx(1));
         card.setStrokeColor(getResources().getColor(R.color.card_stroke, null));
 
@@ -388,12 +388,12 @@ public class AnalysisFragment extends Fragment {
         android.graphics.drawable.GradientDrawable bBg = new android.graphics.drawable.GradientDrawable();
         bBg.setCornerRadius(dpToPx(12));
         boolean isHigh = "high".equalsIgnoreCase(d.severity);
-        bBg.setColor(isHigh ? Color.parseColor("#FEF2F2") : Color.parseColor("#F0FDF4"));
+        bBg.setColor(getResources().getColor(isHigh ? R.color.error_light : R.color.success_light, null));
         badge.setBackground(bBg);
 
         ImageView icon = new ImageView(requireContext());
         icon.setImageResource(isHigh ? R.drawable.ic_nav_analysis : R.drawable.ic_nav_dashboard);
-        icon.setColorFilter(isHigh ? Color.parseColor("#EF4444") : Color.parseColor("#10B981"));
+        icon.setColorFilter(getResources().getColor(isHigh ? R.color.error_main : R.color.success_main, null));
         int p = dpToPx(10); icon.setPadding(p, p, p, p);
         badge.addView(icon);
         contentRow.addView(badge);
@@ -415,7 +415,7 @@ public class AnalysisFragment extends Fragment {
         sub.setText(getString(R.string.impact_suffix, severity, d.value));
         sub.setTextSize(11);
         sub.setLetterSpacing(0.05f);
-        sub.setTextColor(isHigh ? Color.parseColor("#EF4444") : Color.parseColor("#10B981"));
+        sub.setTextColor(getResources().getColor(isHigh ? R.color.error_main : R.color.success_main, null));
         textCol.addView(sub);
         contentRow.addView(textCol);
 

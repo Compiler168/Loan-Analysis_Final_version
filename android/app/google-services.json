@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "184287980744",
+    "project_id": "loan-9e495",
+    "storage_bucket": "loan-9e495.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:184287980744:android:e0652444ba8f1b95ce49fd",
+        "android_client_info": {
+          "package_name": "com.smartloan.ai"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA_3ZsndgsdVb26B15MmCarlu5d2EQwPRg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
