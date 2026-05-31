@@ -399,6 +399,79 @@ cd android
 
 For quick testing with in-memory fallback:
 
+---
+
+<!-- Appended content copied from https://github.com/Compiler168/Smart-Intelligence-System/README.md -->
+
+# SmartLoan AI+
+
+Project Introduction
+
+**Project Name:** SmartLoan AI+
+
+**Tagline:** Intelligent loan decision automation and personal finance advisory for modern Android users.
+
+**Executive Summary:**
+SmartLoan AI+ is a production-ready fintech platform built around an **Android Application developed in Java** that connects to a secured Express.js backend and a dedicated FastAPI ML microservice. The system delivers loan probability scoring, credit health analytics, risk monitoring, AI-driven conversational advice, and report generation.
+
+## Business
+
+### Problem Statement
+Many borrowers lack transparent, real-time decision support when evaluating loan eligibility and managing finance. Traditional apps provide generic guidance without ML-enabled risk analysis or tailored scenarios.
+
+### Existing Challenges
+- Fragmented loan advice across multiple services
+- Limited visibility into approval probability and financial health
+- Manual risk evaluation without predictive automation
+- Poor mobile-first integration for Android users
+
+### Proposed Solution
+SmartLoan AI+ centralizes loan prediction, personal finance analytics, and conversational advisory into a single mobile experience backed by enterprise-grade backend services.
+
+### Benefits
+- Faster approval insight through AI models
+- Personalized recommendations based on financial health
+- Reduced risk through analytics and monitoring
+- Secure, scalable cloud architecture
+- Clear engineer-ready project structure
+
+### Objectives
+- Provide real-time loan approval scoring
+- Enable health and risk analysis on customer data
+- Maintain secure user authentication and session flow
+- Build a reusable ML microservice for future feature expansion
+- Deliver production-level documentation and cleanup
+
+### Target Users
+- Loan applicants seeking better approval insight
+- Financial advisors requiring rapid analysis
+- Mobile-first consumers in emerging markets
+- Product teams validating AI-enabled fintech workflows
+
+## Technology Stack
+
+| Layer | Technology | Purpose |
+|---|---|---|
+| Android | Java, Android Jetpack | Mobile application UI and data handling |
+| Backend | Node.js, Express.js | REST API, auth, Firestore integration |
+| Database | Firebase Firestore | User, prediction, analysis, chat and report persistence |
+| ML Service | Python, FastAPI | Loan prediction, health scoring, risk analysis, chatbot |
+| CI/CD | GitHub Actions | Build, smoke test, Docker image publish, deploy |
+| Containerization | Docker | Standardized backend and ML service packaging |
+
+## Project Structure
+
+See original project README for full structure and documentation.
+
+## Installation Guide
+
+Refer to the original README for detailed setup steps for Backend, ML service, and Android app.
+
+## License
+
+This project is licensed under the terms of the MIT License.
+
+
 ```
 Email: demo@smartloan.ai
 Password: demo123
@@ -475,7 +548,7 @@ Note: Requires MongoDB Atlas connection to persist data beyond session.
 
 ### Android app can't reach backend
 - Use `http://10.0.2.2:5000` for Android emulator (instead of `http://localhost:5000`)
-- For physical device, use actual machine IP address
+- For a physical device on the same Wi-Fi, use your laptop's local IP address (for example `http://192.168.1.7:5000`)
 - Verify backend CORS includes mobile origin
 
 ---
