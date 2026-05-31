@@ -1,4 +1,4 @@
-# SmartLoan AI+
+﻿# SmartLoan AI+
 
 ![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/Compiler168/Loan-Analysis/ci-and-deploy.yml?branch=main)
 ![License](https://img.shields.io/github/license/Compiler168/Loan-Analysis)
@@ -225,4 +225,654 @@ Firebase Firestore Database
 - Implementation: `backend/src/middleware/auth.js`, `helmet`, `rate-limit`
 
 ### Administrative Features
--
+- Purpose: Bootstrap demo data and service health checks.
+- Inputs: server startup.
+- Processing Logic: create demo user if missing, verify Firestore.
+- Outputs: seeded admin user and health endpoints.
+- Benefits: easier onboarding for testing and demos.
+- Implementation: `backend/src/server.js`
+
+---
+
+## Project Structure
+
+### Complete Project Hierarchy
+
+```
+Loan/
+│
+├── android/                         # Native Android Application
+│   ├── app/
+│   │   ├── build.gradle
+│   │   ├── google-services.json      # Firebase config (local only)
+│   │   ├── proguard-rules.pro
+│   │   └── src/
+│   │       ├── androidTest/
+│   │       ├── main/
+│   │       │   ├── AndroidManifest.xml
+│   │       │   ├── java/com/smartloan/ai/
+│   │       │   │   ├── data/api/
+│   │       │   │   ├── data/models/
+│   │       │   │   ├── ui/
+│   │       │   │   └── utils/
+│   │       │   └── res/
+│   │       └── test/
+│   ├── gradle/wrapper/
+│   ├── build.gradle
+│   ├── gradle.properties
+│   ├── settings.gradle
+│   └── local.properties
+│
+├── backend/                         # Express.js API Server
+│   ├── Dockerfile
+│   ├── package.json
+│   ├── package-lock.json
+   ├── .env.template
+   └── src/
+     ├── server.js
+     ├── config/
+     │   └── firebase.js
+     ├── controllers/
+     │   ├── AuthController.js
+     │   ├── LoanController.js
+     │   ├── FinancialController.js
+     │   ├── ChatController.js
+     │   └── ReportController.js
+     ├── middleware/
+     │   └── auth.js
+     ├── models/
+     │   ├── User.js
+     │   ├── Prediction.js
+     │   ├── Analysis.js
+     │   ├── ChatSession.js
+     │   └── Report.js
+     └── routes/
+       ├── auth.js
+       ├── loans.js
+       ├── financial.js
+       ├── chat.js
+       └── reports.js
+│
+├── ml/                              # Python FastAPI ML Service
+│   ├── Dockerfile
+│   ├── main.py
+│   ├── requirements.txt
+│   ├── .env.template
+│   ├── eda/
+│   │   ├── data/
+│   │   │   ├── raw/
+│   │   │   │   └── loan_dataset.csv
+│   │   │   └── cleaned/
+│   │   │       └── loan_dataset_cleaned.csv
+│   │   └── analysis/
+│   │       ├── eda_report.md
+│   │       ├── eda_script.py
+│   │       ├── data_cleaning.py
+│   │       ├── target_dist.png
+│   │       ├── correlation_heatmap.png
+│   │       ├── credit_score_vs_approved.png
+│   │       ├── dti_ratio_vs_approved.png
+│   │       ├── loan_amount_vs_approved.png
+│   │       └── monthly_income_vs_approved.png
+│   ├── models/
+   │   ├── model_metadata.json
+   │   ├── xgboost_model.pkl
+   │   ├── random_forest.pkl
+   │   ├── logistic_regression.pkl
+   │   ├── scaler.pkl
+   │   ├── label_encoder.pkl
+   │   └── feature_columns.pkl
+   ├── training/
+   │   ├── generate_data.py
+   │   └── train_models.py
+   ├── services/
+   │   ├── __init__.py
+   │   ├── prediction_engine.py
+   │   ├── health_scorer.py
+   │   ├── risk_analyzer.py
+   │   ├── nlp_engine.py
+   │   ├── simulation_engine.py
+   │   └── document_analyzer.py
+   └── tests/
+     └── test_engines.py
+│
+├── .github/
+│   └── workflows/
+│       └── ci-and-deploy.yml
+│
+├── ARCHITECTURE.md
+├── DEPLOYMENT.md
+├── DesignSystem.md
+├── LICENSE
+├── README.md
+├── package.json
+└── .gitignore
+```
+
+### Folder Details
+- **`android/`**: Android Application source in Java, resources, and Gradle build system.
+- **`backend/`**: Express.js REST API, Firestore integration, security middleware, and ML service gateway.
+- **`ml/`**: Python FastAPI ML microservice with data, training, models, and prediction engines.
+  - **`ml/eda/`**: Complete data pipeline from raw → cleaned → analyzed → visualized.
+  - **`ml/models/`**: Trained model artifacts and feature metadata.
+  - **`ml/services/`**: Prediction, scoring, risk analysis, and chatbot engines.
+  - **`ml/training/`**: Scripts for model training and synthetic data generation.
+- **`.github/workflows/`**: CI/CD pipeline for testing, building Docker images, and deployment.
+
+---
+
+## EDA & Data Pipeline
+
+### Exploratory Data Analysis Overview
+
+The **Exploratory Data Analysis (EDA)** section documents the complete data journey from raw collection through preprocessing, analysis, visualization, and feature engineering that informs the ML models. All EDA artifacts, scripts, and datasets are located in the `ml/eda/` folder.
+
+### 1. Raw Data Layer
+
+**Location:** `ml/eda/data/raw/loan_dataset.csv`
+
+- **Source**: Loan application records from financial institutions
+- **Size**: ~10,000 rows of customer loan applications
+- **Format**: CSV (tabular structure)
+- **Key Fields**:
+  - **Financial Metrics**: `monthly_income`, `monthly_expenses`, `credit_score`, `savings_balance`, `loan_amount`
+  - **Loan Details**: `loan_term_months`, `interest_rate`, `existing_loans`, `existing_emi`
+  - **Risk Factors**: `missed_payments_last_year`, `bankruptcies`
+  - **Demographics**: `age`
+  - **Target Variable**: `approved` (binary: approved/rejected)
+
+---
+
+### 2. Data Cleaning & Preprocessing
+
+**Script Location:** `ml/eda/analysis/data_cleaning.py`
+
+**Processing Steps:**
+- **Missing Value Handling**
+  - Numeric fields (skewed): median imputation
+  - Categorical fields: mode imputation
+  - Documented thresholds in `ml/eda/analysis/eda_report.md`
+  
+- **Outlier Detection & Treatment**
+  - IQR method for extreme values
+  - Domain-based validation for financial metrics
+  
+- **Feature Engineering**
+  - Derived **Debt-to-Income Ratio (DTI)** = `(monthly_expenses + existing_emi) / monthly_income`
+  - Computed **Requested EMI** based on loan amount and term
+  - Created **Savings Ratio** = `savings_balance / monthly_income`
+  - Derived **Loan-to-Income Ratio** = `loan_amount / annual_income`
+
+**Output:** `ml/eda/data/cleaned/loan_dataset_cleaned.csv`
+
+---
+
+### 3. Cleaned Data Layer
+
+**Location:** `ml/eda/data/cleaned/loan_dataset_cleaned.csv`
+
+- **Size**: Clean dataset ready for ML model training
+- **Quality Checks**:
+  - No missing values after imputation
+  - Outliers handled and documented
+  - All derived features computed
+  - Data types validated
+
+---
+
+### 4. Exploratory Data Analysis
+
+**Report:** `ml/eda/analysis/eda_report.md`
+**Code:** `ml/eda/analysis/eda_script.py`
+
+#### Data Distribution Analysis
+- **Target Variable**: Distribution of approved vs. rejected loans
+  - Visualized in: `ml/eda/analysis/target_dist.png`
+  - Insight: Identifies class imbalance → informs training strategy
+  
+- **Numeric Feature Distributions**:
+  - Histograms and KDE plots for income, credit score, loan amount
+  - Identified skewness and modality for transformation planning
+
+- **Categorical Features**:
+  - Count analysis and low-frequency category detection
+  - Decision on grouping or removal
+
+#### Missing Value Analysis
+- Documented patterns of missingness
+- Justification for imputation method per field
+- Impact assessment on downstream models
+
+#### Feature Correlation Analysis
+- **Heatmap Visualization**: `ml/eda/analysis/correlation_heatmap.png`
+- **Key Findings**:
+  - Credit score shows strong negative correlation with rejection
+  - DTI ratio highly predictive of loan approval
+  - Income and loan amount show expected positive correlation
+  - Multicollinearity detection and feature selection
+
+---
+
+### 5. Visualization Layer
+
+**Location:** `ml/eda/analysis/`
+
+| Visualization | File | Insight |
+|---|---|---|
+| **Approval Distribution** | `target_dist.png` | Shows class balance/imbalance in dataset |
+| **Correlation Heatmap** | `correlation_heatmap.png` | Feature relationships and multicollinearity |
+| **Credit Score vs. Approval** | `credit_score_vs_approved.png` | Strong risk signal for predictions |
+| **DTI Ratio vs. Approval** | `dti_ratio_vs_approved.png` | Repayment burden predictive power |
+| **Loan Amount vs. Approval** | `loan_amount_vs_approved.png` | Requested amount impact on decision |
+| **Monthly Income vs. Approval** | `monthly_income_vs_approved.png` | Income sufficiency relationship |
+
+**Visualization Types**:
+- Histograms & density plots for distributions
+- Heatmaps for correlation matrices
+- Scatter plots for bivariate relationships
+- Box plots for outlier detection
+
+---
+
+### 6. Key Insights & Findings
+
+1. **Credit Score is Critical**
+   - Low credit scores (< 600) strongly associate with rejection
+   - Recommended as high-priority feature in models
+
+2. **Debt-to-Income Ratio Matters Most**
+   - Derived DTI feature outperforms raw income/expenses
+   - Threshold around 0.4–0.5 separates approval tiers
+
+3. **Missed Payments & Bankruptcies are Risk Multipliers**
+   - Even one missed payment in last year reduces approval by 30%+
+   - Any bankruptcy history is near-automatic rejection signal
+
+4. **Income Thresholds Exist**
+   - Minimum monthly income of ~5,000 needed for standard loans
+   - Loan-to-Income ratio of < 5x improves approval odds
+
+5. **Class Imbalance Detected**
+   - ~65% approved, 35% rejected
+   - Requires balanced sampling or weighted loss in training
+
+---
+
+### 7. EDA Impact on Model Development
+
+#### Feature Engineering Decisions
+- **Keep derived features**: DTI, Requested EMI, Savings Ratio, Loan-to-Income
+- **Drop redundant fields**: Original expense + income (use DTI instead)
+- **Encode categorical**: Binary encoding for bankruptcy, scaled numeric features
+
+#### Model Selection Implications
+- Class imbalance suggests: F1-score focus, not just accuracy
+- Feature importance will guide ensemble weights
+- Logistic regression baseline before ensemble methods
+
+#### Sampling Strategy
+- Stratified train/test split to preserve class proportions
+- Optional oversampling of minority (rejected) class in training
+- Cross-validation with stratified k-fold
+
+#### Validation Approach
+- Test set held separately from EDA to avoid leakage
+- Calibration analysis for probability outputs
+- Threshold tuning based on business false-positive cost
+
+---
+
+### 8. Data Files Reference
+
+```
+ml/eda/
+├── data/
+│   ├── raw/
+│   │   └── loan_dataset.csv                   # Original dataset
+│   └── cleaned/
+│       └── loan_dataset_cleaned.csv           # Processed dataset
+├── analysis/
+│   ├── eda_report.md                          # Detailed findings
+│   ├── eda_script.py                          # EDA code
+│   ├── data_cleaning.py                       # Preprocessing pipeline
+│   └── [visualizations - see table above]
+```
+
+---
+
+## Database Documentation
+
+This project uses **Firebase Firestore** rather than a SQL relational database.
+
+### Collections and Primary Keys
+- `users`: user profiles and auth data. Primary key is Firestore document ID.
+- `predictions`: loan prediction records per user.
+- `analyses`: financial health, risk analysis, and simulation history.
+- `chatSessions`: AI chat session history.
+- `reports`: generated report documents.
+- `dashboards`: cached dashboard summaries by user.
+
+### Relationships
+- `predictions.userId` → `users` document ID
+- `analyses.userId` → `users` document ID
+- `chatSessions.userId` → `users` document ID
+- `reports.userId` → `users` document ID
+- `dashboards` keyed by `userId`
+
+### ER Outline
+
+```mermaid
+flowchart LR
+  users((users))
+  predictions((predictions))
+  analyses((analyses))
+  chatSessions((chatSessions))
+  reports((reports))
+  dashboards((dashboards))
+
+  users --> predictions
+  users --> analyses
+  users --> chatSessions
+  users --> reports
+  users --> dashboards
+```
+
+---
+
+## Workflow Documentation
+
+### Authentication Flow
+
+```mermaid
+sequenceDiagram
+    participant App
+    participant Backend
+    participant Firestore
+    App->>Backend: POST /api/auth/register
+    Backend->>Firestore: create user document
+    Firestore-->>Backend: user created
+    Backend-->>App: auth token + profile
+```
+
+### Financial Analysis Flow
+
+```mermaid
+sequenceDiagram
+    participant App
+    participant Backend
+    participant ML
+    participant Firestore
+    App->>Backend: POST /api/financial/health-score
+    Backend->>ML: POST /health-score
+    ML-->>Backend: score result
+    Backend->>Firestore: save analysis
+    Backend-->>App: health score response
+```
+
+### AI Processing Flow
+
+```mermaid
+sequenceDiagram
+    participant App
+    participant Backend
+    participant ML
+    App->>Backend: POST /api/chat/message
+    Backend->>ML: POST /chat
+    ML-->>Backend: AI response
+    Backend->>Firestore: update chat session
+    Backend-->>App: reply
+```
+
+### Loan Prediction Flow
+
+```mermaid
+sequenceDiagram
+    participant App
+    participant Backend
+    participant ML
+    participant Firestore
+    App->>Backend: POST /api/loans/predict
+    Backend->>ML: POST /predict
+    ML-->>Backend: prediction result
+    Backend->>Firestore: save prediction
+    Backend-->>App: prediction output
+```
+
+---
+
+## Installation Guide
+
+### Prerequisites
+- Java 11+ and Android SDK
+- Android Studio
+- Node.js 20+ and npm
+- Python 3.11+
+- Docker (for containerized deployment)
+- Firebase service account JSON for Firestore access
+
+### Clone Repository
+```bash
+git clone https://github.com/Compiler168/Loan-Analysis.git
+cd Loan
+```
+
+### Backend Setup
+```bash
+cd backend
+npm install
+cp .env.template .env
+# Update .env values, especially JWT_SECRET and ML_SERVICE_URL
+```
+
+### ML Service Setup
+```bash
+cd ../ml
+python -m venv venv
+venv\Scripts\Activate.ps1
+pip install -r requirements.txt
+cp .env.template .env
+```
+
+### Android Application Setup
+- Open `Loan/android` in Android Studio
+- Sync Gradle and install SDK components
+- If needed, add `android/app/google-services.json` locally
+- Run the app on emulator or device
+
+---
+
+## Running Guide
+
+### Backend
+```bash
+cd backend
+npm run dev
+```
+Backend listens on `http://localhost:5000` by default.
+
+### ML Service
+```bash
+cd ml
+venv\Scripts\Activate.ps1
+python main.py
+```
+ML service listens on `http://localhost:8000`.
+
+### Android Application
+- Open Android Studio
+- Run `app` module on device or emulator
+- Ensure `ML_SERVICE_URL` and `MOBILE_ORIGINS` align with running services
+
+---
+
+## API Documentation
+
+### Authentication
+- `POST /api/auth/register`
+  - Body: `{ name, email, password }`
+  - Response: `{ token, firebaseCustomToken, user }`
+
+- `POST /api/auth/login`
+  - Body: `{ email, password }`
+  - Response: `{ token, firebaseCustomToken, user }`
+
+- `GET /api/auth/me`
+  - Auth: Bearer token
+  - Response: user profile
+
+- `PUT /api/auth/profile`
+  - Auth: Bearer token
+  - Body: profile fields
+  - Response: updated profile
+
+### Loan Endpoints
+- `POST /api/loans/predict`
+  - Auth required
+  - Body: loan and financial inputs
+  - Response: ensemble probability, approval, risk factors
+
+- `GET /api/loans/history`
+  - Auth required
+  - Response: prediction history
+
+- `GET /api/loans/stats`
+  - Auth required
+  - Response: loan summary metrics
+
+- `DELETE /api/loans/:id`
+  - Auth required
+  - Response: deletion status
+
+### Financial Endpoints
+- `GET /api/financial/dashboard`
+  - Auth required
+  - Response: dashboard summary
+
+- `POST /api/financial/health-score`
+  - Auth required
+  - Body: financial profile
+  - Response: computed health score
+
+- `POST /api/financial/risk-analysis`
+  - Auth required
+  - Body: risk inputs
+  - Response: risk analysis
+
+- `POST /api/financial/simulate`
+  - Auth required
+  - Body: simulation variables
+  - Response: projected scenario
+
+- `GET /api/financial/latest`
+  - Auth required
+  - Response: latest analysis
+
+- `GET /api/financial/history`
+  - Auth required
+  - Response: analysis history
+
+### Chat Endpoints
+- `POST /api/chat/message`
+  - Auth required
+  - Body: `{ message, sessionId }`
+  - Response: AI chatbot reply
+
+- `GET /api/chat/sessions`
+  - Auth required
+  - Response: saved chat sessions
+
+- `DELETE /api/chat/:id`
+  - Auth required
+  - Response: deletion status
+
+### Report Endpoints
+- `POST /api/reports/generate`
+  - Auth required
+  - Body: `{ type }`
+  - Response: report document
+
+- `GET /api/reports/history`
+  - Auth required
+  - Response: report list
+
+- `GET /api/reports/:id`
+  - Auth required
+  - Response: report details
+
+- `DELETE /api/reports/:id`
+  - Auth required
+  - Response: delete status
+
+---
+
+## User Journey
+
+1. User registers in the Android Application developed in Java.
+2. The app sends credentials to `POST /api/auth/register`.
+3. Backend creates the user in Firestore and returns JWT.
+4. User logs in and receives a secured session.
+5. User submits loan details to `POST /api/loans/predict`.
+6. Backend forwards the request to the ML service and writes the result to Firestore.
+7. User views predictions, health score, risk analysis, and report summaries.
+8. User interacts with the AI chat assistant for financial guidance.
+9. User can request reports and view history in-app.
+
+---
+
+## Future Enhancements
+
+- Multi-bank integration with Open Banking APIs
+- Fraud detection and anomaly monitoring
+- AI chat assistant with voice support
+- Predictive financial forecasting and budgeting
+- Personalized loan marketplace recommendations
+- Secure bank account linking and payment tracking
+- Adaptive risk scoring using real-time market data
+
+---
+
+## Optimization Report
+
+### Key improvements
+- Simplified repository layout: `android/`, `backend/`, `ml/` to improve discoverability and maintainability
+- Centralized EDA under `ml/eda/` and model artifacts under `ml/models/`
+- Preserved Docker-ready service definitions for backend and ML service
+- Maintained CI pipeline while removing unnecessary deployment wrappers
+- Improved security posture with explicit ignore rules for secrets
+
+---
+
+## Project Highlights
+
+- Production-ready Android Application developed in Java
+- FastAPI-based ML microservice with ensemble prediction
+- Firestore-backed backend with secure JWT auth
+- AI chatbot and financial simulation engine
+- CI/CD with GitHub Actions and Docker
+---
+
+## Contributing Guidelines
+
+Contributions should follow these rules:
+- Keep changes small and focused
+- Document new features in README or architecture docs
+- Add tests for backend and ML service changes
+- Avoid committing credentials or local environment files
+- Maintain consistent code organization within `android/`, `backend/`, and `ml/`
+
+---
+
+## Developer Notes
+
+- The Android Application is the primary user experience layer (located in `android/`).
+- The backend handles auth, persistence, and ML service orchestration (located in `backend/`).
+- The ML service is a standalone FastAPI app designed to be deployed independently (located in `ml/`).
+- EDA pipeline, data, and model artifacts are organized under `ml/eda/` and `ml/models/`.
+- Use `.env.template` files to configure local development.
+- Run FastAPI and backend services locally before launching the Android app.
+
+---
+
+## License
+
+This project is licensed under the terms of the [MIT License](LICENSE).
