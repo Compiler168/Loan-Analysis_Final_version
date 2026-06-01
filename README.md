@@ -91,8 +91,8 @@ FastAPI ML Service (Python)
 Firebase Firestore Database
 ```
 
-### Frontend Architecture
-- Android Application developed in Java
+### Android App Architecture
+- Android Application built in Java
 - Uses event-driven ViewModel and Activity/Fragment flows
 - Network access via REST API with JWT authentication
 - Local UI state managed through Android Jetpack patterns
@@ -229,15 +229,15 @@ Firebase Firestore Database
 - Inputs: JWT tokens, request headers.
 - Processing Logic: token verification and request sanitization.
 - Outputs: authorized access or rejection.
-- Benefits: secure production-readiness.
+- Benefits: Secure production-readiness.
 - Implementation: `backend/src/middleware/auth.js`, `helmet`, `rate-limit`
 
 ### Administrative Features
 - Purpose: Bootstrap demo data and service health checks.
 - Inputs: server startup.
 - Processing Logic: create demo user if missing, verify Firestore.
-- Outputs: seeded admin user and health endpoints.
-- Benefits: easier onboarding for testing and demos.
+- Outputs: Seeded admin user and health endpoints.
+- Benefits: Easier onboarding for testing and demos.
 - Implementation: `backend/src/server.js`
 
 ---
@@ -776,62 +776,10 @@ Download the latest Android APK to install and test the application directly:
 ## Project Structure
 ### Complete Project Hierarchy
 
-```
+```text
 Loan/
 │
-├── android/                         # Native Android Application
-│   ├── app/
-│   │   ├── build.gradle
-│   │   ├── google-services.json      # Firebase config (local only)
-│   │   ├── proguard-rules.pro
-│   │   └── src/
-│   │       ├── androidTest/
-│   │       ├── main/
-│   │       │   ├── AndroidManifest.xml
-│   │       │   ├── java/com/smartloan/ai/
-│   │       │   │   ├── data/api/
-│   │       │   │   ├── data/models/
-│   │       │   │   ├── ui/
-│   │       │   │   └── utils/
-│   │       │   └── res/
-│   │       └── test/
-│   ├── gradle/wrapper/
-│   ├── build.gradle
-│   ├── gradle.properties
-│   ├── settings.gradle
-│   └── local.properties
-│
-├── backend/                         # Express.js API Server
-│   ├── Dockerfile
-│   ├── package.json
-│   ├── package-lock.json
-   ├── .env.template
-   └── src/
-     ├── server.js
-     ├── config/
-     │   └── firebase.js
-     ├── controllers/
-     │   ├── AuthController.js
-     │   ├── LoanController.js
-     │   ├── FinancialController.js
-     │   ├── ChatController.js
-     │   └── ReportController.js
-     ├── middleware/
-     │   └── auth.js
-     ├── models/
-     │   ├── User.js
-     │   ├── Prediction.js
-     │   ├── Analysis.js
-     │   ├── ChatSession.js
-     │   └── Report.js
-     └── routes/
-       ├── auth.js
-       ├── loans.js
-       ├── financial.js
-       ├── chat.js
-       └── reports.js
-│
-├── ml/                              # Python FastAPI ML Service
+├── ml/                                  # Python FastAPI ML Service
 │   ├── Dockerfile
 │   ├── main.py
 │   ├── requirements.txt
@@ -853,26 +801,87 @@ Loan/
 │   │       ├── loan_amount_vs_approved.png
 │   │       └── monthly_income_vs_approved.png
 │   ├── models/
-   │   ├── model_metadata.json
-   │   ├── xgboost_model.pkl
-   │   ├── random_forest.pkl
-   │   ├── logistic_regression.pkl
-   │   ├── scaler.pkl
-   │   ├── label_encoder.pkl
-   │   └── feature_columns.pkl
-   ├── training/
-   │   ├── generate_data.py
-   │   └── train_models.py
-   ├── services/
-   │   ├── __init__.py
-   │   ├── prediction_engine.py
-   │   ├── health_scorer.py
-   │   ├── risk_analyzer.py
-   │   ├── nlp_engine.py
-   │   ├── simulation_engine.py
-   │   └── document_analyzer.py
-   └── tests/
-     └── test_engines.py
+│   │   ├── model_metadata.json
+│   │   ├── xgboost_model.pkl
+│   │   ├── random_forest.pkl
+│   │   ├── logistic_regression.pkl
+│   │   ├── scaler.pkl
+│   │   ├── label_encoder.pkl
+│   │   └── feature_columns.pkl
+│   ├── training/
+│   │   ├── generate_data.py
+│   │   └── train_models.py
+│   ├── services/
+│   │   ├── __init__.py
+│   │   ├── prediction_engine.py
+│   │   ├── health_scorer.py
+│   │   ├── risk_analyzer.py
+│   │   ├── nlp_engine.py
+│   │   ├── simulation_engine.py
+│   │   └── document_analyzer.py
+│   └── tests/
+│       └── test_engines.py
+│
+├── android/                             # Android Application (Java)
+│   ├── app/
+│   │   ├── build.gradle
+│   │   ├── google-services.json          # Firebase config (local only)
+│   │   ├── proguard-rules.pro
+│   │   └── src/
+│   │       ├── androidTest/
+│   │       ├── main/
+│   │       │   ├── AndroidManifest.xml
+│   │       │   ├── java/com/smartloan/ai/
+│   │       │   │   ├── data/api/
+│   │       │   │   ├── data/models/
+│   │       │   │   ├── ui/
+│   │       │   │   └── utils/
+│   │       │   └── res/
+│   │       └── test/
+│   ├── gradle/wrapper/
+│   ├── build.gradle
+│   ├── gradle.properties
+│   ├── settings.gradle
+│   └── local.properties
+│
+├── backend/                             # Express.js API Server
+│   ├── Dockerfile
+│   ├── package.json
+│   ├── package-lock.json
+│   ├── .env.template
+│   └── src/
+│       ├── server.js
+│       ├── config/
+│       │   └── firebase.js
+│       ├── controllers/
+│       │   ├── AuthController.js
+│       │   ├── LoanController.js
+│       │   ├── FinancialController.js
+│       │   ├── ChatController.js
+│       │   └── ReportController.js
+│       ├── middleware/
+│       │   └── auth.js
+│       ├── models/
+│       │   ├── User.js
+│       │   ├── Prediction.js
+│       │   ├── Analysis.js
+│       │   ├── ChatSession.js
+│       │   └── Report.js
+│       └── routes/
+│           ├── auth.js
+│           ├── loans.js
+│           ├── financial.js
+│           ├── chat.js
+│           └── reports.js
+│
+├── APP_APK_FILE/                        # Android APK build for direct install
+│   └── app-debug.apk
+│
+├── APP_DEMO_VIDEO/                      # App demo video
+│   └── APP_DEMO_VIDEO.mp4
+│
+├── APP_UI_SCREEN_SHORT/                 # App UI screenshots gallery
+│   └── [screenshots]
 │
 ├── .github/
 │   └── workflows/
@@ -888,20 +897,18 @@ Loan/
 ```
 
 ### Folder Details
-- **`android/`**: Android Application source in Java, resources, and Gradle build system.
-- **`backend/`**: Express.js REST API, Firestore integration, security middleware, and ML service gateway.
 - **`ml/`**: Python FastAPI ML microservice with data, training, models, and prediction engines.
   - **`ml/eda/`**: Complete data pipeline from raw → cleaned → analyzed → visualized.
   - **`ml/models/`**: Trained model artifacts and feature metadata.
   - **`ml/services/`**: Prediction, scoring, risk analysis, and chatbot engines.
   - **`ml/training/`**: Scripts for model training and synthetic data generation.
-- **`.github/workflows/`**: CI/CD pipeline for testing, building Docker images, and deployment.
-- **`deploy/`**: Deployment configurations and scripts.
-- **`APP_APK_FILE/`**: Latest Android application build (APK) for direct installation.
+- **`android/`**: Android Application source in Java, resources, and Gradle build system.
+- **`backend/`**: Express.js REST API, Firestore integration, security middleware, and ML service gateway.
+- **`APP_APK_FILE/`**: Latest Android application build (APK) for direct installation and testing.
 - **`APP_DEMO_VIDEO/`**: Video demonstration showcasing all application features.
 - **`APP_UI_SCREEN_SHORT/`**: Complete gallery of application UI screenshots.
-
----
+- **`.github/workflows/`**: CI/CD pipeline for testing, building Docker images, and deployment.
+- **`deploy/`**: Deployment configurations and scripts.\n\n---
 
 
 ## Optimization Report
