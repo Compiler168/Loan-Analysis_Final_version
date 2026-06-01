@@ -1,4 +1,4 @@
-﻿# SmartLoan AI+
+# SmartLoan AI+
 
 ![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/Compiler168/Loan-Analysis/ci-and-deploy.yml?branch=main)
 ![License](https://img.shields.io/github/license/Compiler168/Loan-Analysis)
@@ -637,6 +637,62 @@ sequenceDiagram
     Backend->>Firestore: save prediction
     Backend-->>App: prediction output
 ```
+
+---
+
+## Live Deployment (Vercel + Back4App)
+
+The application has been successfully deployed and is available live.
+
+### Live Application URLs
+- **Backend API**: [Available in Vercel Dashboard] (Deployed via Vercel)
+- **ML Service**: [Available in Vercel/Back4App Dashboard] (Containerized deployment)
+- **Database**: Hosted on Back4App
+
+### Deployment Architecture & Workflow
+The production architecture separates concerns across managed platforms for optimal performance:
+- **Vercel** hosts the Node.js/Express Backend, offering serverless scalability and automatic CI/CD from the `main` branch.
+- **Back4App** provides the managed database (MongoDB/Parse) and can also host the containerized FastAPI ML Service via its Docker deployment capabilities.
+- **GitHub Actions/Vercel CI** handles the deployment workflow. Code pushes to the `main` branch automatically trigger Vercel to build and deploy the backend, while Back4App automatically pulls the latest container images for the ML Service.
+
+### Environment Variable Setup Instructions
+To connect your local or deployed app to the live services, ensure the following environment variables are configured:
+
+**Backend (`backend/.env` or Vercel Environment Variables):**
+```bash
+NODE_ENV=production
+MONGODB_URI=mongodb://<back4app-db-user>:<password>@<back4app-cluster-url>/smartloan?retryWrites=true&w=majority
+JWT_SECRET=<your_secure_jwt_secret>
+ML_SERVICE_URL=<live_ml_service_url>
+MOBILE_ORIGINS=<android_app_package_name_or_domain>
+```
+
+**ML Service (`ml/.env` or Back4App Environment Settings):**
+```bash
+PORT=8000
+HOST=0.0.0.0
+MODEL_PATH=./models
+BATCH_SIZE=32
+```
+
+### Backend, ML Service, and Database Deployment Configuration
+- **Backend (Vercel)**: Deployed using the `vercel.json` configuration or default Node.js settings. The `backend/` directory serves as the root for Vercel.
+- **ML Service (Back4App/Vercel)**: Packaged via the provided `Dockerfile`. Deployed as a scalable container service exposing port 8000.
+- **Database (Back4App)**: Configured with standard MongoDB URI access. Ensure network access is configured to allow connections from the Vercel backend IPs.
+
+### Steps to Run the Project Locally After Deployment
+If you want to run the Android app locally against the live backend:
+1. Open `android/app/build.gradle`.
+2. Update the `debug` API base URL to point to the live backend URL:
+   ```gradle
+   buildConfigField "String", "API_BASE_URL", '"https://<your-vercel-backend-url>"'
+   ```
+3. Sync Gradle and run the app on your emulator or device.
+
+### Deployment-Specific Notes
+- **CORS**: Ensure that the `MOBILE_ORIGINS` environment variable in the backend includes the exact origin or is configured to allow the Android application's requests.
+- **Cold Starts**: Serverless functions on Vercel may experience cold starts. The ML service, if running in a container, should remain warm or might take a few seconds on the first prediction request.
+- **Database Security**: Keep the Back4App database credentials secure and rotate them periodically.
 
 ---
 

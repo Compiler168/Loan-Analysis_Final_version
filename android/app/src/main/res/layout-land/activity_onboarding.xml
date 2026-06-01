@@ -9,14 +9,14 @@
         android:id="@+id/btnSkip"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:layout_marginEnd="24dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="16dp"
         android:fontFamily="sans-serif-medium"
         android:padding="12dp"
         android:text="@string/skip"
         android:textAllCaps="false"
         android:textColor="#B3FFFFFF"
-        android:textSize="16sp"
+        android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -24,7 +24,6 @@
         android:id="@+id/viewPager"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_marginTop="16dp"
         app:layout_constraintBottom_toTopOf="@+id/footerSection"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -32,47 +31,50 @@
         android:id="@+id/footerSection"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingHorizontal="24dp"
-        android:paddingBottom="40dp"
+        android:paddingHorizontal="48dp"
+        android:paddingBottom="16dp"
         app:layout_constraintBottom_toBottomOf="parent">
 
         <LinearLayout
             android:id="@+id/indicatorContainer"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="32dp"
             android:gravity="center"
             android:orientation="horizontal"
-            app:layout_constraintBottom_toTopOf="@+id/btnNext"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btnNext"
-            android:layout_width="match_parent"
-            android:layout_height="64dp"
+            android:layout_width="160dp"
+            android:layout_height="48dp"
             android:fontFamily="sans-serif-black"
             android:text="@string/next"
             android:textAllCaps="false"
             android:textColor="@color/white"
-            android:textSize="18sp"
+            android:textSize="16sp"
             app:backgroundTint="@color/onboarding_btn_next"
-            app:cornerRadius="16dp"
-            app:layout_constraintBottom_toBottomOf="parent" />
+            app:cornerRadius="12dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btnGetStarted"
-            android:layout_width="match_parent"
-            android:layout_height="64dp"
+            android:layout_width="180dp"
+            android:layout_height="48dp"
             android:fontFamily="sans-serif-black"
             android:text="@string/get_started"
             android:textAllCaps="false"
             android:textColor="@color/white"
-            android:textSize="18sp"
+            android:textSize="16sp"
             android:visibility="gone"
             app:backgroundTint="@color/onboarding_btn_next"
-            app:cornerRadius="16dp"
-            app:layout_constraintBottom_toBottomOf="parent" />
+            app:cornerRadius="12dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
