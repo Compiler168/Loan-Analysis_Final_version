@@ -645,8 +645,8 @@ sequenceDiagram
 The application has been successfully deployed and is available live.
 
 ### Live Application URLs
-- **Backend API**: [Available in Vercel Dashboard] (Deployed via Vercel)
-- **ML Service**: [Available in Vercel/Back4App Dashboard] (Containerized deployment)
+- **Backend API**: [https://loan-analysis-final-version-backend-ls7zj9g9z.vercel.app/](https://loan-analysis-final-version-backend-ls7zj9g9z.vercel.app/)
+- **ML Service**: [https://smartloanmlservice-pn8b459o.b4a.run/](https://smartloanmlservice-pn8b459o.b4a.run/)
 - **Database**: Hosted on Back4App
 
 
