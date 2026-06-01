@@ -83,11 +83,11 @@ SmartLoan AI+ centralizes loan prediction, personal finance analytics, and conve
 
 ```
 Android App (Java)
-   â†• HTTPS
+   ↕ HTTPS
 Express Backend (Node.js)
-   â†• HTTP
+   ↕ HTTP
 FastAPI ML Service (Python)
-   â†• Firestore
+   ↕ Firestore
 Firebase Firestore Database
 ```
 
@@ -255,10 +255,10 @@ This project uses **Firebase Firestore** rather than a SQL relational database.
 - `dashboards`: cached dashboard summaries by user.
 
 ### Relationships
-- `predictions.userId` â†’ `users` document ID
-- `analyses.userId` â†’ `users` document ID
-- `chatSessions.userId` â†’ `users` document ID
-- `reports.userId` â†’ `users` document ID
+- `predictions.userId` → `users` document ID
+- `analyses.userId` → `users` document ID
+- `chatSessions.userId` → `users` document ID
+- `reports.userId` → `users` document ID
 - `dashboards` keyed by `userId`
 
 ### ER Outline
@@ -348,7 +348,7 @@ The **Exploratory Data Analysis (EDA)** section documents the complete data jour
 #### Data Distribution Analysis
 - **Target Variable**: Distribution of approved vs. rejected loans
   - Visualized in: `ml/eda/analysis/target_dist.png`
-  - Insight: Identifies class imbalance â†’ informs training strategy
+  - Insight: Identifies class imbalance → informs training strategy
   
 - **Numeric Feature Distributions**:
   - Histograms and KDE plots for income, credit score, loan amount
@@ -402,7 +402,7 @@ The **Exploratory Data Analysis (EDA)** section documents the complete data jour
 
 2. **Debt-to-Income Ratio Matters Most**
    - Derived DTI feature outperforms raw income/expenses
-   - Threshold around 0.4â€“0.5 separates approval tiers
+   - Threshold around 0.4–0.5 separates approval tiers
 
 3. **Missed Payments & Bankruptcies are Risk Multipliers**
    - Even one missed payment in last year reduces approval by 30%+
@@ -446,16 +446,16 @@ The **Exploratory Data Analysis (EDA)** section documents the complete data jour
 
 ```
 ml/eda/
-â”œâ”€â”€ data/
-â”‚   â”œâ”€â”€ raw/
-â”‚   â”‚   â””â”€â”€ loan_dataset.csv                   # Original dataset
-â”‚   â””â”€â”€ cleaned/
-â”‚       â””â”€â”€ loan_dataset_cleaned.csv           # Processed dataset
-â”œâ”€â”€ analysis/
-â”‚   â”œâ”€â”€ eda_report.md                          # Detailed findings
-â”‚   â”œâ”€â”€ eda_script.py                          # EDA code
-â”‚   â”œâ”€â”€ data_cleaning.py                       # Preprocessing pipeline
-â”‚   â””â”€â”€ [visualizations - see table above]
+├── data/
+│   ├── raw/
+│   │   └── loan_dataset.csv                   # Original dataset
+│   └── cleaned/
+│       └── loan_dataset_cleaned.csv           # Processed dataset
+├── analysis/
+│   ├── eda_report.md                          # Detailed findings
+│   ├── eda_script.py                          # EDA code
+│   ├── data_cleaning.py                       # Preprocessing pipeline
+│   └── [visualizations - see table above]
 ```
 
 ---
@@ -606,7 +606,7 @@ The application has been successfully deployed and is available live.
 
 ## App Demo Video
 Watch the complete demonstration of the SmartLoan AI+ app:
-[â–¶ï¸ View App Demo Video](APP_DEMO_VIDEO/APP_DEMO_VIDEO.mp4)
+[▶️ View App Demo Video](APP_DEMO_VIDEO/APP_DEMO_VIDEO.mp4)
 
 ---
 
@@ -668,7 +668,7 @@ Here is the complete gallery of screens from the SmartLoan AI+ application, demo
 
 ## APK File
 Download the latest Android APK to install and test the application directly:
-[ðŸ“¥ Download latest APK File](APP_APK_FILE/app-debug.apk)
+[📥 Download latest APK File](APP_APK_FILE/app-debug.apk)
 
 ---
 
@@ -778,120 +778,120 @@ Download the latest Android APK to install and test the application directly:
 
 ```
 Loan/
-â”‚
-â”œâ”€â”€ android/                         # Native Android Application
-â”‚   â”œâ”€â”€ app/
-â”‚   â”‚   â”œâ”€â”€ build.gradle
-â”‚   â”‚   â”œâ”€â”€ google-services.json      # Firebase config (local only)
-â”‚   â”‚   â”œâ”€â”€ proguard-rules.pro
-â”‚   â”‚   â””â”€â”€ src/
-â”‚   â”‚       â”œâ”€â”€ androidTest/
-â”‚   â”‚       â”œâ”€â”€ main/
-â”‚   â”‚       â”‚   â”œâ”€â”€ AndroidManifest.xml
-â”‚   â”‚       â”‚   â”œâ”€â”€ java/com/smartloan/ai/
-â”‚   â”‚       â”‚   â”‚   â”œâ”€â”€ data/api/
-â”‚   â”‚       â”‚   â”‚   â”œâ”€â”€ data/models/
-â”‚   â”‚       â”‚   â”‚   â”œâ”€â”€ ui/
-â”‚   â”‚       â”‚   â”‚   â””â”€â”€ utils/
-â”‚   â”‚       â”‚   â””â”€â”€ res/
-â”‚   â”‚       â””â”€â”€ test/
-â”‚   â”œâ”€â”€ gradle/wrapper/
-â”‚   â”œâ”€â”€ build.gradle
-â”‚   â”œâ”€â”€ gradle.properties
-â”‚   â”œâ”€â”€ settings.gradle
-â”‚   â””â”€â”€ local.properties
-â”‚
-â”œâ”€â”€ backend/                         # Express.js API Server
-â”‚   â”œâ”€â”€ Dockerfile
-â”‚   â”œâ”€â”€ package.json
-â”‚   â”œâ”€â”€ package-lock.json
-   â”œâ”€â”€ .env.template
-   â””â”€â”€ src/
-     â”œâ”€â”€ server.js
-     â”œâ”€â”€ config/
-     â”‚   â””â”€â”€ firebase.js
-     â”œâ”€â”€ controllers/
-     â”‚   â”œâ”€â”€ AuthController.js
-     â”‚   â”œâ”€â”€ LoanController.js
-     â”‚   â”œâ”€â”€ FinancialController.js
-     â”‚   â”œâ”€â”€ ChatController.js
-     â”‚   â””â”€â”€ ReportController.js
-     â”œâ”€â”€ middleware/
-     â”‚   â””â”€â”€ auth.js
-     â”œâ”€â”€ models/
-     â”‚   â”œâ”€â”€ User.js
-     â”‚   â”œâ”€â”€ Prediction.js
-     â”‚   â”œâ”€â”€ Analysis.js
-     â”‚   â”œâ”€â”€ ChatSession.js
-     â”‚   â””â”€â”€ Report.js
-     â””â”€â”€ routes/
-       â”œâ”€â”€ auth.js
-       â”œâ”€â”€ loans.js
-       â”œâ”€â”€ financial.js
-       â”œâ”€â”€ chat.js
-       â””â”€â”€ reports.js
-â”‚
-â”œâ”€â”€ ml/                              # Python FastAPI ML Service
-â”‚   â”œâ”€â”€ Dockerfile
-â”‚   â”œâ”€â”€ main.py
-â”‚   â”œâ”€â”€ requirements.txt
-â”‚   â”œâ”€â”€ .env.template
-â”‚   â”œâ”€â”€ eda/
-â”‚   â”‚   â”œâ”€â”€ data/
-â”‚   â”‚   â”‚   â”œâ”€â”€ raw/
-â”‚   â”‚   â”‚   â”‚   â””â”€â”€ loan_dataset.csv
-â”‚   â”‚   â”‚   â””â”€â”€ cleaned/
-â”‚   â”‚   â”‚       â””â”€â”€ loan_dataset_cleaned.csv
-â”‚   â”‚   â””â”€â”€ analysis/
-â”‚   â”‚       â”œâ”€â”€ eda_report.md
-â”‚   â”‚       â”œâ”€â”€ eda_script.py
-â”‚   â”‚       â”œâ”€â”€ data_cleaning.py
-â”‚   â”‚       â”œâ”€â”€ target_dist.png
-â”‚   â”‚       â”œâ”€â”€ correlation_heatmap.png
-â”‚   â”‚       â”œâ”€â”€ credit_score_vs_approved.png
-â”‚   â”‚       â”œâ”€â”€ dti_ratio_vs_approved.png
-â”‚   â”‚       â”œâ”€â”€ loan_amount_vs_approved.png
-â”‚   â”‚       â””â”€â”€ monthly_income_vs_approved.png
-â”‚   â”œâ”€â”€ models/
-   â”‚   â”œâ”€â”€ model_metadata.json
-   â”‚   â”œâ”€â”€ xgboost_model.pkl
-   â”‚   â”œâ”€â”€ random_forest.pkl
-   â”‚   â”œâ”€â”€ logistic_regression.pkl
-   â”‚   â”œâ”€â”€ scaler.pkl
-   â”‚   â”œâ”€â”€ label_encoder.pkl
-   â”‚   â””â”€â”€ feature_columns.pkl
-   â”œâ”€â”€ training/
-   â”‚   â”œâ”€â”€ generate_data.py
-   â”‚   â””â”€â”€ train_models.py
-   â”œâ”€â”€ services/
-   â”‚   â”œâ”€â”€ __init__.py
-   â”‚   â”œâ”€â”€ prediction_engine.py
-   â”‚   â”œâ”€â”€ health_scorer.py
-   â”‚   â”œâ”€â”€ risk_analyzer.py
-   â”‚   â”œâ”€â”€ nlp_engine.py
-   â”‚   â”œâ”€â”€ simulation_engine.py
-   â”‚   â””â”€â”€ document_analyzer.py
-   â””â”€â”€ tests/
-     â””â”€â”€ test_engines.py
-â”‚
-â”œâ”€â”€ .github/
-â”‚   â””â”€â”€ workflows/
-â”‚       â””â”€â”€ ci-and-deploy.yml
-â”‚
-â”œâ”€â”€ ARCHITECTURE.md
-â”œâ”€â”€ DEPLOYMENT.md
-â”œâ”€â”€ DesignSystem.md
-â”œâ”€â”€ LICENSE
-â”œâ”€â”€ README.md
-â”œâ”€â”€ package.json
-â””â”€â”€ .gitignore
+│
+├── android/                         # Native Android Application
+│   ├── app/
+│   │   ├── build.gradle
+│   │   ├── google-services.json      # Firebase config (local only)
+│   │   ├── proguard-rules.pro
+│   │   └── src/
+│   │       ├── androidTest/
+│   │       ├── main/
+│   │       │   ├── AndroidManifest.xml
+│   │       │   ├── java/com/smartloan/ai/
+│   │       │   │   ├── data/api/
+│   │       │   │   ├── data/models/
+│   │       │   │   ├── ui/
+│   │       │   │   └── utils/
+│   │       │   └── res/
+│   │       └── test/
+│   ├── gradle/wrapper/
+│   ├── build.gradle
+│   ├── gradle.properties
+│   ├── settings.gradle
+│   └── local.properties
+│
+├── backend/                         # Express.js API Server
+│   ├── Dockerfile
+│   ├── package.json
+│   ├── package-lock.json
+   ├── .env.template
+   └── src/
+     ├── server.js
+     ├── config/
+     │   └── firebase.js
+     ├── controllers/
+     │   ├── AuthController.js
+     │   ├── LoanController.js
+     │   ├── FinancialController.js
+     │   ├── ChatController.js
+     │   └── ReportController.js
+     ├── middleware/
+     │   └── auth.js
+     ├── models/
+     │   ├── User.js
+     │   ├── Prediction.js
+     │   ├── Analysis.js
+     │   ├── ChatSession.js
+     │   └── Report.js
+     └── routes/
+       ├── auth.js
+       ├── loans.js
+       ├── financial.js
+       ├── chat.js
+       └── reports.js
+│
+├── ml/                              # Python FastAPI ML Service
+│   ├── Dockerfile
+│   ├── main.py
+│   ├── requirements.txt
+│   ├── .env.template
+│   ├── eda/
+│   │   ├── data/
+│   │   │   ├── raw/
+│   │   │   │   └── loan_dataset.csv
+│   │   │   └── cleaned/
+│   │   │       └── loan_dataset_cleaned.csv
+│   │   └── analysis/
+│   │       ├── eda_report.md
+│   │       ├── eda_script.py
+│   │       ├── data_cleaning.py
+│   │       ├── target_dist.png
+│   │       ├── correlation_heatmap.png
+│   │       ├── credit_score_vs_approved.png
+│   │       ├── dti_ratio_vs_approved.png
+│   │       ├── loan_amount_vs_approved.png
+│   │       └── monthly_income_vs_approved.png
+│   ├── models/
+   │   ├── model_metadata.json
+   │   ├── xgboost_model.pkl
+   │   ├── random_forest.pkl
+   │   ├── logistic_regression.pkl
+   │   ├── scaler.pkl
+   │   ├── label_encoder.pkl
+   │   └── feature_columns.pkl
+   ├── training/
+   │   ├── generate_data.py
+   │   └── train_models.py
+   ├── services/
+   │   ├── __init__.py
+   │   ├── prediction_engine.py
+   │   ├── health_scorer.py
+   │   ├── risk_analyzer.py
+   │   ├── nlp_engine.py
+   │   ├── simulation_engine.py
+   │   └── document_analyzer.py
+   └── tests/
+     └── test_engines.py
+│
+├── .github/
+│   └── workflows/
+│       └── ci-and-deploy.yml
+│
+├── ARCHITECTURE.md
+├── DEPLOYMENT.md
+├── DesignSystem.md
+├── LICENSE
+├── README.md
+├── package.json
+└── .gitignore
 ```
 
 ### Folder Details
 - **`android/`**: Android Application source in Java, resources, and Gradle build system.
 - **`backend/`**: Express.js REST API, Firestore integration, security middleware, and ML service gateway.
 - **`ml/`**: Python FastAPI ML microservice with data, training, models, and prediction engines.
-  - **`ml/eda/`**: Complete data pipeline from raw â†’ cleaned â†’ analyzed â†’ visualized.
+  - **`ml/eda/`**: Complete data pipeline from raw → cleaned → analyzed → visualized.
   - **`ml/models/`**: Trained model artifacts and feature metadata.
   - **`ml/services/`**: Prediction, scoring, risk analysis, and chatbot engines.
   - **`ml/training/`**: Scripts for model training and synthetic data generation.
