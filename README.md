@@ -1,4 +1,4 @@
-﻿# SmartLoan AI+
+# SmartLoan AI+
 
 ![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/Compiler168/Loan-Analysis/ci-and-deploy.yml?branch=main)
 ![License](https://img.shields.io/github/license/Compiler168/Loan-Analysis)
@@ -21,7 +21,6 @@ The platform integrates:
 
 ---
 
----
 
 ## Project Highlights
 - Production-ready Android Application developed in Java
@@ -31,96 +30,6 @@ The platform integrates:
 - CI/CD with GitHub Actions and Docker
 ---
 
----
-
-## App Demo Video
-Watch the complete demonstration of the SmartLoan AI+ app:
-[â–¶ï¸ View App Demo Video](APP_DEMO_VIDEO/APP_DEMO_VIDEO.mp4)
-
----
-
----
-
-## App Screenshots
-Here is the complete gallery of screens from the SmartLoan AI+ application, demonstrating its full capabilities:
-
-| Splash Screen | Onboarding 1 | Onboarding 2 |
-|:---:|:---:|:---:|
-| <img src="APP_UI_SCREEN_SHORT/Splash%20Screen%20(1).png" width="250"> | <img src="APP_UI_SCREEN_SHORT/Onboarding%20Screen%201.png" width="250"> | <img src="APP_UI_SCREEN_SHORT/Onboarding%20Screen%202.png" width="250"> |
-| **Welcome** | **Intro Step 1** | **Intro Step 2** |
-
-| Onboarding 3 | Login | Sign Up |
-|:---:|:---:|:---:|
-| <img src="APP_UI_SCREEN_SHORT/Onboarding%20Screen%203.png" width="250"> | <img src="APP_UI_SCREEN_SHORT/Login.png" width="250"> | <img src="APP_UI_SCREEN_SHORT/Sign%20UP.png" width="250"> |
-| **Intro Step 3** | **Authentication** | **Create Account** |
-
-| Dashboard | Dashboard Details | Dashboard Stats |
-|:---:|:---:|:---:|
-| <img src="APP_UI_SCREEN_SHORT/Dashboard.png" width="250"> | <img src="APP_UI_SCREEN_SHORT/Dashboard%20(1).png" width="250"> | <img src="APP_UI_SCREEN_SHORT/Dashboard%20(2).png" width="250"> |
-| **Main Hub** | **Insights** | **Financial Overview** |
-
-| Dashboard History | Prediction Input | Prediction Result |
-|:---:|:---:|:---:|
-| <img src="APP_UI_SCREEN_SHORT/Dashboard%20(3).png" width="250"> | <img src="APP_UI_SCREEN_SHORT/Prediction.png" width="250"> | <img src="APP_UI_SCREEN_SHORT/Prediction%20(1).png" width="250"> |
-| **Transactions** | **Loan Entry** | **AI Output** |
-
-| Prediction Factor | Prediction Detail | Prediction Suggestion |
-|:---:|:---:|:---:|
-| <img src="APP_UI_SCREEN_SHORT/Prediction%20(2).png" width="250"> | <img src="APP_UI_SCREEN_SHORT/Prediction%20(3).png" width="250"> | <img src="APP_UI_SCREEN_SHORT/Prediction%20(4).png" width="250"> |
-| **Risk Factors** | **Deep Dive** | **Recommendations** |
-
-| Analyze Overview | Analyze Score | Analyze Breakdown |
-|:---:|:---:|:---:|
-| <img src="APP_UI_SCREEN_SHORT/Analyize.png" width="250"> | <img src="APP_UI_SCREEN_SHORT/Analyize%20(1).png" width="250"> | <img src="APP_UI_SCREEN_SHORT/Analyize%20(2).png" width="250"> |
-| **Health Check** | **Credit Score** | **Metrics** |
-
-| Simulator | Simulator Scenario | Chat Assistant |
-|:---:|:---:|:---:|
-| <img src="APP_UI_SCREEN_SHORT/Simulator.png" width="250"> | <img src="APP_UI_SCREEN_SHORT/Simulator%20(1).png" width="250"> | <img src="APP_UI_SCREEN_SHORT/Chat.png" width="250"> |
-| **Future Planning** | **"What If" Analysis** | **AI Helper** |
-
-| Chat Suggestion | Chat Conversation | Report Generation |
-|:---:|:---:|:---:|
-| <img src="APP_UI_SCREEN_SHORT/Chat%20(1).png" width="250"> | <img src="APP_UI_SCREEN_SHORT/Chat%20(2).png" width="250"> | <img src="APP_UI_SCREEN_SHORT/Report.png" width="250"> |
-| **Prompt Ideas** | **Advisory** | **PDF Export** |
-
-| Report Detail | Reports Archive | Profile Info |
-|:---:|:---:|:---:|
-| <img src="APP_UI_SCREEN_SHORT/Report%20(1).png" width="250"> | <img src="APP_UI_SCREEN_SHORT/Reports.png" width="250"> | <img src="APP_UI_SCREEN_SHORT/Profile.png" width="250"> |
-| **Full Document** | **History** | **User Settings** |
-
-| Profile Security | Upload Document | |
-|:---:|:---:|:---:|
-| <img src="APP_UI_SCREEN_SHORT/Profile%20(1).png" width="250"> | <img src="APP_UI_SCREEN_SHORT/Upload.png" width="250"> | |
-| **Account Mgmt** | **Verification** | |
-
----
-
-## APK File
-Download the latest Android APK to install and test the application directly:
-[ðŸ“¥ Download latest APK File](APP_APK_FILE/app-debug.apk)
-
----
-
----
-
-## Live Deployment (Vercel + Back4App)
-The application has been successfully deployed and is available live.
-
-### Live Application URLs
-- **Backend API**: [https://loan-analysis-final-version-backend-ls7zj9g9z.vercel.app/](https://loan-analysis-final-version-backend-ls7zj9g9z.vercel.app/)
-- **ML Service**: [https://smartloanmlservice-pn8b459o.b4a.run/](https://smartloanmlservice-pn8b459o.b4a.run/)
-- **Database**: Hosted on Back4App
-
-
-### Deployment-Specific Notes
-- **CORS**: Ensure that the `MOBILE_ORIGINS` environment variable in the backend includes the exact origin or is configured to allow the Android application's requests.
-- **Cold Starts**: Serverless functions on Vercel may experience cold starts. The ML service, if running in a container, should remain warm or might take a few seconds on the first prediction request.
-- **Database Security**: Keep the Back4App database credentials secure and rotate them periodically.
-
----
-
----
 
 ## Business Documentation
 ### Problem Statement
@@ -157,22 +66,70 @@ SmartLoan AI+ centralizes loan prediction, personal finance analytics, and conve
 
 ---
 
+
+## Technical Documentation
+### Technology Stack
+
+| Layer | Technology | Purpose |
+|---|---|---|
+| Android | Java, Android Jetpack | Mobile application UI and data handling |
+| Backend | Node.js, Express.js | REST API, auth, Firestore integration |
+| Database | Firebase Firestore | User, prediction, analysis, chat and report persistence |
+| ML Service | Python, FastAPI | Loan prediction, health scoring, risk analysis, chatbot |
+| CI/CD | GitHub Actions | Build, smoke test, Docker image publish, deploy |
+| Containerization | Docker | Standardized backend and ML service packaging |
+
+### System Architecture
+
+```
+Android App (Java)
+   â†• HTTPS
+Express Backend (Node.js)
+   â†• HTTP
+FastAPI ML Service (Python)
+   â†• Firestore
+Firebase Firestore Database
+```
+
+### Frontend Architecture
+- Android Application developed in Java
+- Uses event-driven ViewModel and Activity/Fragment flows
+- Network access via REST API with JWT authentication
+- Local UI state managed through Android Jetpack patterns
+
+### Backend Architecture
+- `backend/src/server.js` bootstraps Express and Firestore
+- Route modules separate domain logic: auth, loans, financial, chat, reports
+- Firestore integration through custom model classes
+- Auth middleware validates JWT tokens and protects API routes
+- ML interactions proxied to the dedicated ML service via `axios`
+
+### Database Architecture
+- Firebase Firestore collections store structured documents
+- Collections:
+  - `users`
+  - `predictions`
+  - `analyses`
+  - `chatSessions`
+  - `reports`
+  - `dashboards`
+
+### Machine Learning Architecture
+- `ml/main.py` exposes clean FastAPI endpoints
+- Prediction, health scoring, risk analysis, simulation, NLP, and document parsing engines
+- Lazy-loaded service modules for resource efficiency
+- Ensemble model stack: XGBoost, Random Forest, Logistic Regression
+
+### Security Architecture
+- JWT-based authentication for all protected API routes
+- Password hashing with `bcryptjs`
+- Helmet middleware for HTTP security headers
+- CORS restrictions configurable via environment
+- Rate limiting for general and AI-specific endpoints
+- Local secret management via `.env` templates and ignored credential files
+
 ---
 
-## User Journey
-1. User registers in the Android Application developed in Java.
-2. The app sends credentials to `POST /api/auth/register`.
-3. Backend creates the user in Firestore and returns JWT.
-4. User logs in and receives a secured session.
-5. User submits loan details to `POST /api/loans/predict`.
-6. Backend forwards the request to the ML service and writes the result to Firestore.
-7. User views predictions, health score, risk analysis, and report summaries.
-8. User interacts with the AI chat assistant for financial guidance.
-9. User can request reports and view history in-app.
-
----
-
----
 
 ## Feature Documentation
 ### User Features
@@ -285,134 +242,45 @@ SmartLoan AI+ centralizes loan prediction, personal finance analytics, and conve
 
 ---
 
----
 
-## Technical Documentation
-### Technology Stack
+## Database Documentation
+This project uses **Firebase Firestore** rather than a SQL relational database.
 
-| Layer | Technology | Purpose |
-|---|---|---|
-| Android | Java, Android Jetpack | Mobile application UI and data handling |
-| Backend | Node.js, Express.js | REST API, auth, Firestore integration |
-| Database | Firebase Firestore | User, prediction, analysis, chat and report persistence |
-| ML Service | Python, FastAPI | Loan prediction, health scoring, risk analysis, chatbot |
-| CI/CD | GitHub Actions | Build, smoke test, Docker image publish, deploy |
-| Containerization | Docker | Standardized backend and ML service packaging |
+### Collections and Primary Keys
+- `users`: user profiles and auth data. Primary key is Firestore document ID.
+- `predictions`: loan prediction records per user.
+- `analyses`: financial health, risk analysis, and simulation history.
+- `chatSessions`: AI chat session history.
+- `reports`: generated report documents.
+- `dashboards`: cached dashboard summaries by user.
 
-### System Architecture
+### Relationships
+- `predictions.userId` â†’ `users` document ID
+- `analyses.userId` â†’ `users` document ID
+- `chatSessions.userId` â†’ `users` document ID
+- `reports.userId` â†’ `users` document ID
+- `dashboards` keyed by `userId`
 
-```
-Android App (Java)
-   â†• HTTPS
-Express Backend (Node.js)
-   â†• HTTP
-FastAPI ML Service (Python)
-   â†• Firestore
-Firebase Firestore Database
-```
-
-### Frontend Architecture
-- Android Application developed in Java
-- Uses event-driven ViewModel and Activity/Fragment flows
-- Network access via REST API with JWT authentication
-- Local UI state managed through Android Jetpack patterns
-
-### Backend Architecture
-- `backend/src/server.js` bootstraps Express and Firestore
-- Route modules separate domain logic: auth, loans, financial, chat, reports
-- Firestore integration through custom model classes
-- Auth middleware validates JWT tokens and protects API routes
-- ML interactions proxied to the dedicated ML service via `axios`
-
-### Database Architecture
-- Firebase Firestore collections store structured documents
-- Collections:
-  - `users`
-  - `predictions`
-  - `analyses`
-  - `chatSessions`
-  - `reports`
-  - `dashboards`
-
-### Machine Learning Architecture
-- `ml/main.py` exposes clean FastAPI endpoints
-- Prediction, health scoring, risk analysis, simulation, NLP, and document parsing engines
-- Lazy-loaded service modules for resource efficiency
-- Ensemble model stack: XGBoost, Random Forest, Logistic Regression
-
-### Security Architecture
-- JWT-based authentication for all protected API routes
-- Password hashing with `bcryptjs`
-- Helmet middleware for HTTP security headers
-- CORS restrictions configurable via environment
-- Rate limiting for general and AI-specific endpoints
-- Local secret management via `.env` templates and ignored credential files
-
----
-
----
-
-## Workflow Documentation
-### Authentication Flow
+### ER Outline
 
 ```mermaid
-sequenceDiagram
-    participant App
-    participant Backend
-    participant Firestore
-    App->>Backend: POST /api/auth/register
-    Backend->>Firestore: create user document
-    Firestore-->>Backend: user created
-    Backend-->>App: auth token + profile
-```
+flowchart LR
+  users((users))
+  predictions((predictions))
+  analyses((analyses))
+  chatSessions((chatSessions))
+  reports((reports))
+  dashboards((dashboards))
 
-### Financial Analysis Flow
-
-```mermaid
-sequenceDiagram
-    participant App
-    participant Backend
-    participant ML
-    participant Firestore
-    App->>Backend: POST /api/financial/health-score
-    Backend->>ML: POST /health-score
-    ML-->>Backend: score result
-    Backend->>Firestore: save analysis
-    Backend-->>App: health score response
-```
-
-### AI Processing Flow
-
-```mermaid
-sequenceDiagram
-    participant App
-    participant Backend
-    participant ML
-    App->>Backend: POST /api/chat/message
-    Backend->>ML: POST /chat
-    ML-->>Backend: AI response
-    Backend->>Firestore: update chat session
-    Backend-->>App: reply
-```
-
-### Loan Prediction Flow
-
-```mermaid
-sequenceDiagram
-    participant App
-    participant Backend
-    participant ML
-    participant Firestore
-    App->>Backend: POST /api/loans/predict
-    Backend->>ML: POST /predict
-    ML-->>Backend: prediction result
-    Backend->>Firestore: save prediction
-    Backend-->>App: prediction output
+  users --> predictions
+  users --> analyses
+  users --> chatSessions
+  users --> reports
+  users --> dashboards
 ```
 
 ---
 
----
 
 ## EDA & Data Pipeline
 ### Exploratory Data Analysis Overview
@@ -592,47 +460,218 @@ ml/eda/
 
 ---
 
----
 
-## Database Documentation
-This project uses **Firebase Firestore** rather than a SQL relational database.
-
-### Collections and Primary Keys
-- `users`: user profiles and auth data. Primary key is Firestore document ID.
-- `predictions`: loan prediction records per user.
-- `analyses`: financial health, risk analysis, and simulation history.
-- `chatSessions`: AI chat session history.
-- `reports`: generated report documents.
-- `dashboards`: cached dashboard summaries by user.
-
-### Relationships
-- `predictions.userId` â†’ `users` document ID
-- `analyses.userId` â†’ `users` document ID
-- `chatSessions.userId` â†’ `users` document ID
-- `reports.userId` â†’ `users` document ID
-- `dashboards` keyed by `userId`
-
-### ER Outline
+## Workflow Documentation
+### Authentication Flow
 
 ```mermaid
-flowchart LR
-  users((users))
-  predictions((predictions))
-  analyses((analyses))
-  chatSessions((chatSessions))
-  reports((reports))
-  dashboards((dashboards))
+sequenceDiagram
+    participant App
+    participant Backend
+    participant Firestore
+    App->>Backend: POST /api/auth/register
+    Backend->>Firestore: create user document
+    Firestore-->>Backend: user created
+    Backend-->>App: auth token + profile
+```
 
-  users --> predictions
-  users --> analyses
-  users --> chatSessions
-  users --> reports
-  users --> dashboards
+### Financial Analysis Flow
+
+```mermaid
+sequenceDiagram
+    participant App
+    participant Backend
+    participant ML
+    participant Firestore
+    App->>Backend: POST /api/financial/health-score
+    Backend->>ML: POST /health-score
+    ML-->>Backend: score result
+    Backend->>Firestore: save analysis
+    Backend-->>App: health score response
+```
+
+### AI Processing Flow
+
+```mermaid
+sequenceDiagram
+    participant App
+    participant Backend
+    participant ML
+    App->>Backend: POST /api/chat/message
+    Backend->>ML: POST /chat
+    ML-->>Backend: AI response
+    Backend->>Firestore: update chat session
+    Backend-->>App: reply
+```
+
+### Loan Prediction Flow
+
+```mermaid
+sequenceDiagram
+    participant App
+    participant Backend
+    participant ML
+    participant Firestore
+    App->>Backend: POST /api/loans/predict
+    Backend->>ML: POST /predict
+    ML-->>Backend: prediction result
+    Backend->>Firestore: save prediction
+    Backend-->>App: prediction output
 ```
 
 ---
 
+
+## Installation Guide
+### Prerequisites
+- Java 11+ and Android SDK
+- Android Studio
+- Node.js 20+ and npm
+- Python 3.11+
+- Docker (for containerized deployment)
+- Firebase service account JSON for Firestore access
+
+### Clone Repository
+```bash
+git clone https://github.com/Compiler168/Loan-Analysis.git
+cd Loan
+```
+
+### Backend Setup
+```bash
+cd backend
+npm install
+cp .env.template .env
+# Update .env values, especially JWT_SECRET and ML_SERVICE_URL
+```
+
+### ML Service Setup
+```bash
+cd ../ml
+python -m venv venv
+venv\Scripts\Activate.ps1
+pip install -r requirements.txt
+cp .env.template .env
+```
+
+### Android Application Setup
+- Open `Loan/android` in Android Studio
+- Sync Gradle and install SDK components
+- If needed, add `android/app/google-services.json` locally
+- Run the app on emulator or device
+
 ---
+
+
+## Running Guide
+### Backend
+```bash
+cd backend
+npm run dev
+```
+Backend listens on `http://localhost:5000` by default.
+
+### ML Service
+```bash
+cd ml
+venv\Scripts\Activate.ps1
+python main.py
+```
+ML service listens on `http://localhost:8000`.
+
+### Android Application
+- Open Android Studio
+- Run `app` module on device or emulator
+- Ensure `ML_SERVICE_URL` and `MOBILE_ORIGINS` align with running services
+
+---
+
+
+## Live Deployment (Vercel + Back4App)
+The application has been successfully deployed and is available live.
+
+### Live Application URLs
+- **Backend API**: [https://loan-analysis-final-version-backend-ls7zj9g9z.vercel.app/](https://loan-analysis-final-version-backend-ls7zj9g9z.vercel.app/)
+- **ML Service**: [https://smartloanmlservice-pn8b459o.b4a.run/](https://smartloanmlservice-pn8b459o.b4a.run/)
+- **Database**: Hosted on Back4App
+
+
+### Deployment-Specific Notes
+- **CORS**: Ensure that the `MOBILE_ORIGINS` environment variable in the backend includes the exact origin or is configured to allow the Android application's requests.
+- **Cold Starts**: Serverless functions on Vercel may experience cold starts. The ML service, if running in a container, should remain warm or might take a few seconds on the first prediction request.
+- **Database Security**: Keep the Back4App database credentials secure and rotate them periodically.
+
+---
+
+
+## App Demo Video
+Watch the complete demonstration of the SmartLoan AI+ app:
+[â–¶ï¸ View App Demo Video](APP_DEMO_VIDEO/APP_DEMO_VIDEO.mp4)
+
+---
+
+
+## App Screenshots
+Here is the complete gallery of screens from the SmartLoan AI+ application, demonstrating its full capabilities:
+
+| Splash Screen | Onboarding 1 | Onboarding 2 |
+|:---:|:---:|:---:|
+| <img src="APP_UI_SCREEN_SHORT/Splash%20Screen%20(1).png" width="250"> | <img src="APP_UI_SCREEN_SHORT/Onboarding%20Screen%201.png" width="250"> | <img src="APP_UI_SCREEN_SHORT/Onboarding%20Screen%202.png" width="250"> |
+| **Welcome** | **Intro Step 1** | **Intro Step 2** |
+
+| Onboarding 3 | Login | Sign Up |
+|:---:|:---:|:---:|
+| <img src="APP_UI_SCREEN_SHORT/Onboarding%20Screen%203.png" width="250"> | <img src="APP_UI_SCREEN_SHORT/Login.png" width="250"> | <img src="APP_UI_SCREEN_SHORT/Sign%20UP.png" width="250"> |
+| **Intro Step 3** | **Authentication** | **Create Account** |
+
+| Dashboard | Dashboard Details | Dashboard Stats |
+|:---:|:---:|:---:|
+| <img src="APP_UI_SCREEN_SHORT/Dashboard.png" width="250"> | <img src="APP_UI_SCREEN_SHORT/Dashboard%20(1).png" width="250"> | <img src="APP_UI_SCREEN_SHORT/Dashboard%20(2).png" width="250"> |
+| **Main Hub** | **Insights** | **Financial Overview** |
+
+| Dashboard History | Prediction Input | Prediction Result |
+|:---:|:---:|:---:|
+| <img src="APP_UI_SCREEN_SHORT/Dashboard%20(3).png" width="250"> | <img src="APP_UI_SCREEN_SHORT/Prediction.png" width="250"> | <img src="APP_UI_SCREEN_SHORT/Prediction%20(1).png" width="250"> |
+| **Transactions** | **Loan Entry** | **AI Output** |
+
+| Prediction Factor | Prediction Detail | Prediction Suggestion |
+|:---:|:---:|:---:|
+| <img src="APP_UI_SCREEN_SHORT/Prediction%20(2).png" width="250"> | <img src="APP_UI_SCREEN_SHORT/Prediction%20(3).png" width="250"> | <img src="APP_UI_SCREEN_SHORT/Prediction%20(4).png" width="250"> |
+| **Risk Factors** | **Deep Dive** | **Recommendations** |
+
+| Analyze Overview | Analyze Score | Analyze Breakdown |
+|:---:|:---:|:---:|
+| <img src="APP_UI_SCREEN_SHORT/Analyize.png" width="250"> | <img src="APP_UI_SCREEN_SHORT/Analyize%20(1).png" width="250"> | <img src="APP_UI_SCREEN_SHORT/Analyize%20(2).png" width="250"> |
+| **Health Check** | **Credit Score** | **Metrics** |
+
+| Simulator | Simulator Scenario | Chat Assistant |
+|:---:|:---:|:---:|
+| <img src="APP_UI_SCREEN_SHORT/Simulator.png" width="250"> | <img src="APP_UI_SCREEN_SHORT/Simulator%20(1).png" width="250"> | <img src="APP_UI_SCREEN_SHORT/Chat.png" width="250"> |
+| **Future Planning** | **"What If" Analysis** | **AI Helper** |
+
+| Chat Suggestion | Chat Conversation | Report Generation |
+|:---:|:---:|:---:|
+| <img src="APP_UI_SCREEN_SHORT/Chat%20(1).png" width="250"> | <img src="APP_UI_SCREEN_SHORT/Chat%20(2).png" width="250"> | <img src="APP_UI_SCREEN_SHORT/Report.png" width="250"> |
+| **Prompt Ideas** | **Advisory** | **PDF Export** |
+
+| Report Detail | Reports Archive | Profile Info |
+|:---:|:---:|:---:|
+| <img src="APP_UI_SCREEN_SHORT/Report%20(1).png" width="250"> | <img src="APP_UI_SCREEN_SHORT/Reports.png" width="250"> | <img src="APP_UI_SCREEN_SHORT/Profile.png" width="250"> |
+| **Full Document** | **History** | **User Settings** |
+
+| Profile Security | Upload Document | |
+|:---:|:---:|:---:|
+| <img src="APP_UI_SCREEN_SHORT/Profile%20(1).png" width="250"> | <img src="APP_UI_SCREEN_SHORT/Upload.png" width="250"> | |
+| **Account Mgmt** | **Verification** | |
+
+---
+
+## APK File
+Download the latest Android APK to install and test the application directly:
+[ðŸ“¥ Download latest APK File](APP_APK_FILE/app-debug.apk)
+
+---
+
 
 ## API Documentation
 ### Authentication
@@ -733,74 +772,6 @@ flowchart LR
 
 ---
 
----
-
-## Installation Guide
-### Prerequisites
-- Java 11+ and Android SDK
-- Android Studio
-- Node.js 20+ and npm
-- Python 3.11+
-- Docker (for containerized deployment)
-- Firebase service account JSON for Firestore access
-
-### Clone Repository
-```bash
-git clone https://github.com/Compiler168/Loan-Analysis.git
-cd Loan
-```
-
-### Backend Setup
-```bash
-cd backend
-npm install
-cp .env.template .env
-# Update .env values, especially JWT_SECRET and ML_SERVICE_URL
-```
-
-### ML Service Setup
-```bash
-cd ../ml
-python -m venv venv
-venv\Scripts\Activate.ps1
-pip install -r requirements.txt
-cp .env.template .env
-```
-
-### Android Application Setup
-- Open `Loan/android` in Android Studio
-- Sync Gradle and install SDK components
-- If needed, add `android/app/google-services.json` locally
-- Run the app on emulator or device
-
----
-
----
-
-## Running Guide
-### Backend
-```bash
-cd backend
-npm run dev
-```
-Backend listens on `http://localhost:5000` by default.
-
-### ML Service
-```bash
-cd ml
-venv\Scripts\Activate.ps1
-python main.py
-```
-ML service listens on `http://localhost:8000`.
-
-### Android Application
-- Open Android Studio
-- Run `app` module on device or emulator
-- Ensure `ML_SERVICE_URL` and `MOBILE_ORIGINS` align with running services
-
----
-
----
 
 ## Project Structure
 ### Complete Project Hierarchy
@@ -925,10 +896,13 @@ Loan/
   - **`ml/services/`**: Prediction, scoring, risk analysis, and chatbot engines.
   - **`ml/training/`**: Scripts for model training and synthetic data generation.
 - **`.github/workflows/`**: CI/CD pipeline for testing, building Docker images, and deployment.
+- **`deploy/`**: Deployment configurations and scripts.
+- **`APP_APK_FILE/`**: Latest Android application build (APK) for direct installation.
+- **`APP_DEMO_VIDEO/`**: Video demonstration showcasing all application features.
+- **`APP_UI_SCREEN_SHORT/`**: Complete gallery of application UI screenshots.
 
 ---
 
----
 
 ## Optimization Report
 ### Key improvements
@@ -940,7 +914,6 @@ Loan/
 
 ---
 
----
 
 ## Developer Notes
 - The Android Application is the primary user experience layer (located in `android/`).
@@ -952,7 +925,20 @@ Loan/
 
 ---
 
+
+## User Journey
+1. User registers in the Android Application developed in Java.
+2. The app sends credentials to `POST /api/auth/register`.
+3. Backend creates the user in Firestore and returns JWT.
+4. User logs in and receives a secured session.
+5. User submits loan details to `POST /api/loans/predict`.
+6. Backend forwards the request to the ML service and writes the result to Firestore.
+7. User views predictions, health score, risk analysis, and report summaries.
+8. User interacts with the AI chat assistant for financial guidance.
+9. User can request reports and view history in-app.
+
 ---
+
 
 ## Contributing Guidelines
 Contributions should follow these rules:
@@ -964,7 +950,6 @@ Contributions should follow these rules:
 
 ---
 
----
 
 ## Future Enhancements
 - Multi-bank integration with Open Banking APIs
@@ -977,11 +962,9 @@ Contributions should follow these rules:
 
 ---
 
----
 
 ## License
 This project is licensed under the terms of the [MIT License](LICENSE).
 
+
 ---
-
-
