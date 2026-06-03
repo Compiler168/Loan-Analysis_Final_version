@@ -22,6 +22,51 @@ The platform integrates:
 
 ---
 
+## App Demo Video
+
+Watch the complete demonstration of the SmartLoan AI+ app:
+[▶️ View App Demo Video](APP_DEMO_VIDEO/APP_DEMO_VIDEO.mp4)
+
+---
+
+## App Screenshots
+
+Here are the top 10 most important screens of the SmartLoan AI+ application:
+
+| Splash Screen | Onboarding |
+|:---:|:---:|
+| <img src="APP_UI_SCREEN_SHORT/Splash%20Screen%20(1).png" width="250"> | <img src="APP_UI_SCREEN_SHORT/Onboarding%20Screen%201.png" width="250"> |
+| **Welcome** | **App Intro** |
+
+| Login | Dashboard |
+|:---:|:---:|
+| <img src="APP_UI_SCREEN_SHORT/Login.png" width="250"> | <img src="APP_UI_SCREEN_SHORT/Dashboard.png" width="250"> |
+| **Authentication** | **Main Hub** |
+
+| Prediction | Analyze |
+|:---:|:---:|
+| <img src="APP_UI_SCREEN_SHORT/Prediction.png" width="250"> | <img src="APP_UI_SCREEN_SHORT/Analyize.png" width="250"> |
+| **Loan Prediction** | **Financial Health** |
+
+| Simulator | Chat |
+|:---:|:---:|
+| <img src="APP_UI_SCREEN_SHORT/Simulator.png" width="250"> | <img src="APP_UI_SCREEN_SHORT/Chat.png" width="250"> |
+| **Financial Simulation** | **AI Assistant** |
+
+| Report | Profile |
+|:---:|:---:|
+| <img src="APP_UI_SCREEN_SHORT/Report.png" width="250"> | <img src="APP_UI_SCREEN_SHORT/Profile.png" width="250"> |
+| **Financial Reports** | **User Profile** |
+
+---
+
+## APK File
+
+Download the latest Android APK to install and test the application directly:
+[📥 Download latest APK File](APP_APK_FILE/app-debug.apk)
+
+---
+
 ## Business Documentation
 
 ### Problem Statement
